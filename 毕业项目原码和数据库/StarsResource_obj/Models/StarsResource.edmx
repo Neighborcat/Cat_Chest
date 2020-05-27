@@ -1,0 +1,691 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_StarsResourcesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrators">
+          <Key>
+            <PropertyRef Name="AdmID" />
+          </Key>
+          <Property Name="AdmID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LoginPwd" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Jurisdiction" Type="int" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="CatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ccategory" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Clabel" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CrsoucesID" Type="int" />
+          <Property Name="CrecordID" Type="int" />
+          <Property Name="CID" Type="int" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ComID" />
+          </Key>
+          <Property Name="ComID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CuserID" Type="int" Nullable="false" />
+          <Property Name="CresID" Type="int" Nullable="false" />
+          <Property Name="Content" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Integral">
+          <Key>
+            <PropertyRef Name="IntID" />
+          </Key>
+          <Property Name="IntID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IuserID" Type="int" Nullable="false" />
+          <Property Name="Integrals" Type="int" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="LinID" />
+          </Key>
+          <Property Name="LinID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ldescribe" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Linkline" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Lremarks" Type="varchar" MaxLength="100" />
+          <Property Name="RecID" Type="int" />
+          <Property Name="ResID" Type="int" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="RecID" />
+          </Key>
+          <Property Name="RecID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RuserID" Type="int" Nullable="false" />
+          <Property Name="LinkID" Type="int" />
+          <Property Name="Releasetime" Type="date" Nullable="false" />
+          <Property Name="Rname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rpicture" Type="varchar" MaxLength="200" />
+          <Property Name="Rdescribe" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Rstatement" Type="varchar" MaxLength="200" />
+          <Property Name="Rdemand" Type="int" />
+          <Property Name="Rstate" Type="int" />
+        </EntityType>
+        <EntityType Name="Resouces">
+          <Key>
+            <PropertyRef Name="ResID" />
+          </Key>
+          <Property Name="ResID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RuserID" Type="int" Nullable="false" />
+          <Property Name="LinkID" Type="int" />
+          <Property Name="Releasetime" Type="date" Nullable="false" />
+          <Property Name="Rname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rpicture" Type="varchar" MaxLength="200" />
+          <Property Name="Rdescribe" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Rstatement" Type="varchar" MaxLength="200" />
+          <Property Name="Rdemand" Type="int" />
+          <Property Name="Rstate" Type="int" />
+          <Property Name="ComID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationTime" Type="date" Nullable="false" />
+          <Property Name="IntegralID" Type="int" Nullable="false" />
+          <Property Name="RecordID" Type="int" />
+          <Property Name="ResoucesID" Type="int" />
+          <Property Name="LoginName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LoginPwd" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="E_mail" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="UserState" Type="int" />
+        </EntityType>
+        <Association Name="FK__Category__Crecor__3F466844">
+          <End Role="Record" Type="Self.Record" Multiplicity="0..1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Record">
+              <PropertyRef Name="RecID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="CrecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category__Crsouc__3E52440B">
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="0..1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resouces">
+              <PropertyRef Name="ResID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="CrsoucesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Record__LinkID__239E4DCF">
+          <End Role="Link" Type="Self.Link" Multiplicity="0..1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Link">
+              <PropertyRef Name="LinID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="LinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__LinkID__1ED998B2">
+          <End Role="Link" Type="Self.Link" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Link">
+              <PropertyRef Name="LinID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="LinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInfo__Integr__2D27B809">
+          <End Role="Integral" Type="Self.Integral" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Integral">
+              <PropertyRef Name="IntID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="IntegralID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInfo__Record__2E1BDC42">
+          <End Role="Record" Type="Self.Record" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Record">
+              <PropertyRef Name="RecID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="RecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInfo__Resouc__2F10007B">
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resouces">
+              <PropertyRef Name="ResID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="ResoucesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CatID" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resouces_Comment">
+          <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="ComID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="ComID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_StarsResourcesModelStoreContainer">
+          <EntitySet Name="Administrators" EntityType="Self.Administrators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Integral" EntityType="Self.Integral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Link" EntityType="Self.Link" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resouces" EntityType="Self.Resouces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Category__Crecor__3F466844" Association="Self.FK__Category__Crecor__3F466844">
+            <End Role="Record" EntitySet="Record" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category__Crsouc__3E52440B" Association="Self.FK__Category__Crsouc__3E52440B">
+            <End Role="Resouces" EntitySet="Resouces" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Record__LinkID__239E4DCF" Association="Self.FK__Record__LinkID__239E4DCF">
+            <End Role="Link" EntitySet="Link" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__LinkID__1ED998B2" Association="Self.FK__Resouces__LinkID__1ED998B2">
+            <End Role="Link" EntitySet="Link" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInfo__Integr__2D27B809" Association="Self.FK__UserInfo__Integr__2D27B809">
+            <End Role="Integral" EntitySet="Integral" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInfo__Record__2E1BDC42" Association="Self.FK__UserInfo__Record__2E1BDC42">
+            <End Role="Record" EntitySet="Record" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInfo__Resouc__2F10007B" Association="Self.FK__UserInfo__Resouc__2F10007B">
+            <End Role="Resouces" EntitySet="Resouces" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category1" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resouces_Comment" Association="Self.FK_Resouces_Comment">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_StarsResourcesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrators">
+          <Key>
+            <PropertyRef Name="AdmID" />
+          </Key>
+          <Property Name="AdmID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LoginPwd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Jurisdiction" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ccategory" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clabel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CrsoucesID" Type="Int32" />
+          <Property Name="CrecordID" Type="Int32" />
+          <Property Name="CID" Type="Int32" />
+          <NavigationProperty Name="Record" Relationship="Self.FK__Category__Crecor__3F466844" FromRole="Category" ToRole="Record" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK__Category__Crsouc__3E52440B" FromRole="Category" ToRole="Resouces" />
+          <NavigationProperty Name="Category1" Relationship="Self.FK_Category_Category" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="Category2" Relationship="Self.FK_Category_Category" FromRole="Category1" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ComID" />
+          </Key>
+          <Property Name="ComID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CuserID" Type="Int32" Nullable="false" />
+          <Property Name="CresID" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK_Resouces_Comment" FromRole="Comment" ToRole="Resouces" />
+        </EntityType>
+        <EntityType Name="Integral">
+          <Key>
+            <PropertyRef Name="IntID" />
+          </Key>
+          <Property Name="IntID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IuserID" Type="Int32" Nullable="false" />
+          <Property Name="Integrals" Type="Int32" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK__UserInfo__Integr__2D27B809" FromRole="Integral" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="LinID" />
+          </Key>
+          <Property Name="LinID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ldescribe" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Linkline" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lremarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RecID" Type="Int32" />
+          <Property Name="ResID" Type="Int32" />
+          <NavigationProperty Name="Record" Relationship="Self.FK__Record__LinkID__239E4DCF" FromRole="Link" ToRole="Record" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__LinkID__1ED998B2" FromRole="Link" ToRole="Resouces" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="RecID" />
+          </Key>
+          <Property Name="RecID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RuserID" Type="Int32" Nullable="false" />
+          <Property Name="LinkID" Type="Int32" />
+          <Property Name="Releasetime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Rname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rpicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Rdescribe" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rstatement" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Rdemand" Type="Int32" />
+          <Property Name="Rstate" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Category__Crecor__3F466844" FromRole="Record" ToRole="Category" />
+          <NavigationProperty Name="Link" Relationship="Self.FK__Record__LinkID__239E4DCF" FromRole="Record" ToRole="Link" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK__UserInfo__Record__2E1BDC42" FromRole="Record" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Resouces">
+          <Key>
+            <PropertyRef Name="ResID" />
+          </Key>
+          <Property Name="ResID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RuserID" Type="Int32" Nullable="false" />
+          <Property Name="LinkID" Type="Int32" />
+          <Property Name="Releasetime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Rname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rpicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Rdescribe" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rstatement" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Rdemand" Type="Int32" />
+          <Property Name="Rstate" Type="Int32" />
+          <Property Name="ComID" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Category__Crsouc__3E52440B" FromRole="Resouces" ToRole="Category" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_Resouces_Comment" FromRole="Resouces" ToRole="Comment" />
+          <NavigationProperty Name="Link" Relationship="Self.FK__Resouces__LinkID__1ED998B2" FromRole="Resouces" ToRole="Link" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK__UserInfo__Resouc__2F10007B" FromRole="Resouces" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IntegralID" Type="Int32" Nullable="false" />
+          <Property Name="RecordID" Type="Int32" />
+          <Property Name="ResoucesID" Type="Int32" />
+          <Property Name="LoginName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LoginPwd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserState" Type="Int32" />
+          <NavigationProperty Name="Integral" Relationship="Self.FK__UserInfo__Integr__2D27B809" FromRole="UserInfo" ToRole="Integral" />
+          <NavigationProperty Name="Record" Relationship="Self.FK__UserInfo__Record__2E1BDC42" FromRole="UserInfo" ToRole="Record" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK__UserInfo__Resouc__2F10007B" FromRole="UserInfo" ToRole="Resouces" />
+        </EntityType>
+        <Association Name="FK__Category__Crecor__3F466844">
+          <End Role="Record" Type="Self.Record" Multiplicity="0..1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Record">
+              <PropertyRef Name="RecID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="CrecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category__Crsouc__3E52440B">
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="0..1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resouces">
+              <PropertyRef Name="ResID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="CrsoucesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CatID" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resouces_Comment">
+          <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="ComID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="ComID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInfo__Integr__2D27B809">
+          <End Role="Integral" Type="Self.Integral" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Integral">
+              <PropertyRef Name="IntID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="IntegralID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Record__LinkID__239E4DCF">
+          <End Role="Link" Type="Self.Link" Multiplicity="0..1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Link">
+              <PropertyRef Name="LinID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="LinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__LinkID__1ED998B2">
+          <End Role="Link" Type="Self.Link" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Link">
+              <PropertyRef Name="LinID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="LinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInfo__Record__2E1BDC42">
+          <End Role="Record" Type="Self.Record" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Record">
+              <PropertyRef Name="RecID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="RecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInfo__Resouc__2F10007B">
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resouces">
+              <PropertyRef Name="ResID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="ResoucesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_StarsResourcesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrators" EntityType="Self.Administrators" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" />
+          <EntitySet Name="Integral" EntityType="Self.Integral" />
+          <EntitySet Name="Link" EntityType="Self.Link" />
+          <EntitySet Name="Record" EntityType="Self.Record" />
+          <EntitySet Name="Resouces" EntityType="Self.Resouces" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <AssociationSet Name="FK__Category__Crecor__3F466844" Association="Self.FK__Category__Crecor__3F466844">
+            <End Role="Record" EntitySet="Record" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category__Crsouc__3E52440B" Association="Self.FK__Category__Crsouc__3E52440B">
+            <End Role="Resouces" EntitySet="Resouces" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category1" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resouces_Comment" Association="Self.FK_Resouces_Comment">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInfo__Integr__2D27B809" Association="Self.FK__UserInfo__Integr__2D27B809">
+            <End Role="Integral" EntitySet="Integral" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Record__LinkID__239E4DCF" Association="Self.FK__Record__LinkID__239E4DCF">
+            <End Role="Link" EntitySet="Link" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__LinkID__1ED998B2" Association="Self.FK__Resouces__LinkID__1ED998B2">
+            <End Role="Link" EntitySet="Link" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInfo__Record__2E1BDC42" Association="Self.FK__UserInfo__Record__2E1BDC42">
+            <End Role="Record" EntitySet="Record" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInfo__Resouc__2F10007B" Association="Self.FK__UserInfo__Resouc__2F10007B">
+            <End Role="Resouces" EntitySet="Resouces" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_StarsResourcesModelStoreContainer" CdmEntityContainer="db_StarsResourcesEntities">
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Administrators">
+              <MappingFragment StoreEntitySet="Administrators">
+                <ScalarProperty Name="AdmID" ColumnName="AdmID" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+                <ScalarProperty Name="Jurisdiction" ColumnName="Jurisdiction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="Ccategory" ColumnName="Ccategory" />
+                <ScalarProperty Name="Clabel" ColumnName="Clabel" />
+                <ScalarProperty Name="CrsoucesID" ColumnName="CrsoucesID" />
+                <ScalarProperty Name="CrecordID" ColumnName="CrecordID" />
+                <ScalarProperty Name="CID" ColumnName="CID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="ComID" ColumnName="ComID" />
+                <ScalarProperty Name="CuserID" ColumnName="CuserID" />
+                <ScalarProperty Name="CresID" ColumnName="CresID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Integral">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Integral">
+              <MappingFragment StoreEntitySet="Integral">
+                <ScalarProperty Name="IntID" ColumnName="IntID" />
+                <ScalarProperty Name="IuserID" ColumnName="IuserID" />
+                <ScalarProperty Name="Integrals" ColumnName="Integrals" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Link">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Link">
+              <MappingFragment StoreEntitySet="Link">
+                <ScalarProperty Name="LinID" ColumnName="LinID" />
+                <ScalarProperty Name="Ldescribe" ColumnName="Ldescribe" />
+                <ScalarProperty Name="Linkline" ColumnName="Linkline" />
+                <ScalarProperty Name="Lremarks" ColumnName="Lremarks" />
+                <ScalarProperty Name="RecID" ColumnName="RecID" />
+                <ScalarProperty Name="ResID" ColumnName="ResID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Record">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Record">
+              <MappingFragment StoreEntitySet="Record">
+                <ScalarProperty Name="RecID" ColumnName="RecID" />
+                <ScalarProperty Name="RuserID" ColumnName="RuserID" />
+                <ScalarProperty Name="LinkID" ColumnName="LinkID" />
+                <ScalarProperty Name="Releasetime" ColumnName="Releasetime" />
+                <ScalarProperty Name="Rname" ColumnName="Rname" />
+                <ScalarProperty Name="Rpicture" ColumnName="Rpicture" />
+                <ScalarProperty Name="Rdescribe" ColumnName="Rdescribe" />
+                <ScalarProperty Name="Rstatement" ColumnName="Rstatement" />
+                <ScalarProperty Name="Rdemand" ColumnName="Rdemand" />
+                <ScalarProperty Name="Rstate" ColumnName="Rstate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resouces">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Resouces">
+              <MappingFragment StoreEntitySet="Resouces">
+                <ScalarProperty Name="ResID" ColumnName="ResID" />
+                <ScalarProperty Name="RuserID" ColumnName="RuserID" />
+                <ScalarProperty Name="LinkID" ColumnName="LinkID" />
+                <ScalarProperty Name="Releasetime" ColumnName="Releasetime" />
+                <ScalarProperty Name="Rname" ColumnName="Rname" />
+                <ScalarProperty Name="Rpicture" ColumnName="Rpicture" />
+                <ScalarProperty Name="Rdescribe" ColumnName="Rdescribe" />
+                <ScalarProperty Name="Rstatement" ColumnName="Rstatement" />
+                <ScalarProperty Name="Rdemand" ColumnName="Rdemand" />
+                <ScalarProperty Name="Rstate" ColumnName="Rstate" />
+                <ScalarProperty Name="ComID" ColumnName="ComID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RegistrationTime" ColumnName="RegistrationTime" />
+                <ScalarProperty Name="IntegralID" ColumnName="IntegralID" />
+                <ScalarProperty Name="RecordID" ColumnName="RecordID" />
+                <ScalarProperty Name="ResoucesID" ColumnName="ResoucesID" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+                <ScalarProperty Name="E_mail" ColumnName="E_mail" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserState" ColumnName="UserState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
