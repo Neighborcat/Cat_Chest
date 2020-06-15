@@ -1,0 +1,15 @@
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\BLL.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\BLL.pdb
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\obj\Debug\Business_logic_layer.csprojAssemblyReference.cache
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\obj\Debug\BLL.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\obj\Debug\BLL.pdb
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\obj\Debug\Business_logic_layer.csproj.CoreCompileInputs.cache
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\DAL.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\Models.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\EntityFramework.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\DAL.pdb
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\Models.pdb
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\Models.dll.config
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\EntityFramework.xml
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\BLL\obj\Debug\Business_logic_layer.csproj.CopyComplete

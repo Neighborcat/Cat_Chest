@@ -1,0 +1,14 @@
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\bin\Debug\Models.dll.config
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\bin\Debug\Models.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\bin\Debug\Models.pdb
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\bin\Debug\EntityFramework.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\bin\Debug\EntityFramework.SqlServer.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\bin\Debug\EntityFramework.xml
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\bin\Debug\EntityFramework.SqlServer.xml
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\obj\Debug\Models.csprojAssemblyReference.cache
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\obj\Debug\Models.csproj.CopyComplete
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\obj\Debug\Models.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\obj\Debug\Models.pdb
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache

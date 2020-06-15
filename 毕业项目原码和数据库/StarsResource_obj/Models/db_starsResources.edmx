@@ -1,0 +1,727 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="db_StarsResourcesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrators">
+          <Key>
+            <PropertyRef Name="AdmID" />
+          </Key>
+          <Property Name="AdmID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LoginPwd" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Jurisdiction" Type="int" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TabelName" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="CollectionID" />
+          </Key>
+          <Property Name="CollectionID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ResoucesID" Type="int" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ComID" />
+          </Key>
+          <Property Name="ComID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Content" Type="varchar" MaxLength="200" />
+          <Property Name="ResoucesID" Type="int" />
+        </EntityType>
+        <EntityType Name="Lable">
+          <Key>
+            <PropertyRef Name="LableID" />
+          </Key>
+          <Property Name="LableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="TabelName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="LinkID" />
+          </Key>
+          <Property Name="LinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ldescribe" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Linkline" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Lremarks" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="PictureID" />
+          </Key>
+          <Property Name="PictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Picture_a" Type="varchar" MaxLength="200" />
+          <Property Name="Picture_b" Type="varchar" MaxLength="200" />
+          <Property Name="Picture_c" Type="varchar" MaxLength="200" />
+          <Property Name="Picture_d" Type="varchar" MaxLength="200" />
+          <Property Name="Picture_e" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Resouces">
+          <Key>
+            <PropertyRef Name="ResoucesID" />
+          </Key>
+          <Property Name="ResoucesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="LinkID" Type="int" />
+          <Property Name="PictureID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="LableID" Type="int" />
+          <Property Name="Releasetime" Type="date" Nullable="false" />
+          <Property Name="Rname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rdescribe" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Rdemand" Type="int" />
+          <Property Name="Rstate" Type="int" />
+          <Property Name="Reading" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationTime" Type="date" Nullable="false" />
+          <Property Name="LoginName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LoginPwd" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="E_mail" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="UserSex" Type="char" MaxLength="2" />
+          <Property Name="Userdescribe" Type="varchar" MaxLength="500" />
+          <Property Name="integral" Type="int" />
+          <Property Name="UserState" Type="int" />
+          <Property Name="UserPicture" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Comment__UserID__1A14E395">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lable__CategoryI__1ED998B2">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Lable" Type="Self.Lable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Lable">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__Catego__2C3393D0">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__LableI__2D27B809">
+          <End Role="Lable" Type="Self.Lable" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lable">
+              <PropertyRef Name="LableID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="LableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__LinkID__2A4B4B5E">
+          <End Role="Link" Type="Self.Link" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Link">
+              <PropertyRef Name="LinkID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="LinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__Pictur__2B3F6F97">
+          <End Role="Picture" Type="Self.Picture" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Picture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__UserID__29572725">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_Resouces">
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="0..1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resouces">
+              <PropertyRef Name="ResoucesID" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="ResoucesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Resouces">
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resouces">
+              <PropertyRef Name="ResoucesID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ResoucesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_StarsResourcesModelStoreContainer">
+          <EntitySet Name="Administrators" EntityType="Self.Administrators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lable" EntityType="Self.Lable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Link" EntityType="Self.Link" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resouces" EntityType="Self.Resouces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Comment__UserID__1A14E395" Association="Self.FK__Comment__UserID__1A14E395">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lable__CategoryI__1ED998B2" Association="Self.FK__Lable__CategoryI__1ED998B2">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Lable" EntitySet="Lable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__Catego__2C3393D0" Association="Self.FK__Resouces__Catego__2C3393D0">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__LableI__2D27B809" Association="Self.FK__Resouces__LableI__2D27B809">
+            <End Role="Lable" EntitySet="Lable" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__LinkID__2A4B4B5E" Association="Self.FK__Resouces__LinkID__2A4B4B5E">
+            <End Role="Link" EntitySet="Link" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__Pictur__2B3F6F97" Association="Self.FK__Resouces__Pictur__2B3F6F97">
+            <End Role="Picture" EntitySet="Picture" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__UserID__29572725" Association="Self.FK__Resouces__UserID__29572725">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_Resouces" Association="Self.FK_Collection_Resouces">
+            <End Role="Resouces" EntitySet="Resouces" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_UserInfo" Association="Self.FK_Collection_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Resouces" Association="Self.FK_Comment_Resouces">
+            <End Role="Resouces" EntitySet="Resouces" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_StarsResourcesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrators">
+          <Key>
+            <PropertyRef Name="AdmID" />
+          </Key>
+          <Property Name="AdmID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LoginPwd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Jurisdiction" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TabelName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Lable" Relationship="Self.FK__Lable__CategoryI__1ED998B2" FromRole="Category" ToRole="Lable" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__Catego__2C3393D0" FromRole="Category" ToRole="Resouces" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ComID" />
+          </Key>
+          <Property Name="ComID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ResoucesID" Type="Int32" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK__Comment__UserID__1A14E395" FromRole="Comment" ToRole="UserInfo" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK_Comment_Resouces" FromRole="Comment" ToRole="Resouces" />
+        </EntityType>
+        <EntityType Name="Lable">
+          <Key>
+            <PropertyRef Name="LableID" />
+          </Key>
+          <Property Name="LableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="TabelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Lable__CategoryI__1ED998B2" FromRole="Lable" ToRole="Category" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__LableI__2D27B809" FromRole="Lable" ToRole="Resouces" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="LinkID" />
+          </Key>
+          <Property Name="LinkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ldescribe" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Linkline" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lremarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__LinkID__2A4B4B5E" FromRole="Link" ToRole="Resouces" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="PictureID" />
+          </Key>
+          <Property Name="PictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Picture_a" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Picture_b" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Picture_c" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Picture_d" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Picture_e" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__Pictur__2B3F6F97" FromRole="Picture" ToRole="Resouces" />
+        </EntityType>
+        <EntityType Name="Resouces">
+          <Key>
+            <PropertyRef Name="ResoucesID" />
+          </Key>
+          <Property Name="ResoucesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="LinkID" Type="Int32" />
+          <Property Name="PictureID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="LableID" Type="Int32" />
+          <Property Name="Releasetime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Rname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rdescribe" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rdemand" Type="Int32" />
+          <Property Name="Rstate" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Resouces__Catego__2C3393D0" FromRole="Resouces" ToRole="Category" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Resouces" FromRole="Resouces" ToRole="Comment" />
+          <NavigationProperty Name="Lable" Relationship="Self.FK__Resouces__LableI__2D27B809" FromRole="Resouces" ToRole="Lable" />
+          <NavigationProperty Name="Link" Relationship="Self.FK__Resouces__LinkID__2A4B4B5E" FromRole="Resouces" ToRole="Link" />
+          <NavigationProperty Name="Picture" Relationship="Self.FK__Resouces__Pictur__2B3F6F97" FromRole="Resouces" ToRole="Picture" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK__Resouces__UserID__29572725" FromRole="Resouces" ToRole="UserInfo" />
+          <Property Name="Reading" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Collection" Relationship="db_StarsResourcesModel.FK_Collection_Resouces" FromRole="Resouces" ToRole="Collection" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LoginName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LoginPwd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserSex" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Userdescribe" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="integral" Type="Int32" />
+          <Property Name="UserState" Type="Int32" />
+          <Property Name="UserPicture" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK__Comment__UserID__1A14E395" FromRole="UserInfo" ToRole="Comment" />
+          <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__UserID__29572725" FromRole="UserInfo" ToRole="Resouces" />
+          <NavigationProperty Name="Collection" Relationship="db_StarsResourcesModel.FK_Collection_UserInfo" FromRole="UserInfo" ToRole="Collection" />
+        </EntityType>
+        <Association Name="FK__Lable__CategoryI__1ED998B2">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Lable" Type="Self.Lable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Lable">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__Catego__2C3393D0">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__UserID__1A14E395">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Resouces">
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resouces">
+              <PropertyRef Name="ResoucesID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ResoucesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__LableI__2D27B809">
+          <End Role="Lable" Type="Self.Lable" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lable">
+              <PropertyRef Name="LableID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="LableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__LinkID__2A4B4B5E">
+          <End Role="Link" Type="Self.Link" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Link">
+              <PropertyRef Name="LinkID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="LinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__Pictur__2B3F6F97">
+          <End Role="Picture" Type="Self.Picture" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Picture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resouces__UserID__29572725">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Resouces" Type="Self.Resouces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Resouces">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_StarsResourcesEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrators" EntityType="Self.Administrators" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" />
+          <EntitySet Name="Lable" EntityType="Self.Lable" />
+          <EntitySet Name="Link" EntityType="Self.Link" />
+          <EntitySet Name="Picture" EntityType="Self.Picture" />
+          <EntitySet Name="Resouces" EntityType="Self.Resouces" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <AssociationSet Name="FK__Lable__CategoryI__1ED998B2" Association="Self.FK__Lable__CategoryI__1ED998B2">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Lable" EntitySet="Lable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__Catego__2C3393D0" Association="Self.FK__Resouces__Catego__2C3393D0">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__UserID__1A14E395" Association="Self.FK__Comment__UserID__1A14E395">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Resouces" Association="Self.FK_Comment_Resouces">
+            <End Role="Resouces" EntitySet="Resouces" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__LableI__2D27B809" Association="Self.FK__Resouces__LableI__2D27B809">
+            <End Role="Lable" EntitySet="Lable" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__LinkID__2A4B4B5E" Association="Self.FK__Resouces__LinkID__2A4B4B5E">
+            <End Role="Link" EntitySet="Link" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__Pictur__2B3F6F97" Association="Self.FK__Resouces__Pictur__2B3F6F97">
+            <End Role="Picture" EntitySet="Picture" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resouces__UserID__29572725" Association="Self.FK__Resouces__UserID__29572725">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Resouces" EntitySet="Resouces" />
+          </AssociationSet>
+          <EntitySet Name="Collection" EntityType="db_StarsResourcesModel.Collection" />
+          <AssociationSet Name="FK_Collection_Resouces" Association="db_StarsResourcesModel.FK_Collection_Resouces">
+            <End Role="Resouces" EntitySet="Resouces" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_UserInfo" Association="db_StarsResourcesModel.FK_Collection_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="CollectionID" />
+          </Key>
+          <Property Name="CollectionID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ResoucesID" Type="Int32" />
+          <NavigationProperty Name="Resouces" Relationship="db_StarsResourcesModel.FK_Collection_Resouces" FromRole="Collection" ToRole="Resouces" />
+          <NavigationProperty Name="UserInfo" Relationship="db_StarsResourcesModel.FK_Collection_UserInfo" FromRole="Collection" ToRole="UserInfo" />
+        </EntityType>
+        <Association Name="FK_Collection_Resouces">
+          <End Type="db_StarsResourcesModel.Resouces" Role="Resouces" Multiplicity="0..1" />
+          <End Type="db_StarsResourcesModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resouces">
+              <PropertyRef Name="ResoucesID" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="ResoucesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_UserInfo">
+          <End Type="db_StarsResourcesModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+          <End Type="db_StarsResourcesModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_StarsResourcesModelStoreContainer" CdmEntityContainer="db_StarsResourcesEntities2">
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Administrators">
+              <MappingFragment StoreEntitySet="Administrators">
+                <ScalarProperty Name="AdmID" ColumnName="AdmID" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+                <ScalarProperty Name="Jurisdiction" ColumnName="Jurisdiction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="TabelName" ColumnName="TabelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="ComID" ColumnName="ComID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ResoucesID" ColumnName="ResoucesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lable">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Lable">
+              <MappingFragment StoreEntitySet="Lable">
+                <ScalarProperty Name="LableID" ColumnName="LableID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="TabelName" ColumnName="TabelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Link">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Link">
+              <MappingFragment StoreEntitySet="Link">
+                <ScalarProperty Name="LinkID" ColumnName="LinkID" />
+                <ScalarProperty Name="Ldescribe" ColumnName="Ldescribe" />
+                <ScalarProperty Name="Linkline" ColumnName="Linkline" />
+                <ScalarProperty Name="Lremarks" ColumnName="Lremarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Picture">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Picture">
+              <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+                <ScalarProperty Name="Picture_a" ColumnName="Picture_a" />
+                <ScalarProperty Name="Picture_b" ColumnName="Picture_b" />
+                <ScalarProperty Name="Picture_c" ColumnName="Picture_c" />
+                <ScalarProperty Name="Picture_d" ColumnName="Picture_d" />
+                <ScalarProperty Name="Picture_e" ColumnName="Picture_e" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resouces">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Resouces">
+              <MappingFragment StoreEntitySet="Resouces">
+                <ScalarProperty Name="Reading" ColumnName="Reading" />
+                <ScalarProperty Name="ResoucesID" ColumnName="ResoucesID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LinkID" ColumnName="LinkID" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="LableID" ColumnName="LableID" />
+                <ScalarProperty Name="Releasetime" ColumnName="Releasetime" />
+                <ScalarProperty Name="Rname" ColumnName="Rname" />
+                <ScalarProperty Name="Rdescribe" ColumnName="Rdescribe" />
+                <ScalarProperty Name="Rdemand" ColumnName="Rdemand" />
+                <ScalarProperty Name="Rstate" ColumnName="Rstate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RegistrationTime" ColumnName="RegistrationTime" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+                <ScalarProperty Name="E_mail" ColumnName="E_mail" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserSex" ColumnName="UserSex" />
+                <ScalarProperty Name="Userdescribe" ColumnName="Userdescribe" />
+                <ScalarProperty Name="integral" ColumnName="integral" />
+                <ScalarProperty Name="UserState" ColumnName="UserState" />
+                <ScalarProperty Name="UserPicture" ColumnName="UserPicture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collection">
+            <EntityTypeMapping TypeName="db_StarsResourcesModel.Collection">
+              <MappingFragment StoreEntitySet="Collection">
+                <ScalarProperty Name="ResoucesID" ColumnName="ResoucesID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

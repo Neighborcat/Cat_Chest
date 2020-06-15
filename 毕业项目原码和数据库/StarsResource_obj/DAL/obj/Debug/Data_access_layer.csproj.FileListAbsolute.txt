@@ -1,0 +1,13 @@
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\bin\Debug\DAL.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\bin\Debug\DAL.pdb
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\obj\Debug\Data_access_layer.csprojAssemblyReference.cache
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\obj\Debug\DAL.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\obj\Debug\DAL.pdb
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\obj\Debug\Data_access_layer.csproj.CoreCompileInputs.cache
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\bin\Debug\Models.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\bin\Debug\EntityFramework.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\bin\Debug\Models.pdb
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\bin\Debug\Models.dll.config
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\bin\Debug\EntityFramework.xml
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\DAL\obj\Debug\Data_access_layer.csproj.CopyComplete
