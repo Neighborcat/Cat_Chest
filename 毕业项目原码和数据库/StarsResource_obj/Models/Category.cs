@@ -17,20 +17,16 @@ namespace Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Category1 = new HashSet<Category>();
+            this.Lable = new HashSet<Lable>();
+            this.Resouces = new HashSet<Resouces>();
         }
     
-        public int CatID { get; set; }
-        public string Ccategory { get; set; }
-        public string Clabel { get; set; }
-        public Nullable<int> CrsoucesID { get; set; }
-        public Nullable<int> CrecordID { get; set; }
-        public Nullable<int> CID { get; set; }
+        public int CategoryID { get; set; }
+        public string TabelName { get; set; }
     
-        public virtual Record Record { get; set; }
-        public virtual Resouces Resouces { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Category1 { get; set; }
-        public virtual Category Category2 { get; set; }
+        public virtual ICollection<Lable> Lable { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resouces> Resouces { get; set; }
     }
 }

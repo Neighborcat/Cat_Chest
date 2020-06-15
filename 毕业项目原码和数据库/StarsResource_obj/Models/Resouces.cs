@@ -17,27 +17,31 @@ namespace Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Resouces()
         {
-            this.Category = new HashSet<Category>();
-            this.UserInfo = new HashSet<UserInfo>();
+            this.Comment = new HashSet<Comment>();
+            this.Collection = new HashSet<Collection>();
         }
     
-        public int ResID { get; set; }
-        public int RuserID { get; set; }
+        public int ResoucesID { get; set; }
+        public Nullable<int> UserID { get; set; }
         public Nullable<int> LinkID { get; set; }
+        public Nullable<int> PictureID { get; set; }
+        public Nullable<int> CategoryID { get; set; }
+        public Nullable<int> LableID { get; set; }
         public System.DateTime Releasetime { get; set; }
         public string Rname { get; set; }
-        public string Rpicture { get; set; }
         public string Rdescribe { get; set; }
-        public string Rstatement { get; set; }
         public Nullable<int> Rdemand { get; set; }
         public Nullable<int> Rstate { get; set; }
-        public Nullable<int> ComID { get; set; }
+        public int Reading { get; set; }
     
+        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Category { get; set; }
-        public virtual Comment Comment { get; set; }
+        public virtual ICollection<Comment> Comment { get; set; }
+        public virtual Lable Lable { get; set; }
         public virtual Link Link { get; set; }
+        public virtual Picture Picture { get; set; }
+        public virtual UserInfo UserInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInfo> UserInfo { get; set; }
+        public virtual ICollection<Collection> Collection { get; set; }
     }
 }

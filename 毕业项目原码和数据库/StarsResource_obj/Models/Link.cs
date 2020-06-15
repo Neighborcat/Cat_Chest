@@ -17,19 +17,14 @@ namespace Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Link()
         {
-            this.Record = new HashSet<Record>();
             this.Resouces = new HashSet<Resouces>();
         }
     
-        public int LinID { get; set; }
+        public int LinkID { get; set; }
         public string Ldescribe { get; set; }
         public string Linkline { get; set; }
         public string Lremarks { get; set; }
-        public Nullable<int> RecID { get; set; }
-        public Nullable<int> ResID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Record> Record { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Resouces> Resouces { get; set; }
     }

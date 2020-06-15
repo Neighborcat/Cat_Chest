@@ -14,18 +14,12 @@ namespace Models
     
     public partial class Comment
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Comment()
-        {
-            this.Resouces = new HashSet<Resouces>();
-        }
-    
         public int ComID { get; set; }
-        public int CuserID { get; set; }
-        public int CresID { get; set; }
+        public Nullable<int> UserID { get; set; }
         public string Content { get; set; }
+        public Nullable<int> ResoucesID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Resouces> Resouces { get; set; }
+        public virtual UserInfo UserInfo { get; set; }
+        public virtual Resouces Resouces { get; set; }
     }
 }

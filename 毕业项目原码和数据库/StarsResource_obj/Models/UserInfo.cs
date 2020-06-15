@@ -14,19 +14,31 @@ namespace Models
     
     public partial class UserInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UserInfo()
+        {
+            this.Comment = new HashSet<Comment>();
+            this.Resouces = new HashSet<Resouces>();
+            this.Collection = new HashSet<Collection>();
+        }
+    
         public int UserID { get; set; }
         public System.DateTime RegistrationTime { get; set; }
-        public int IntegralID { get; set; }
-        public Nullable<int> RecordID { get; set; }
-        public Nullable<int> ResoucesID { get; set; }
         public string LoginName { get; set; }
         public string LoginPwd { get; set; }
         public string E_mail { get; set; }
         public string UserName { get; set; }
+        public string UserSex { get; set; }
+        public string Userdescribe { get; set; }
+        public Nullable<int> integral { get; set; }
         public Nullable<int> UserState { get; set; }
+        public string UserPicture { get; set; }
     
-        public virtual Integral Integral { get; set; }
-        public virtual Record Record { get; set; }
-        public virtual Resouces Resouces { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resouces> Resouces { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Collection> Collection { get; set; }
     }
 }
