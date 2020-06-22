@@ -95,3 +95,7 @@ D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\StarsResouces\b
 D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\StarsResouces\bin\EntityFramework.SqlServer.xml
 D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\StarsResouces\bin\zh-Hans\EntityFramework.resources.dll
 D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\StarsResouces\bin\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\StarsResouces\bin\PagedList.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\StarsResouces\bin\PagedList.Mvc.dll
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\StarsResouces\bin\PagedList.xml
+D:\毕业项目\毕业项目原码和数据库\StarsResource_obj\StarsResouces\bin\PagedList.Mvc.xml

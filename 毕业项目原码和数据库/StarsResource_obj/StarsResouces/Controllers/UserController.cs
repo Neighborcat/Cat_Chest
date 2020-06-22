@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Models;
 
 namespace StarsResouces.Controllers
 {
     public class UserController : Controller
     {
+        db_StarsResourcesEntities2 db = new db_StarsResourcesEntities2();
         // GET: User
         //我的账户
-        public ActionResult MainPage()
+        public ActionResult MainPage(int id)
         {
+            UserInfo info = db.UserInfo.Find(id);
+            Session["user"] = info;
             return View();
         }
         //个人中心
@@ -52,7 +56,8 @@ namespace StarsResouces.Controllers
         //退出账户
         public ActionResult Exit()
         {
-            return View();
+            Session["user"] = null;
+            return RedirectToAction("Index","Home");
         }
     }
 }

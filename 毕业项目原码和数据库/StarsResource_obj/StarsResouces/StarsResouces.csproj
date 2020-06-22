@@ -54,6 +54,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -155,15 +161,56 @@
     <Content Include="Content\icon\png\网站.png" />
     <Content Include="Content\icon\svg\福利.svg" />
     <Content Include="Content\Layout\Logo.png" />
+    <Content Include="Content\LB\css\css.css" />
     <Content Include="Content\LB\images\ACG.GY_03.jpg" />
     <Content Include="Content\LB\images\ACG.GY_19.jpg" />
+    <Content Include="Content\LB\images\left.png" />
     <Content Include="Content\LB\images\QQ图片20200528143941.jpg" />
     <Content Include="Content\LB\images\QQ图片20200528144122.jpg" />
+    <Content Include="Content\LB\images\right.png" />
+    <Content Include="Content\LB\js\index.js" />
+    <Content Include="Content\LB\js\jquery-1.9.1.min.js" />
+    <Content Include="Content\LB\view\index.html" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Resouces\Images\51cfd565c04f56db6c2e8d5dd89edf85.jpg" />
     <Content Include="Content\Resouces\Images\64d99a3d5eee070089a92d6e554e6208.jpg" />
     <Content Include="Content\Resouces\Images\7b39e76d30a843e91fc7f949c5862e31.jpg" />
     <Content Include="Content\Resouces\Images\a86db145cdab3ab993b5a595f3164450.jpg" />
+    <Content Include="Content\Resouces\Images\dq_01.jpg" />
+    <Content Include="Content\Resouces\Images\dq_02.jpg" />
+    <Content Include="Content\Resouces\Images\dq_03.jpg" />
+    <Content Include="Content\Resouces\Images\dq_04.jpg" />
+    <Content Include="Content\Resouces\Images\eg_01.jpg" />
+    <Content Include="Content\Resouces\Images\eg_02.jpg" />
+    <Content Include="Content\Resouces\Images\eg_03.jpg" />
+    <Content Include="Content\Resouces\Images\eg_04.jpg" />
     <Content Include="Content\Resouces\Images\feefcba52a144e2e6987d445a4b31da9.jpg" />
+    <Content Include="Content\Resouces\Images\hf_01.jpg" />
+    <Content Include="Content\Resouces\Images\hf_02.jpg" />
+    <Content Include="Content\Resouces\Images\hf_03.jpg" />
+    <Content Include="Content\Resouces\Images\hf_04.jpg" />
+    <Content Include="Content\Resouces\Images\lm_01.jpg" />
+    <Content Include="Content\Resouces\Images\lm_02.jpg" />
+    <Content Include="Content\Resouces\Images\lm_03.jpg" />
+    <Content Include="Content\Resouces\Images\lm_04.jpg" />
+    <Content Include="Content\Resouces\Images\ppt_01.jpg" />
+    <Content Include="Content\Resouces\Images\ppt_02.jpg" />
+    <Content Include="Content\Resouces\Images\ppt_03.jpg" />
+    <Content Include="Content\Resouces\Images\ppt_04.jpg" />
+    <Content Include="Content\Resouces\Images\ppt_05.jpg" />
+    <Content Include="Content\Resouces\Images\tt_01.jpg" />
+    <Content Include="Content\Resouces\Images\tt_02.jpg" />
+    <Content Include="Content\Resouces\Images\tt_03.jpg" />
+    <Content Include="Content\Resouces\Images\tt_04.jpg" />
+    <Content Include="Content\Resouces\Images\tx_01.jpg" />
+    <Content Include="Content\Resouces\Images\tx_02.jpg" />
+    <Content Include="Content\Resouces\Images\tx_03.jpg" />
+    <Content Include="Content\Resouces\Images\tx_04.jpg" />
+    <Content Include="Content\Resouces\Images\tx_05.jpg" />
+    <Content Include="Content\Resouces\Images\ys_01.jpg" />
+    <Content Include="Content\Resouces\Images\ys_02.jpg" />
+    <Content Include="Content\Resouces\Images\ys_03.jpg" />
+    <Content Include="Content\Resouces\Images\ys_04.jpg" />
     <Content Include="Content\Resouces\Img\acg.gy_29.jpg" />
     <Content Include="Content\Resouces\Img\acg.gy_43.jpg" />
     <Content Include="favicon.ico" />
@@ -297,7 +344,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Shared\_LayoutPage1.cshtml" />
+    <Content Include="Views\Shared\_LayoutTest.cshtml" />
     <Content Include="Views\Shared\_LayoutUserMain.cshtml" />
     <Content Include="Views\User\MainPage.cshtml" />
     <Content Include="Views\User\UserCenter.cshtml" />
@@ -308,11 +355,14 @@
     <Content Include="Views\User\Comment.cshtml" />
     <Content Include="Views\User\ChangePwd.cshtml" />
     <Content Include="Views\Home\FuLi.cshtml" />
+    <Content Include="Views\Home\ShouJi.cshtml" />
+    <Content Include="Views\Home\XueXi.cshtml" />
+    <Content Include="Views\Home\JianZhan.cshtml" />
+    <Content Include="Views\Home\DianNao.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\LB\css\" />
-    <Folder Include="Content\LB\js\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

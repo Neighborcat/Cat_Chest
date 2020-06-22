@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
 using Models;
-
+using PagedList;
+using PagedList.Mvc;
 
 namespace StarsResouces.Controllers
 {
@@ -14,11 +15,13 @@ namespace StarsResouces.Controllers
         db_StarsResourcesEntities2 db = new db_StarsResourcesEntities2();
         public ActionResult Index()
         {
-            return View(db.Resouces.ToList());
+            List<Resouces> list = db.Resouces.ToList();
+            return View(list.ToPagedList(1,6));
         }
         public ActionResult FuLi()
         {
-            return View();
+            List<Resouces> fuli = db.Resouces.Where(p=>p.CategoryID==1).ToList();
+            return View(fuli);
         }
         public ActionResult ShouJi()
         {
@@ -33,6 +36,16 @@ namespace StarsResouces.Controllers
             return View();
         }
         public ActionResult DianNao()
+        {
+            return View();
+        }
+        public ActionResult Details(int id)
+        {
+            Resouces resouces = db.Resouces.Find(id);
+            ViewBag.resouces = resouces;
+            return View();
+        }
+        public ActionResult Links()
         {
             return View();
         }

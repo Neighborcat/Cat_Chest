@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Models;
+@{
+    UserInfo infos = Session["user"] as UserInfo;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -63,19 +68,14 @@
                         </a>
                     </li>
                 </ul>
+
                 <a href="#">
-                    <img src="~/Content/icon/default.jpg" style=" width: 34px; height: 34px; display: flex; border-radius: 50%; align-items: center; justify-content: center; overflow: hidden" />
+                    <img src="~/Content/icon/@infos.UserPicture" style=" width: 34px; height: 34px; display: flex; border-radius: 50%; align-items: center; justify-content: center; overflow: hidden" />
                 </a>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:aqua">
-                        隔壁老猫
+                <div class="nav-item">
+                    <a class="nav-link" href="#" style="color:aqua;font-size:10px">
+                        @infos.UserName
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">个人中心</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">切换账号</a>
-                        <a class="dropdown-item" href="#">注销用户</a>
-                    </div>
                 </div>
 
             </div>
@@ -86,17 +86,17 @@
         <div class="row">
             <div class="col-3 bg-dark" style="padding-right:0px;">
                 <div class="card bg-transparent border-0">
-                    <img src="~/Content/icon/default.jpg" class="card-img-top" id="card-img" style="width: 60px; height: 60px; display: flex; border-radius: 50%; align-items: center; justify-content: center; overflow: hidden" />
+                    <img src="~/Content/icon/@infos.UserPicture" class="card-img-top" id="card-img" style="width: 60px; height: 60px; display: flex; border-radius: 50%; align-items: center; justify-content: center; overflow: hidden" />
                     <div class="card-body text-white">
-                        <h5 class="card-title text-center">隔壁老猫</h5>
+                        <h5 class="card-title text-center">@infos.UserName</h5>
                         <p class="card-text" style="font-size:12px;text-align:center">
-                            <label>UID:1009</label>
+                            <label>UID:@infos.UserID</label>
                         </p>
                         <p class="card-text" style="font-size:12px;text-align:center">
                             <svg class="bi bi-tag-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
                                 <path fill-rule="evenodd" d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                             </svg>
-                            我就是我不一样得烟火
+                            @infos.Userdescribe
                         </p>
 
                     </div>
@@ -154,6 +154,14 @@
             </div>
             <div class="col-md-9" style="height:1000px;border:1px solid blue">
                 <section>
+                    <div>
+                        <nav aria-label="breadcrumb" style="margin-top:15px">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/User/MainPage?id=@infos.UserID">我的账户</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">我的分享</li>
+                            </ol>
+                        </nav>
+                    </div>
                     @RenderBody()
                 </section>
             </div>

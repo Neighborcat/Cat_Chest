@@ -26,6 +26,7 @@ Create table Comment(
 	UserID int Foreign key references UserInfo(UserID),--发布者
 	Content varchar(200)--评论内容
 )
+alter table Comment add [Time] date default (getdate()) not null
 --类别表
 Create table Category(
 	CategoryID int primary key identity(1,1),
@@ -116,5 +117,9 @@ insert into Administrators(LoginName,LoginPwd,Jurisdiction) values('Mr.Sam','123
 select * from Administrators
 create table [Collection](--收藏表
 CollectionID int primary key identity(1,1),
+
+)
+create table Recomment(
+Recomment int primary key identity(1,1),
 
 )

@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Models
+@{
+    Resouces resouces = ViewBag.resouces;
+}
+<link href="~/Content/LB/css/css.css" rel="stylesheet" />
+@*<script src="~/Content/LB/js/index.js"></script>*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<div style="width:100%;height:300px;">
+    <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a" style="width:100%;height:300px" />
+</div>
+<div>
+    <h4>@resouces.Rname</h4>
+    <h5>资源图片</h5>
+</div>
+
+<div class="box">
+    <!-- 存放大图的容器-->
+    <div class="all">
+        <div class="top-img">
+            <div class="activeimg" >
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a">
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_b">
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_c">
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_d">
+                @*<img src="~/Content/Resouces/Images/@resouces.Picture.Picture_e">*@
+            </div>
+            <div class="left"><img src="~/Content/LB/images/left.png"> </div>
+            <div class="right"><img src="~/Content/LB/images/right.png"></div>
+        </div>
+        <!-- 存放缩略图的容器-->
+        <div class="bot-img">
+            <ul>
+                <li class="active"><img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a"></li>
+                <li><img src="~/Content/Resouces/Images/@resouces.Picture.Picture_b"> </li>
+                <li><img src="~/Content/Resouces/Images/@resouces.Picture.Picture_c"> </li>
+                <li><img src="~/Content/Resouces/Images/@resouces.Picture.Picture_d"> </li>
+                @*<li><img src="~/Content/Resouces/Images/@resouces.Picture.Picture_e"> </li>*@
+            </ul>
+        </div>
+    </div>
+</div>
+
+@*<div style="border:1px solid black;width:50%;height:280px;margin:0 auto">
+        <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_b" style="width:100%;height:100%"/>
+    </div>
+    <div style="border:1px solid black;width:50%;height:280px;margin:0 auto">
+        <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_c" style="width:100%;height:100%" />
+    </div>
+    <div style="border:1px solid black;width:50%;height:280px;margin:0 auto">
+        <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_d" style="width:100%;height:100%" />
+    </div>
+    <div style="border:1px solid black;width:50%;height:280px;margin:0 auto">
+        <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_e" style="width:100%;height:100%" />
+    </div>*@
+<div>
+    <h4 style="color:darkslateblue">资源介绍：</h4>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@resouces.Rdescribe
+    <br />
+    <p>
+        <span>上传时间：@resouces.Releasetime</span>
+        <span style="font-size:10px;float:right">上传者：<img src="~/Content/icon/@resouces.UserInfo.UserPicture " style=" width: 24px; height: 24px; display: flex; border-radius: 50%; align-items: center; justify-content: center; overflow: hidden" />@resouces.UserInfo.UserName</span>
+    </p>
+</div>
+<div>
+    <h4>需求积分：@resouces.Rdemand</h4>
+</div>
+<div>
+    <p><span>链接描述：</span>@resouces.Link.Ldescribe</p>
+    <p><span>云盘链接：</span><a href="@resouces.Link.Linkline">@resouces.Link.Linkline</a></p>
+    <p><span>链接备注;</span>@resouces.Link.Lremarks</p>
+</div>
+
+    <script>
+        $(function () {
+            $('.bot-img ul li').click(function () {
+                var _this = $(this);
+                _this.addClass('active').siblings('li').removeClass('active');
+                var int = _this.index();
+                $('.activeimg').animate({ left: int * -500 }, "slow");
+            });
+            var list = $('.bot-img ul li').length;
+            $('.activeimg').css({
+                width: list * 500,
+            });
+            $('.right').click(function () {
+                next(list)
+
+            })
+            $('.left').click(function () {
+                prev(list)
+            });
+
+            //自动播放 2秒播放一次 无限循环
+            var timer = '';
+            var num = 0;
+            timer = setInterval(function () { //打开定时器
+                num++;
+                if (num > parseFloat(list) - 1) {
+                    num = 0;
+                    $('.activeimg').animate({ left: num * -500 }, "slow");
+                } else {
+                    $('.activeimg').animate({ left: num * -500 }, "slow");
+                }
+            }, 2000);
+        })
+        var index = 0;
+        //下一张
+        function next(list) {
+            if (index < list - 1) {
+                index++;
+                $('.activeimg').animate({ left: index * -500 }, "slow");
+                $('.bot-img ul li').eq(index).addClass('active').siblings('li').removeClass('active')
+            } else {
+                index = 0;
+                $('.activeimg').animate({ left: index * -522 }, "slow");
+                $('.bot-img ul li').eq(index).addClass('active').siblings('li').removeClass('active')
+            }
+        }
+        //        上一张
+        function prev(list) {
+            index--;
+            if (index < 0) {
+                index = list - 1;
+                $('.activeimg').animate({ left: index * -500 }, "slow");
+                $('.bot-img ul li').eq(index).addClass('active').siblings('li').removeClass('active')
+            } else {
+                $('.activeimg').animate({ left: index * -500 }, "slow");
+                $('.bot-img ul li').eq(index).addClass('active').siblings('li').removeClass('active')
+            }
+        }
+    </script>
+
