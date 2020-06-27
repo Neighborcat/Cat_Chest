@@ -1,6 +1,10 @@
 ﻿@using Models
 @{
     UserInfo infos = Session["user"] as UserInfo;
+    if (infos!=null)
+    {
+        Session["uid"] = infos.UserID;
+    }
 }
 <!DOCTYPE html>
 <html>
@@ -8,11 +12,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    <title> - 我的 ASP.NET 应用程序</title>
+    @*@ViewBag.Title*@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.validate.min.js"></script>
     <style>
         body {
-            background-color: white;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            background-image: url('../../Content/Resouces/Images/e27ffbf57a28588657c7e40c45dccf0d.jpg');
+        }
+
+        .error {
+            display: block;
+            font-size: 10px;
+            color: red;
         }
     </style>
 </head>
@@ -97,7 +114,7 @@
                             @infos.UserName
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                            <a class="dropdown-item" href="/User/MainPage?id=@infos.UserID">个人中心</a>
+                            <a class="dropdown-item" href="/User/UserCenter?id=@infos.UserID">个人中心</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#Login">切换账号</a>
                             <div class="dropdown-divider"></div>
@@ -134,7 +151,7 @@
                                     <svg t="1592210331443" class="icon" viewBox="0 0 1126 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2970" width="16" height="16"><path d="M792.576 379.392a25.6 25.6 0 0 0 25.2928 25.8048h283.2384A25.6 25.6 0 0 0 1126.4 379.392a25.6 25.6 0 0 0-25.2928-25.8048h-283.2384a25.6 25.6 0 0 0-25.344 25.8048z m303.9232 80.7424H761.856c-16.5376 0-29.9008 11.6224-29.9008 25.7536 0 14.1824 13.312 25.7536 29.9008 25.7536h334.6432c16.4864 0 29.9008-11.5712 29.9008-25.7536 0-14.1312-13.4144-25.7536-29.9008-25.7536z m4.608 106.496h-283.2384a25.6 25.6 0 0 0-25.344 25.7536 25.6 25.6 0 0 0 25.344 25.7536h283.2384A25.6 25.6 0 0 0 1126.4 592.384a25.6 25.6 0 0 0-25.2928-25.8048zM543.0272 1024H341.6576C150.8352 1024 0 1024 0 923.648v-20.1216c0-188.16 153.2928-341.1968 341.7088-341.1968h201.2672c188.416 0 341.76 153.0368 341.76 341.1968v20.0704C884.6848 1024 726.3232 1024 542.976 1024z m-203.1616-405.1456c-158.464 0-287.4368 128.4096-287.4368 286.208v20.48c0 40.9088 166.0928 40.9088 287.4368 40.9088h204.9536c100.4544 0 287.4368 0 287.4368-40.96v-20.3776c0-157.8496-128.9728-286.208-287.4368-286.208H339.8656z m92.416-76.7488a271.4112 271.4112 0 0 1-271.2064-271.0528A271.36 271.36 0 0 1 432.2816 0a271.36 271.36 0 0 1 271.2064 271.0528 271.4624 271.4624 0 0 1-271.2064 271.0528z m-215.3472-271.872c0 118.1696 96.6144 214.3232 215.3472 214.3232 118.784 0 215.3984-96.1536 215.3984-214.3232 0-118.2208-96.6144-214.3232-215.3984-214.3232S216.9344 152.0128 216.9344 270.2336z" p-id="2971" fill="#cdcdcd"></path></svg>
                                 </span>
                             </div>
-                            <input type="text" class="form-control" id="LoginName" name="LoginName" placeholder="请输入账号" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" id="LoginName" name="LoginName" required="required" placeholder="请输入账号" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -142,7 +159,7 @@
                                     <svg t="1592210398974" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4083" width="16" height="16"><path d="M807.936 336.384h-12.288c-5.12-66.56-33.792-128.512-81.92-176.64C659.968 106.496 589.312 76.8 514.56 76.8c-147.968 0-269.312 114.688-280.576 259.072h-12.288c-78.848 0-143.36 64.512-143.36 143.36v327.168c0 78.848 64.512 143.36 143.36 143.36h586.24c78.848 0 143.36-64.512 143.36-143.36V479.744c0-79.36-64.512-143.36-143.36-143.36zM514.56 158.72c53.248 0 102.912 20.992 140.8 58.88 32.768 32.768 52.736 74.24 57.344 118.784H315.904C327.168 236.544 412.16 158.72 514.56 158.72z m354.816 647.68c0 33.792-27.648 61.44-61.44 61.44H221.696c-33.792 0-61.44-27.648-61.44-61.44V479.744c0-33.792 27.648-61.44 61.44-61.44h586.752c33.792 0 61.44 27.648 61.44 61.44v326.656z" fill="#cdcdcd" p-id="4084"></path><path d="M514.56 507.904c-22.528 0-40.96 18.432-40.96 40.96v158.72c0 22.528 18.432 40.96 40.96 40.96s40.96-18.432 40.96-40.96v-158.72c0-22.528-18.432-40.96-40.96-40.96z" fill="#cdcdcd" p-id="4085"></path></svg>
                                 </span>
                             </div>
-                            <input type="text" class="form-control" id="LoginPwd" name="LoginPwd" placeholder="请输入密码" aria-label="pwd" aria-describedby="basic-addon1">
+                            <input type="password" class="form-control" id="LoginPwd" name="LoginPwd" required="required" placeholder="请输入密码" aria-label="pwd" aria-describedby="basic-addon1">
                         </div>
                         <div style="margin-left:3%">
                             <input type="checkbox" id="JiZhu" name="JiZhu" checked="checked"/><label style="font-size:12px">记住密码</label>
@@ -151,7 +168,7 @@
                             <a href="#">忘记密码？</a>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width:90%;margin-left:5%;margin-bottom:30px">登录</button>
+                    <button type="submit" class="btn btn-primary" style="width:90%;margin-left:5%;margin-bottom:30px" id="loginsubmit">登录</button>
                 </form>
             </div>
 
@@ -219,6 +236,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">
@@ -227,4 +245,36 @@
             $('.dropdown-menu').toggle();
         })
     })
+    $("#LoginModal").validate({
+        rules: {
+            LoginName: { required: true, maxlength: 30 },
+            LoginPwd: { required: true},
+        },
+        messages: {
+            LoginName: { required: "*账号必填", maxlength: "账号输入内容不能超过30字" },
+            LoginPwd: { required: "*密码必填" },
+        }
+    })
+    $.validator.addMethod("checkPwd", function (value, e) {
+        var reg = /^[A-Za-z0-9]{6,12}$/;
+        return reg.test(value);
+    })
+    //$("#loginsubmit").bind("click", function () {
+    //    if ($("#JiZhu").is(':checked') == true) {
+    //        $("#hidSavePass").val("1");
+    //    }
+    //    $.ajax({
+    //        url: "/Home/LoginModal",
+    //        type: "post",
+    //        data: { sHidSavePass: $("#hidSavePass").val(),},
+    //        async: false,
+    //        success: function (data) {
+    //            if (data == "1") {
+    //                window.location.href = "/Home/LoginModal";
+    //            } else {
+    //                $("#error_log").text(data);
+    //            }
+    //        }
+    //    })
+    //})
 </script>

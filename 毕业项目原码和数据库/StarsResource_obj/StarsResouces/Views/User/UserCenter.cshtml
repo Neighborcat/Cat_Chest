@@ -1,15 +1,51 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "UserCenter";
     Layout = "~/Views/Shared/_LayoutUserMain.cshtml";
+    UserInfo info = ViewBag.info;
+    Session["userid"] = info.UserID;
 }
-
-    <div>
-        <nav aria-label="breadcrumb" style="margin-top:15px">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/User/MainPage">我的账户</a></li>
-                <li class="breadcrumb-item active" aria-current="page">个人中心</li>
-            </ol>
-        </nav>
+<style>
+    .bottom_line .ab:hover {
+        transition: all 280ms;
+        border-bottom: 8px solid cornflowerblue;
+    }
+    .message label {
+    font-size:14px;
+    font-family:STXinwei;
+    }
+</style>
+@using Models
+    <div class="row bottom_line" style="margin:0 auto;margin-top:30px;width:100%">
+        <div class="row-cols-lg-4 ab" style="width:240px;height:100px;text-align:center;padding-top:20px;background-color:whitesmoke;margin-left:10px">
+            <lable style="font-weight:bold;font-size:large">我的文章(@info.Resouces.Count())</lable><br />
+            <a href="/User/Myshare?id=@Session["userid"]" style="font-size:small">查看详情>></a><br />
+        </div>
+        <div class="row-cols-lg-4 ab" style="width: 240px; height: 100px; text-align: center; padding-top: 20px; background-color: whitesmoke;margin-left:10px">
+            <lable style="font-weight:bold;font-size:large">我的评论(@info.Comment.Count())</lable><br />
+            <a href="/User/Comment?id=@Session["userid"]" style="font-size:small">查看详情>></a><br />
+        </div>
+        <div class="row-cols-lg-4 ab" style="width: 240px; height: 100px; text-align: center; padding-top: 20px; background-color: whitesmoke;margin-left:10px">
+            <lable style="font-weight:bold;font-size:large">我的收藏(@info.Collection.Count())</lable><br />
+            <a href="/User/Collection?id=@Session["userid"]" style="font-size:small">查看详情>></a><br />
+        </div>
+    </div>
+    <div style="margin:40px 0px 0px 10px;background-color:whitesmoke;width:740px;height:600px">
+        <div style="padding:40px 0px 0px 30px" class="message">
+            <h4 style="font-weight:bold">基 础 信 息</h4>
+            <label>用户名：@info.UserName</label><br />
+            <label>登录账户：@info.LoginName</label><br />
+            <label>电子邮箱：@info.E_mail</label><br />
+            <label>
+                性别：@if (Convert.ToInt32(info.UserSex) == 0)
+                {<label>未知??</label>}
+                else if (Convert.ToInt32(info.UserSex) == 1)
+                {<label>男</label>}
+                else if (Convert.ToInt32(info.UserSex) == 2)
+                {<label>女</label>}
+            </label><br />
+            <label>个性签名：@info.Userdescribe</label><br />
+            <label>拥有积分：@info.integral</label><br />
+            <label>注册时间：@string.Format("{0:D}", info.RegistrationTime)</label>
+        </div>
     </div>
 

@@ -76,7 +76,7 @@ Create table Resouces(
 	Rname varchar(50) not null,--资源名称
 	Rdescribe varchar(1000) not null,--资源描述
 	Rdemand int,--下载需求
-	Rstate int check (Rstate=0 or Rstate=1 or Rstate=2) default (0),--资源状态0、审核中，1、通过，2、未通过或者封禁
+	Rstate int check (Rstate=0 or Rstate=1 or Rstate=2) default (0),--资源状态0、通过，1、审核中，2、未通过或者封禁
 )
 select*from Resouces
 insert into Resouces(UserID,LinkID,PictureID,CategoryID,LableID,Releasetime,Rname,Rdescribe,Rdemand,Rstate) values

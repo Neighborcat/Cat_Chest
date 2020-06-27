@@ -4,18 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using Models
-@model List<Resouces>
+@using PagedList.Mvc
+@model PagedList.PagedList<Resouces>
 <style>
     .asb:hover {
         transition: all 420ms;
         box-shadow: 0px 0px 10px #48484a
     }
 </style>
-<div style="border:1px solid black;width:100%;height:100px;background-color:aquamarine">
-    <h3 style="text-align:center">广告投放</h3>
+<div style="border:1px solid black;width:100%;height:100px;background-color:black">
+    <a href="#">
+        <img src="~/Content/GuangGao/music.gif" style="width:40%;height:100%;margin:0 auto"/>
+        <label style="color:white;font-family:YouYuan">不是广告是情怀!这些曾经脍炙人口的广告歌曲,你听过几首?</label>
+    </a>
 </div>
 <div class="row" style="margin-top:20px">
-    <div class="col-9 row">
+    <div class="col-9 row" style="min-height:800px">
         @foreach (var item in Model)
         {
             <div class="col-md-6">
@@ -35,7 +39,7 @@
                             </div>
                         </dd>
                         <dd>
-                            <span style="font-size:0.2rem;margin-left:5px;color:black">
+                            <span style="font-size:8px;margin-left:5px;color:black">
                                 <svg t="1592024207787" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1912" width="16" height="16"><path d="M1022.88 504.832c-0.32-1.344-0.128-2.784-0.64-4.096-0.192-0.544-0.672-0.832-0.864-1.344-0.32-0.768-0.256-1.632-0.672-2.368-92.8-177.632-294.816-304.896-507.936-304.896-213.152 0-415.136 127.072-508 304.672-0.416 0.736-0.352 1.6-0.672 2.368-0.224 0.512-0.672 0.8-0.864 1.344-0.512 1.312-0.32 2.752-0.64 4.096-0.576 2.4-1.12 4.704-1.12 7.168s0.576 4.736 1.12 7.168c0.32 1.344 0.128 2.784 0.64 4.096 0.192 0.544 0.672 0.832 0.864 1.344 0.32 0.768 0.256 1.632 0.672 2.368 92.832 177.632 294.848 304.896 508 304.896 213.12 0 415.136-127.072 507.936-304.672 0.448-0.736 0.384-1.6 0.672-2.368 0.192-0.512 0.672-0.8 0.864-1.344 0.512-1.312 0.32-2.752 0.64-4.096 0.544-2.432 1.12-4.736 1.12-7.168s-0.576-4.768-1.12-7.168z m-510.144 262.784c-179.68 0-355.584-102.112-443.232-255.84 88.128-153.92 263.776-255.68 443.232-255.68 179.616 0 355.552 102.144 443.2 255.84-88.128 153.952-263.744 255.68-443.2 255.68z" fill="#333333" p-id="1913"></path><path d="M512.736 383.968l-0.192 0.032a127.936 127.936 0 0 0-127.744 127.872 16 16 0 0 0 31.968 0 96.064 96.064 0 0 1 95.968-95.904v-0.032a15.968 15.968 0 0 0 0-31.968z" fill="#333333" p-id="1914"></path><path d="M512 288a224 224 0 1 0 0 448 224 224 0 0 0 0-448z m0 416c-105.888 0-192-86.112-192-192s86.112-192 192-192 192 86.112 192 192-86.112 192-192 192z" fill="#333333" p-id="1915"></path></svg>
                                 阅览（@item.Reading）
                                 &nbsp;
@@ -49,35 +53,46 @@
                 </a>
             </div>
         }
+    <div style="width:100%;height:100px;padding:10px;margin-bottom:5px;text-align:center;background-color:white">
+        当前页/总页数（ @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount ）
+        @Html.PagedListPager(Model, page => Url.Action("FuLi", new
+   {
+       page
+   }))
     </div>
+    </div>
+    
     @*//右边部分*@
-<div class="col-3">
-    <div class="lable">
-        <a href="#" class="btn btn-outline-success btn-sm">开放下载</a>
-        <a href="#" class="btn btn-outline-danger btn-sm">免费电影</a>
-    </div>
-    <div class="row" style="height:80px;margin-top:15px">
-        <div class="col-md-10">
-            <input type="text" placeholder="搜索内容" class="form-control" />
+    <div class="col-3">
+        <div class="lable">
+            <a href="/Home/Fuli?id=37" class="btn btn-outline-success btn-sm">开放下载</a>
+            <a href="/Home/Fuli?id=38" class="btn btn-outline-danger btn-sm">免费电影</a>
         </div>
-        <div class="col-md-2">
-            <button class="btn btn-primary" type="button">
-                搜索
-            </button>
+        <div class="row" style="height:80px;margin-top:15px">
+            <div class="col-md-10">
+                <input type="text" placeholder="搜索内容" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary" type="button">
+                    搜索
+                </button>
+            </div>
+        </div>
+        <div style="width:100%;height:420px;border:1px solid black;background-color:whitesmoke;margin-top:25px">
+            <h5 style="padding-left:15px;padding-top:10px;font-family:STXinwei">推荐文章</h5>
+            <div class="dropdown-divider"></div>
+            @for (int i = 0; i < 8; i++)
+            {
+                <div style="background-color:blueviolet;width:100%;height:40px;margin-top:5px"></div>
+            }
+        </div>
+        <div style="border:1px solid black;width:100%;height:220px;background-color:whitesmoke;margin-top:20px;text-align:center">
+            <a href="#">
+                <img src="~/Content/GuangGao/tiktalk.gif" style="width:100%;height:180px"/>
+                <label style="color:cornflowerblue;font-family:STCaiyun">抖音记录美好生活~</label>
+            </a>
         </div>
     </div>
-    <div style="width:100%;height:420px;border:1px solid black;background-color:whitesmoke;margin-top:25px">
-        <h5 style="padding-left:15px;padding-top:10px;font-family:STXinwei">推荐文章</h5>
-        <div class="dropdown-divider"></div>
-        @for (int i = 0; i < 8; i++)
-        {
-            <div style="background-color:blueviolet;width:100%;height:40px;margin-top:5px"></div>
-        }
-    </div>
-    <div style="border:1px solid black;width:100%;height:180px;background-color:aquamarine;margin-top:20px">
-        <h3 style="text-align:center">广告投放</h3>
-    </div>
-</div>
 </div>
 
 

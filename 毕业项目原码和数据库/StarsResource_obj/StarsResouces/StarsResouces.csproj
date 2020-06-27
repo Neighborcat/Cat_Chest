@@ -153,7 +153,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DayTime\css\style.css" />
     <Content Include="Content\DayTime\js\index.js" />
+    <Content Include="Content\GuangGao\ds1.gif" />
+    <Content Include="Content\GuangGao\gg.gif" />
+    <Content Include="Content\GuangGao\liuliang.jpg" />
+    <Content Include="Content\GuangGao\music.gif" />
+    <Content Include="Content\GuangGao\QQdaishua.jpg" />
+    <Content Include="Content\GuangGao\tiktalk.gif" />
     <Content Include="Content\icon\default.jpg" />
+    <Content Include="Content\icon\loading.gif" />
+    <Content Include="Content\icon\NoFind.jpg" />
     <Content Include="Content\icon\png\学习.png" />
     <Content Include="Content\icon\png\手机.png" />
     <Content Include="Content\icon\png\电脑.png" />
@@ -161,16 +169,20 @@
     <Content Include="Content\icon\png\网站.png" />
     <Content Include="Content\icon\svg\福利.svg" />
     <Content Include="Content\Layout\Logo.png" />
-    <Content Include="Content\LB\css\css.css" />
+    <Content Include="Content\LB\css\demo.css" />
+    <Content Include="Content\LB\css\style.css" />
     <Content Include="Content\LB\images\ACG.GY_03.jpg" />
     <Content Include="Content\LB\images\ACG.GY_19.jpg" />
     <Content Include="Content\LB\images\left.png" />
     <Content Include="Content\LB\images\QQ图片20200528143941.jpg" />
     <Content Include="Content\LB\images\QQ图片20200528144122.jpg" />
     <Content Include="Content\LB\images\right.png" />
-    <Content Include="Content\LB\js\index.js" />
-    <Content Include="Content\LB\js\jquery-1.9.1.min.js" />
-    <Content Include="Content\LB\view\index.html" />
+    <Content Include="Content\LB\images\纱布.jpg" />
+    <Content Include="Content\LB\js\hm.js" />
+    <Content Include="Content\LB\js\jquery.min.js" />
+    <Content Include="Content\LB\js\jquery.qrcode.min.js" />
+    <Content Include="Content\LB\js\js.js" />
+    <Content Include="Content\LB\js\tools.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Resouces\Images\51cfd565c04f56db6c2e8d5dd89edf85.jpg" />
     <Content Include="Content\Resouces\Images\64d99a3d5eee070089a92d6e554e6208.jpg" />
@@ -180,6 +192,7 @@
     <Content Include="Content\Resouces\Images\dq_02.jpg" />
     <Content Include="Content\Resouces\Images\dq_03.jpg" />
     <Content Include="Content\Resouces\Images\dq_04.jpg" />
+    <Content Include="Content\Resouces\Images\e27ffbf57a28588657c7e40c45dccf0d.jpg" />
     <Content Include="Content\Resouces\Images\eg_01.jpg" />
     <Content Include="Content\Resouces\Images\eg_02.jpg" />
     <Content Include="Content\Resouces\Images\eg_03.jpg" />
@@ -346,7 +359,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LayoutTest.cshtml" />
     <Content Include="Views\Shared\_LayoutUserMain.cshtml" />
-    <Content Include="Views\User\MainPage.cshtml" />
     <Content Include="Views\User\UserCenter.cshtml" />
     <Content Include="Views\User\Contribution.cshtml" />
     <Content Include="Views\User\Myshare.cshtml" />
@@ -360,9 +372,11 @@
     <Content Include="Views\Home\JianZhan.cshtml" />
     <Content Include="Views\Home\DianNao.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Loading.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\LB\view\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
