@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Myshare";
+    ViewBag.Title = "我的分享";
     Layout = "~/Views/Shared/_LayoutUserMain.cshtml";
 }
 @using Models
@@ -19,10 +19,7 @@ else
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" id="button-addon2">
                 @*图标*@
-                <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                </svg>
+                <svg t="1593586385666" class="icon" viewBox="0 0 1034 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2136" width="16" height="16"><path d="M346.352941 346.352941m-346.352941 0a346.352941 346.352941 0 1 0 692.705882 0 346.352941 346.352941 0 1 0-692.705882 0Z" fill="#8CF6FB" p-id="2137"></path><path d="M421.647059 843.294118C188.235294 843.294118 0 655.058824 0 421.647059S188.235294 0 421.647059 0s421.647059 188.235294 421.647059 421.647059-188.235294 421.647059-421.647059 421.647059z m0-768C230.4 75.294118 75.294118 230.4 75.294118 421.647059s155.105882 346.352941 346.352941 346.352941 346.352941-155.105882 346.352941-346.352941S612.894118 75.294118 421.647059 75.294118z" fill="#3C2DCB" p-id="2138"></path><path d="M1022.494118 1011.952941c-15.058824 15.058824-39.152941 15.058824-52.705883 0L757.458824 799.623529c-15.058824-15.058824-13.552941-39.152941 1.505882-52.705882 15.058824-13.552941 37.647059-13.552941 52.705882 0L1024 959.247059c13.552941 13.552941 13.552941 37.647059-1.505882 52.705882z" fill="#D098FF" p-id="2139"></path></svg>
             </button>
         </div>
     </div>
@@ -33,7 +30,14 @@ else
                 <a href="/Home/Details?id=@item.ResoucesID" style="color:black;text-decoration:none;display:block;">
                     <dl style="background-color: whitesmoke;width: 100%;height: 160px;border-radius: 5px;text-align:left">
                         <dt>
-                            <img src="~/Content/Resouces/Images/@item.Picture.Picture_a" style="width:40%;height:159px;float:left;border-radius:5px" />
+                            @if (item.Picture.Picture_a != null)
+                            {
+                                <img src="~/Content/Resouces/Images/@item.Picture.Picture_a" style="width:40%;height:159px;float:left;border-radius:5px" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/Resouces/Img/notfound.jpg" style="width:40%;height:159px;float:left;border-radius:5px" />
+                            }
                         </dt>
                         <dd style="height:120px;padding:6px;overflow:hidden">
                             <div>

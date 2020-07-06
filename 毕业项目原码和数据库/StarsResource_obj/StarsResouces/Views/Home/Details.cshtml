@@ -1,11 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "资源详情";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using Models
+@using PagedList.Mvc
 @{
     Resouces resouces = ViewBag.resouces;
+    UserInfo user = Session["user"] as UserInfo;
+    PagedList.PagedList<Comment> com = ViewBag.com;
 }
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 @*轮播*@
@@ -15,20 +18,26 @@
 <script src="~/Content/LB/js/jquery.qrcode.min.js"></script>
 <script src="~/Content/LB/js/js.js"></script>
 <script src="~/Content/LB/js/tools.js"></script>
-@*————*@
-@*<div style="width:100%;height:360px;">*@
+@if (resouces.Picture.Picture_a != null)
+{
     <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a" style="width:1110px;height:360px" />
-@*</div>*@
-<div style="color:Highlight;font-weight: bold;position: absolute;top: 70px;background-image: url('../../Content/LB/images/纱布.jpg');width: 1110px;height: 360px;opacity: 0.2">
-</div>
+    <div style="color:Highlight;font-weight: bold;position: absolute;top: 70px;background-image: url('../../Content/LB/images/纱布.jpg');width: 1110px;height: 360px;opacity: 0.2">
+    </div>
+}
+else
+{
+    <img src="~/Content/Resouces/Img/no-img.gif" style="width:1110px;height:360px" />
+}
 <h2 style="color:lightyellow;font-weight: bold;">【@resouces.Rname】</h2>
 <div style="color:white;font-family:STHupo;margin-top:15px">
     <h5>资源图片:</h5>
 </div>
-<div style="margin:0 auto">
+@if (resouces.Picture.Picture_a != null)
+{
+    <div style="margin:0 auto">
         @if (resouces.Picture.Picture_e != null && resouces.Picture.Picture_d != null && resouces.Picture.Picture_c != null && resouces.Picture.Picture_b != null)
         {
-            <div class="wrap" id="wrap">
+            <div class="wrap" id="wrap" style="position:relative;top:20px;right:35px">
                 <ul class="content">
                     <li style="top: 60px; left: 0px; width: 400px; height: 240px; z-index: 1; opacity: 0;"><img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a" style="width:100%;height:100%" /></li>
                     <li style="top: 60px; left: 0px; width: 400px; height: 240px; z-index: 2; opacity: 0.4;"><img src="~/Content/Resouces/Images/@resouces.Picture.Picture_b" style="width:100%;height:100%" /></li>
@@ -44,7 +53,7 @@
         }
         else if (resouces.Picture.Picture_d != null && resouces.Picture.Picture_c != null && resouces.Picture.Picture_b != null)
         {
-            <div class="wrap" id="wrap">
+            <div class="wrap" id="wrap" style="position:relative;top:20px;right:35px">
                 <ul class="content">
                     <li style="top: 60px; left: 0px; width: 400px; height: 240px; z-index: 1; opacity: 0;"><img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a" style="width:100%;height:100%" /></li>
                     <li style="top: 60px; left: 0px; width: 400px; height: 240px; z-index: 2; opacity: 0.4;"><img src="~/Content/Resouces/Images/@resouces.Picture.Picture_b" style="width:100%;height:100%" /></li>
@@ -60,15 +69,35 @@
         }
         else if (resouces.Picture.Picture_c != null && resouces.Picture.Picture_b != null)
         {
-            <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_b" style="width:200px;height:100px" />
-            <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_c" style="width:200px;height:100px" />
+            <div style="margin-left:110px">
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a" style="width:300px;height:120px" />
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_b" style="width:300px;height:120px" />
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_c" style="width:300px;height:120px" />
+            </div>
+        }
+        else if (resouces.Picture.Picture_b != null)
+        {
+            <div style="margin-left:140px">
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a" style="width:400px;height:180px" />
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_b" style="width:400px;height:180px" />
+            </div>
         }
         else
         {
-            <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a" style="width:200px;height:100px" />
+            <div>
+                <img src="~/Content/Resouces/Images/@resouces.Picture.Picture_a" style="width:800px;height:300px;margin-left:150px" />
+            </div>
         }
     </div>
-<div style="width:1110px;height:500px;background-color:whitesmoke;opacity:0.9;margin-top:60px">
+}
+else
+{
+    <div>
+        <img src="~/Content/Resouces/Img/notfound.jpg" style="width:800px;height:300px;margin-left:150px" />
+    </div>
+}
+
+<div style="width:1110px;height:auto;background-color:lightgray;opacity:0.9;margin-top:60px">
     <div style="width:1000px; height: auto;margin:0 auto;padding-top:1px;">
         <h4 style="color:black;margin-top:55px;font-family:STCaiyun">资源介绍：</h4>
         <div style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@resouces.Rdescribe</div>
@@ -102,9 +131,86 @@
     <div style="color:black;width:1000px; height:auto;margin:0 auto;padding-bottom:1px;margin-bottom:12px">
         <h5>需求积分：@resouces.Rdemand</h5>
         <p><span>链接描述：</span>@resouces.Link.Ldescribe</p>
-        <p><span>云盘链接：</span><a href="@resouces.Link.Linkline" target="_blank">@resouces.Link.Linkline</a></p>
+        <p>
+            <span>相关链接：</span>
+            @if (resouces.Rdemand != 0)
+            {
+                <a href="/Home/Links?id=@resouces.LinkID" class="btn btn-outline-primary">
+                    <svg t="1593737658125" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2127" width="26" height="26"><path d="M549.451852 639.525926c-30.340741 0-58.88-11.757037-80.213333-33.09037l-26.832593-26.832593c-8.343704-8.343704-8.343704-21.807407 0-30.151111s21.807407-8.343704 30.151111 0l26.832593 26.832592c13.274074 13.274074 31.099259 20.574815 50.062222 20.574815s36.788148-7.300741 50.062222-20.574815l236.088889-236.088888c27.591111-27.591111 27.591111-72.533333 0-100.124445l-48.82963-48.82963c-13.274074-13.274074-31.099259-20.574815-50.062222-20.574814s-36.788148 7.300741-50.062222 20.574814L540.065185 337.825185c-8.343704 8.343704-21.807407 8.343704-30.151111 0s-8.343704-21.807407 0-30.151111L656.402963 161.185185c21.333333-21.333333 49.872593-33.09037 80.213333-33.09037 30.340741 0 58.88 11.757037 80.213334 33.09037l48.829629 48.82963c44.183704 44.183704 44.183704 116.148148 0 160.426666l-236.088889 236.088889c-21.238519 21.238519-49.777778 32.995556-80.118518 32.995556z" p-id="2128" fill="#1296db"></path><path d="M292.977778 896c-30.340741 0-58.88-11.757037-80.213334-33.09037l-48.829629-48.82963c-44.183704-44.183704-44.183704-116.148148 0-160.426667l236.088889-236.088889c21.333333-21.333333 49.872593-33.09037 80.213333-33.09037s58.88 11.757037 80.213333 33.09037l21.997037 21.997037c8.343704 8.343704 8.343704 21.807407 0 30.151112s-21.807407 8.343704-30.151111 0l-21.997037-21.997037c-13.274074-13.274074-31.099259-20.574815-50.062222-20.574815s-36.788148 7.300741-50.062222 20.574815l-236.088889 236.088888c-27.591111 27.591111-27.591111 72.533333 0 100.124445l48.82963 48.82963c13.274074 13.274074 31.099259 20.574815 50.062222 20.574814s36.788148-7.300741 50.062222-20.574814l146.488889-146.488889c8.343704-8.343704 21.807407-8.343704 30.151111 0s8.343704 21.807407 0 30.151111L373.191111 862.90963C351.857778 884.242963 323.413333 896 292.977778 896z" p-id="2129" fill="#1296db"></path></svg>
+                    使用积分获取
+                </a>
+                <label style="color:red">@TempData["nofull"]</label>
+            }
+            else
+            {
+                <a href="@resouces.Link.Linkline" target="_blank">@resouces.Link.Linkline</a>
+            }
+        </p>
         <p><span>链接备注;</span>@resouces.Link.Lremarks</p>
     </div>
+    @*评论*@
+    @if (user != null)
+    {
+        <div>
+            <form action="/Home/Comment" method="post">
+                <div style="position:relative;top:180px;left:60px">
+                    <label style="font-size:8px;color:green">@user.UserName</label>
+                    <picture><img src="~/Content/icon/@user.UserPicture" style="width:30px;height:30px;border-radius: 4px" /></picture>
+                    @if (user.UserID == ViewBag.uid)
+                    {
+                        <a href="#" class="btn-sm btn-danger">发布者</a>
+                    }
+                    else
+                    {
+                        <a href="#" class="btn-sm btn-dark">浏览者</a>
+                    }
+                </div>
+                <textarea class="form-control" rows="5" style="max-width:1010px;margin-left:50px" placeholder="你的评论可以一针见血" name="Content" id="Content"></textarea>
+                <input type="submit" class="btn btn-primary" value="发表" style="margin:10px 0px 10px 940px;min-width:100px" />
+            </form>
+        </div>
+        <div style="background-color:#e3e3ce;max-width:1060px;margin-left:20px;margin-top:10px">
+            <div style="height:10px"></div>
+            @foreach (var item in com)
+            {
+                <div style="background-color: whitesmoke;margin-top:2px;max-width:900px;margin-left:96px;border-radius:5px">
+                    <div style="font-size:10px;margin-left:10px;padding-top:5px;max-width:220px">
+                        <a href="#" style="text-decoration:none">
+                            <img src="~/Content/icon/@item.UserInfo.UserPicture" style="width:25px;height:25px;border-radius: 3px;border:0.5px solid black" />
+                            <label>UID:@item.UserID</label>
+                            <label style="color:#808080">@item.UserInfo.UserName</label>
+                        </a>
+                        @if (item.UserID == ViewBag.uid)
+                        {
+                            <lable class="btn-sm btn-primary">发布者</lable>
+                        }
+                    </div>
+                    <label style="padding-left:30px">@item.Content</label>
+                </div>
+            }
+            @if (com.TotalItemCount < com.PageSize)
+            {
+
+            }
+            else
+            {
+                <div style="height:100px;padding:10px;margin:5px 0px 0px 0px;text-align:center;background-color:white">
+                    当前页/总页数（ @(com.PageCount < com.PageNumber ? 0 : com.PageNumber) / @com.PageCount ）
+                    @Html.PagedListPager(com, page => Url.Action("Details", new
+               {
+                   page,
+                        id = resouces.ResoucesID
+               }))
+                </div>
+            }
+        </div>     
+    }
+    else
+    {
+        <div>
+            <div class="btn btn-secondary text-center" style="margin-left:50px;margin-bottom:10px" data-toggle="modal" data-target="#Login">请登录再发表和查看资源评论</div>
+        </div>
+    }
 </div>
 
 

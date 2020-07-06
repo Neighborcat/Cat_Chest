@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "繁星资源网，为你分享最好的";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using Models
@@ -33,17 +33,19 @@
         <h5 style="font-family:YouYuan;color:white;font-weight:bold">最新推荐:</h5>
     </div>
     <div class="col-md-6">
-        <div class="input-group" style="padding-top:18px">
-            <input type="text" class="form-control" placeholder="资源搜索" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-                    <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                    </svg>
-                </button>
+        <form method="post" action="/Home/Index">
+            <div class="input-group" style="padding-top:18px">
+                <input type="text" class="form-control" placeholder="资源搜索" name="search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                        <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <br />
@@ -56,7 +58,6 @@
         <li data-target="#demo" data-slide-to="2"></li>
         <li data-target="#demo" data-slide-to="3"></li>
     </ul>
-
     <!-- 轮播图片 -->
     <div class="carousel-inner" style="border-radius: 5px;">
         <div class="carousel-item active">
@@ -72,7 +73,6 @@
             <a href="#"><img src="~/Content/LB/images/QQ图片20200528144122.jpg" /></a>
         </div>
     </div>
-
     <!-- 左右切换按钮 -->
     <a class="carousel-control-prev" href="#demo" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>
@@ -80,7 +80,6 @@
     <a class="carousel-control-next" href="#demo" data-slide="next">
         <span class="carousel-control-next-icon"></span>
     </a>
-
 </div>
 <p></p>
 <div class="row">
@@ -139,7 +138,14 @@
                 <a href="/Home/Details?id=@item.ResoucesID" style="color:black;text-decoration:none;display:block;">
                     <dl style="background-color: whitesmoke;width: 100%;height: 160px;border-radius: 5px;text-align:left">
                         <dt>
-                            <img src="~/Content/Resouces/Images/@item.Picture.Picture_a" style="width:40%;height:159px;float:left;border-radius:5px" />
+                            @if (item.Picture.Picture_a == null)
+                            {
+                                <img src="~/Content/Resouces/Img/notfound.jpg" style="width:40%;height:159px;float:left;border-radius:5px" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/Resouces/Images/@item.Picture.Picture_a" style="width:40%;height:159px;float:left;border-radius:5px" />
+                            }
                         </dt>
                         <dd style="height:120px;padding:6px;overflow:hidden">
                             <div>
@@ -176,44 +182,44 @@
         </div>
     </div>
     @*右边部分*@
-    <div class="col-md-4">
-        <div style="height:200px;margin-top:20px">
-            <a href="#">
-                <img src="~/Content/GuangGao/ds1.gif" style="width:100%;height:100%"/>
-            </a>
+<div class="col-md-4">
+    <div style="height:200px;margin-top:20px">
+        <a href="#">
+            <img src="~/Content/GuangGao/ds1.gif" style="width:100%;height:100%" />
+        </a>
+    </div>
+    <div class="calendar">
+        <div class="header">
+            <a data-action="prev-month" href="javascript:void(0)" title="Previous Month"><i></i></a>
+            <div class="text" data-render="month-year"></div>
+            <a data-action="next-month" href="javascript:void(0)" title="Next Month"><i></i></a>
         </div>
-        <div class="calendar">
-            <div class="header">
-                <a data-action="prev-month" href="javascript:void(0)" title="Previous Month"><i></i></a>
-                <div class="text" data-render="month-year"></div>
-                <a data-action="next-month" href="javascript:void(0)" title="Next Month"><i></i></a>
+        <div class="months" data-flow="left">
+            <div class="month month-a">
+                <div class="render render-a"></div>
             </div>
-            <div class="months" data-flow="left">
-                <div class="month month-a">
-                    <div class="render render-a"></div>
-                </div>
-                <div class="month month-b">
-                    <div class="render render-b"></div>
-                </div>
+            <div class="month month-b">
+                <div class="render render-b"></div>
             </div>
-        </div>
-        <div style="background-color:lightgray;margin-top:25px;margin-left:25px;background-color:whitesmoke;height:300px;width:300px">
-            <h5 style="padding-left:15px;padding-top:5px">热门标签</h5>
-            <ul style="list-style:none;padding-top:15px">
-                @for (int i = 0; i < 7; i++)
-                {
-
-                    <li style="margin-top:12px">
-                        <svg t="1592031854927" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6162" width="16" height="16"><path d="M960.616994 0.010005H519.790222c-9.825277 0-20.481001 4.642494-27.854961 12.016455L10.676772 494.095383l-1.090586 0.550296c-15.018066 15.018066-15.018066 39.331125 0 54.079046l439.736187 439.736187 0.550295 0.82044c14.747921 15.018066 39.331125 15.018066 54.349192 0l482.609214-482.619219c7.654111-7.644106 12.016454-17.209243 12.016454-27.854961V38.52069c0-21.311447-16.929093-38.510684-38.230534-38.510685z m-38.78083 462.948654L477.177334 907.61749l-386.207436-385.65714L536.179024 76.761229h385.65714v386.19743zM756.867558 357.532034c63.093888 0 114.981758-51.897875 114.981758-115.261908 0-63.364033-51.897875-115.261908-114.981758-115.261909-63.364033 0-115.271914 51.347579-115.271913 115.261909 0 63.374039 51.90788 115.261908 115.271913 115.261908z m0-184.088876a68.716908 68.716908 0 0 1 68.826968 68.826968c0 37.960389-31.136724 69.377263-68.826968 69.377263-38.240539 0-69.377263-31.416874-69.377263-69.377263 0-38.230534 31.136724-68.826968 69.377263-68.826968z" p-id="6163"></path></svg>
-                        <a href="#" style="color:black;font-size:20px">热门标签，有资讯</a>
-                    </li>
-                }
-            </ul>
-        </div>
-        <div style="margin-top:5px;background-color:#b6ff00;height:120px">
-            <a href="#">
-                <img src="~/Content/GuangGao/liuliang.jpg" style="width:100%;height:100%"/>
-            </a>
         </div>
     </div>
+    <div style="background-color:lightgray;margin-top:25px;margin-left:25px;background-color:whitesmoke;height:300px;width:300px">
+        <h5 style="padding-left:15px;padding-top:5px">热门标签</h5>
+        <ul style="list-style:none;padding-top:15px">
+            @for (int i = 0; i < 7; i++)
+            {
+
+                <li style="margin-top:12px">
+                    <svg t="1592031854927" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6162" width="16" height="16"><path d="M960.616994 0.010005H519.790222c-9.825277 0-20.481001 4.642494-27.854961 12.016455L10.676772 494.095383l-1.090586 0.550296c-15.018066 15.018066-15.018066 39.331125 0 54.079046l439.736187 439.736187 0.550295 0.82044c14.747921 15.018066 39.331125 15.018066 54.349192 0l482.609214-482.619219c7.654111-7.644106 12.016454-17.209243 12.016454-27.854961V38.52069c0-21.311447-16.929093-38.510684-38.230534-38.510685z m-38.78083 462.948654L477.177334 907.61749l-386.207436-385.65714L536.179024 76.761229h385.65714v386.19743zM756.867558 357.532034c63.093888 0 114.981758-51.897875 114.981758-115.261908 0-63.364033-51.897875-115.261908-114.981758-115.261909-63.364033 0-115.271914 51.347579-115.271913 115.261909 0 63.374039 51.90788 115.261908 115.271913 115.261908z m0-184.088876a68.716908 68.716908 0 0 1 68.826968 68.826968c0 37.960389-31.136724 69.377263-68.826968 69.377263-38.240539 0-69.377263-31.416874-69.377263-69.377263 0-38.230534 31.136724-68.826968 69.377263-68.826968z" p-id="6163"></path></svg>
+                    <a href="#" style="color:black;font-size:20px">热门标签，有资讯</a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div style="margin-top:5px;background-color:#b6ff00;height:120px">
+        <a href="#">
+            <img src="~/Content/GuangGao/liuliang.jpg" style="width:100%;height:100%" />
+        </a>
+    </div>
+</div>
 </div>

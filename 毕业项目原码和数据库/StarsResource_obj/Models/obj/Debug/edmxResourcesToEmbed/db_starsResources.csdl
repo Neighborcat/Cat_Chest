@@ -17,6 +17,7 @@
     <Property Name="TabelName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Lable" Relationship="Self.FK__Lable__CategoryI__1ED998B2" FromRole="Category" ToRole="Lable" />
     <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__Catego__2C3393D0" FromRole="Category" ToRole="Resouces" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>
@@ -28,6 +29,7 @@
     <Property Name="ResoucesID" Type="Int32" />
     <NavigationProperty Name="UserInfo" Relationship="Self.FK__Comment__UserID__1A14E395" FromRole="Comment" ToRole="UserInfo" />
     <NavigationProperty Name="Resouces" Relationship="Self.FK_Comment_Resouces" FromRole="Comment" ToRole="Resouces" />
+    <Property Name="Time" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
   <EntityType Name="Lable">
     <Key>
@@ -38,6 +40,7 @@
     <Property Name="TabelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Category" Relationship="Self.FK__Lable__CategoryI__1ED998B2" FromRole="Lable" ToRole="Category" />
     <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__LableI__2D27B809" FromRole="Lable" ToRole="Resouces" />
+    <Property Name="LableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Link">
     <Key>
@@ -103,13 +106,13 @@
     <Property Name="RegistrationTime" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="LoginName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="LoginPwd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="UserSex" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-    <Property Name="Userdescribe" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="integral" Type="Int32" />
-    <Property Name="UserState" Type="Int32" />
-    <Property Name="UserPicture" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserSex" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Userdescribe" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="integral" Type="Int32" Nullable="false" />
+    <Property Name="UserState" Type="Int32" Nullable="false" />
+    <Property Name="UserPicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Comment" Relationship="Self.FK__Comment__UserID__1A14E395" FromRole="UserInfo" ToRole="Comment" />
     <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__UserID__29572725" FromRole="UserInfo" ToRole="Resouces" />
     <NavigationProperty Name="Collection" Relationship="db_StarsResourcesModel.FK_Collection_UserInfo" FromRole="UserInfo" ToRole="Collection" />

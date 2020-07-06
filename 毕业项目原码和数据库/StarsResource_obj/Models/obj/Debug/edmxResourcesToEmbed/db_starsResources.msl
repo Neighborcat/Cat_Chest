@@ -14,14 +14,15 @@
     <EntitySetMapping Name="Category">
       <EntityTypeMapping TypeName="db_StarsResourcesModel.Category">
         <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-          <ScalarProperty Name="TabelName" ColumnName="TabelName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Comment">
       <EntityTypeMapping TypeName="db_StarsResourcesModel.Comment">
         <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="Time" ColumnName="Time" />
           <ScalarProperty Name="ComID" ColumnName="ComID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="Content" ColumnName="Content" />
@@ -32,9 +33,9 @@
     <EntitySetMapping Name="Lable">
       <EntityTypeMapping TypeName="db_StarsResourcesModel.Lable">
         <MappingFragment StoreEntitySet="Lable">
+          <ScalarProperty Name="LableName" ColumnName="LableName" />
           <ScalarProperty Name="LableID" ColumnName="LableID" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-          <ScalarProperty Name="TabelName" ColumnName="TabelName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

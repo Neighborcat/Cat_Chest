@@ -51,60 +51,60 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administrators.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Collection.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Comment.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="db_starsResources.Context.cs">
+    <Compile Include="db_StarsResourcesEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>db_starsResources.Context.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="db_starsResources.cs">
+    <Compile Include="db_StarsResourcesEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="db_starsResources.Designer.cs">
+    <Compile Include="db_StarsResourcesEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>db_starsResources.edmx</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Lable.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Link.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Picture.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resouces.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserInfo.cs">
-      <DependentUpon>db_starsResources.tt</DependentUpon>
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="db_starsResources.edmx">
+    <EntityDeploy Include="db_StarsResourcesEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>db_starsResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>db_StarsResourcesEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="db_starsResources.edmx.diagram">
-      <DependentUpon>db_starsResources.edmx</DependentUpon>
+    <None Include="db_StarsResourcesEntities.edmx.diagram">
+      <DependentUpon>db_StarsResourcesEntities.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -112,15 +112,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="db_starsResources.Context.tt">
+    <Content Include="db_StarsResourcesEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>db_starsResources.edmx</DependentUpon>
-      <LastGenOutput>db_starsResources.Context.cs</LastGenOutput>
+      <DependentUpon>db_StarsResourcesEntities.edmx</DependentUpon>
+      <LastGenOutput>db_StarsResourcesEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="db_starsResources.tt">
+    <Content Include="db_StarsResourcesEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>db_starsResources.edmx</DependentUpon>
-      <LastGenOutput>db_starsResources.cs</LastGenOutput>
+      <DependentUpon>db_StarsResourcesEntities.edmx</DependentUpon>
+      <LastGenOutput>db_StarsResourcesEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

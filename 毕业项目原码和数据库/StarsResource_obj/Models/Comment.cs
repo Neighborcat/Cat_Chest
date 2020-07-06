@@ -18,8 +18,9 @@ namespace Models
         public Nullable<int> UserID { get; set; }
         public string Content { get; set; }
         public Nullable<int> ResoucesID { get; set; }
+        public System.DateTime Time { get; set; }
     
-        public virtual UserInfo UserInfo { get; set; }
         public virtual Resouces Resouces { get; set; }
+        public virtual UserInfo UserInfo { get; set; }
     }
 }

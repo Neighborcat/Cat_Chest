@@ -11,34 +11,45 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class UserInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserInfo()
         {
+            this.Collection = new HashSet<Collection>();
             this.Comment = new HashSet<Comment>();
             this.Resouces = new HashSet<Resouces>();
-            this.Collection = new HashSet<Collection>();
         }
-    
+        [Display(Name ="编号")]
         public int UserID { get; set; }
+        [Display(Name = "注册时间")]
         public System.DateTime RegistrationTime { get; set; }
+        [Display(Name = "登录名")]
         public string LoginName { get; set; }
+        [Display(Name = "登录密码")]
         public string LoginPwd { get; set; }
+        [Display(Name = "邮箱")]
         public string E_mail { get; set; }
+        [Display(Name = "用户名")]
         public string UserName { get; set; }
+        [Display(Name = "性别")]
         public string UserSex { get; set; }
+        [Display(Name = "签名")]
         public string Userdescribe { get; set; }
-        public Nullable<int> integral { get; set; }
-        public Nullable<int> UserState { get; set; }
+        [Display(Name = "拥有积分")]
+        public int integral { get; set; }
+        [Display(Name = "状态")]
+        public int UserState { get; set; }
+        [Display(Name = "头像")]
         public string UserPicture { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Collection> Collection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Resouces> Resouces { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Collection> Collection { get; set; }
     }
 }

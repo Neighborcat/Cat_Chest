@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_StarsResourcesModelStoreContainer" CdmEntityContainer="db_StarsResourcesEntities1">
+    <EntitySetMapping Name="Administrators">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Administrators">
+        <MappingFragment StoreEntitySet="Administrators">
+          <ScalarProperty Name="AdmID" ColumnName="AdmID" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+          <ScalarProperty Name="Jurisdiction" ColumnName="Jurisdiction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Collection">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Collection">
+        <MappingFragment StoreEntitySet="Collection">
+          <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+          <ScalarProperty Name="ResoucesID" ColumnName="ResoucesID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comment">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="ComID" ColumnName="ComID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="ResoucesID" ColumnName="ResoucesID" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lable">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Lable">
+        <MappingFragment StoreEntitySet="Lable">
+          <ScalarProperty Name="LableID" ColumnName="LableID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="LableName" ColumnName="LableName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Link">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Link">
+        <MappingFragment StoreEntitySet="Link">
+          <ScalarProperty Name="LinkID" ColumnName="LinkID" />
+          <ScalarProperty Name="Ldescribe" ColumnName="Ldescribe" />
+          <ScalarProperty Name="Linkline" ColumnName="Linkline" />
+          <ScalarProperty Name="Lremarks" ColumnName="Lremarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Picture">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Picture">
+        <MappingFragment StoreEntitySet="Picture">
+          <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+          <ScalarProperty Name="Picture_a" ColumnName="Picture_a" />
+          <ScalarProperty Name="Picture_b" ColumnName="Picture_b" />
+          <ScalarProperty Name="Picture_c" ColumnName="Picture_c" />
+          <ScalarProperty Name="Picture_d" ColumnName="Picture_d" />
+          <ScalarProperty Name="Picture_e" ColumnName="Picture_e" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resouces">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Resouces">
+        <MappingFragment StoreEntitySet="Resouces">
+          <ScalarProperty Name="ResoucesID" ColumnName="ResoucesID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LinkID" ColumnName="LinkID" />
+          <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="LableID" ColumnName="LableID" />
+          <ScalarProperty Name="Releasetime" ColumnName="Releasetime" />
+          <ScalarProperty Name="Rname" ColumnName="Rname" />
+          <ScalarProperty Name="Rdescribe" ColumnName="Rdescribe" />
+          <ScalarProperty Name="Rdemand" ColumnName="Rdemand" />
+          <ScalarProperty Name="Rstate" ColumnName="Rstate" />
+          <ScalarProperty Name="Reading" ColumnName="Reading" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RegistrationTime" ColumnName="RegistrationTime" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+          <ScalarProperty Name="E_mail" ColumnName="E_mail" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserSex" ColumnName="UserSex" />
+          <ScalarProperty Name="Userdescribe" ColumnName="Userdescribe" />
+          <ScalarProperty Name="integral" ColumnName="integral" />
+          <ScalarProperty Name="UserState" ColumnName="UserState" />
+          <ScalarProperty Name="UserPicture" ColumnName="UserPicture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

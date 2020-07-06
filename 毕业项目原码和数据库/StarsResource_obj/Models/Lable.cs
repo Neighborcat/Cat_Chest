@@ -22,7 +22,7 @@ namespace Models
     
         public int LableID { get; set; }
         public Nullable<int> CategoryID { get; set; }
-        public string TabelName { get; set; }
+        public string LableName { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1,0 +1,196 @@
+﻿
+@{
+    Layout = null;
+}
+@using Models;
+@{
+
+    Administrators adm = Session["result"] as Administrators;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>后台管理系统</title>
+    <link rel="Shortcut Icon" href="~/Content/Header/MannageTitle.png">
+    <link href="~/Zoter/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+    <link href="~/Zoter/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Zoter/style.css" rel="stylesheet" type="text/css">
+</head>
+<body class="fixed-left" style="overflow: visible;">
+    <div id="wrapper">
+        <div class="left side-menu">
+            <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+                <i class="ion-close"></i>
+            </button>
+            <div class="topbar-left" style="background-color:#6eadaa">
+                <div class="text-center">
+                    <a href="#" class="logo">
+                        <img src="~/Content/Logo/Logo.png" style="width:50px;height:50px" />
+                        <label style="font-size:12px;font-family:STXingkai;color:white">繁星资源网</label>
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-inner niceScrollleft" tabindex="5000" style="overflow: hidden; outline: none;">
+                <div id="sidebar-menu" class="active">
+                    @if (Session["result"] != null && adm.Jurisdiction == 3)
+                    {
+                        <ul>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>用户模块</span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/AddUser">新增用户</a></li>
+                                    <li><a href="/Mannage/Users">浏览用户</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>资源模块 </span><span class="float-right"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/AddRes">添加资源</a></li>
+                                    <li><a href="/Mannage/Resouces">浏览资源</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>评论模块 </span><span class="float-right"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/RComment">资源评论管理</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>广告模块 </span><span class="float-right"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/Advertisement">已有广告</a></li>
+                                    <li><a href="/Mannage/EditAdver">修改广告</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                    else if (Session["result"] != null && adm.Jurisdiction == 2)
+                    {
+                        <ul>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>资源模块 </span><span class="float-right"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/AddRes">添加资源</a></li>
+                                    <li><a href="/Mannage/Resouces">浏览资源</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>评论模块 </span><span class="float-right"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/RComment">资源评论管理</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                    else if (Session["result"] != null && adm.Jurisdiction == 1)
+                    {
+
+                        <ul>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>用户模块</span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/AddUser">新增用户</a></li>
+                                    <li><a href="/Mannage/Users">浏览用户</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>广告模块 </span><span class="float-right"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/Advertisement">已有广告</a></li>
+                                    <li><a href="/Mannage/EditAdver">修改广告</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                    else if (Session["result"] != null && adm.Jurisdiction == 0)
+                    {
+                        <ul>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>用户模块</span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/Users">浏览用户</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>资源模块 </span><span class="float-right"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/Resouces">浏览资源</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><span>广告模块 </span><span class="float-right"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/Mannage/Advertisement">已有广告</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><span>后台管理</span></a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+        <div class="content-page">
+            <div class="content">
+                <div class="topbar">
+                    <nav class="navbar-custom" style="background-color:#6eadaa">
+                        <ul class="list-inline float-right mb-0">
+                            @if (Session["result"] != null)
+                            {
+                                <li class="list-inline-item dropdown notification-list text-white"><a href="#">@adm.LoginName</a></li>
+                            }
+                            else
+                            {
+                                <li class="list-inline-item dropdown notification-list text-white"><a href="#">点击头像进行登录</a></li>
+                            }
+
+                            <li class="list-inline-item dropdown notification-list">
+                                <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    <img src="~/Content/Header/管理员.jpg" alt="user" class="rounded-circle" />
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                    @if (Session["result"] != null)
+                                    {
+                                        <div class="dropdown-item noti-title"><h5>欢迎登录</h5></div>
+                                        <a class="dropdown-item" href="~/Mannage/Exit">注销</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="dropdown-item" href="~/Mannage/Login">登录</a>
+                                    }
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="clearfix">
+                        </div>
+                    </nav>
+                </div>
+                <div class="page-content-wrapper">
+                    <div class="container-fluid">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <footer class="footer" style="background-color:#526763;color:white">© 繁星资源网后台管理系统</footer>
+        </div>
+    </div>
+    <script src="~/Zoter/jquery.min.js"></script>
+    <script src="~/Zoter/popper.min.js"></script>
+    <script src="~/Zoter/bootstrap.min.js"></script>
+    <script src="~/Zoter/jquery.nicescroll.js"></script>
+    <script src="~/Zoter/app.js"></script>
+</body>
+</html>
+

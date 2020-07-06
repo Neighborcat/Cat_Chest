@@ -1,0 +1,113 @@
+﻿@*@model IEnumerable<Models.UserInfo>*@
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+}
+@using Models;
+@using PagedList.Mvc
+@model PagedList.PagedList<Models.UserInfo>
+@{
+    Administrators adm = Session["result"] as Administrators;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<form method="get" action="/Mannage/Users">
+    <div class="input-group" style="padding-top:18px">
+        <input type="text" class="form-control" placeholder="用户搜索" name="searcher" style="max-width:96%">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2" style="border:1px solid #b9b9b9">
+                <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</form>
+<br />
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                登录名
+            </th>
+            <th>
+                登录密码
+            </th>
+            <th>
+                邮箱
+            </th>
+            <th>
+                用户名
+            </th>
+            <th>
+                积分
+            </th>
+            <th>
+                状态
+            </th>
+            <th>
+                头像
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="thead-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoginName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoginPwd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.E_mail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.integral)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserState)
+                </td>
+                <td>
+                    <img src="https://localhost:44374/Content/icon/@item.UserPicture" style="width:45px;height:45px;border:1px solid #d1cece" />
+                </td>
+                <td>
+                    @if (Session["result"] == null || adm.Jurisdiction == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        @Html.ActionLink("编辑", "Edit", new { id = item.UserID })
+                        @:|
+                        @Html.ActionLink("详情", "Details", new { id = item.UserID })
+                        @:|
+                        @Html.ActionLink("删除", "Delete", new { id = item.UserID })
+                    }
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+@if (Model.TotalItemCount < Model.PageSize)
+{
+
+}
+else
+{
+    @:共 @Model.TotalItemCount 条，
+    @:每页 @Model.PageSize 条，
+    @:共 @Model.PageCount 页，
+    @:当前第 @Model.PageNumber 页
+    <br />
+    @Html.PagedListPager(Model, page => Url.Action("Users", new { page, State = ViewBag.State, StuName = ViewBag.StuName }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
+}
+
+

@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "UserCenter";
+    ViewBag.Title = "用户中心";
     Layout = "~/Views/Shared/_LayoutUserMain.cshtml";
-    UserInfo info = ViewBag.info;
+    UserInfo info = Session["info"] as UserInfo;
     Session["userid"] = info.UserID;
 }
 <style>

@@ -15,8 +15,8 @@ namespace Models
     public partial class Collection
     {
         public int CollectionID { get; set; }
-        public Nullable<int> UserID { get; set; }
         public Nullable<int> ResoucesID { get; set; }
+        public Nullable<int> UserID { get; set; }
     
         public virtual Resouces Resouces { get; set; }
         public virtual UserInfo UserInfo { get; set; }

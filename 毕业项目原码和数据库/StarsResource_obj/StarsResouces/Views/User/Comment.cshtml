@@ -1,8 +1,51 @@
 ﻿
 @{
-    ViewBag.Title = "Comment";
+    ViewBag.Title = "我的评论";
     Layout = "~/Views/Shared/_LayoutUserMain.cshtml";
 }
-<img src="~/Content/icon/NoFind.jpg" style="width:300px;height:300px;margin:150px 0px 0px 250px" />
-<label style="font-family:STXingkai">什么都没有哦~~~~</label>
+@using Models
+@using PagedList.Mvc
+@model PagedList.PagedList<Comment>
+<div class="input-group" style="padding-top:28px;margin-bottom:20px">
+    <input type="text" class="form-control" placeholder="相关搜索" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+            @*图标*@
+            <svg t="1593586385666" class="icon" viewBox="0 0 1034 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2136" width="16" height="16"><path d="M346.352941 346.352941m-346.352941 0a346.352941 346.352941 0 1 0 692.705882 0 346.352941 346.352941 0 1 0-692.705882 0Z" fill="#8CF6FB" p-id="2137"></path><path d="M421.647059 843.294118C188.235294 843.294118 0 655.058824 0 421.647059S188.235294 0 421.647059 0s421.647059 188.235294 421.647059 421.647059-188.235294 421.647059-421.647059 421.647059z m0-768C230.4 75.294118 75.294118 230.4 75.294118 421.647059s155.105882 346.352941 346.352941 346.352941 346.352941-155.105882 346.352941-346.352941S612.894118 75.294118 421.647059 75.294118z" fill="#3C2DCB" p-id="2138"></path><path d="M1022.494118 1011.952941c-15.058824 15.058824-39.152941 15.058824-52.705883 0L757.458824 799.623529c-15.058824-15.058824-13.552941-39.152941 1.505882-52.705882 15.058824-13.552941 37.647059-13.552941 52.705882 0L1024 959.247059c13.552941 13.552941 13.552941 37.647059-1.505882 52.705882z" fill="#D098FF" p-id="2139"></path></svg>
+        </button>
+    </div>
+</div>
+@if (ViewBag.count == 0)
+{
+    <img src="~/Content/icon/NoFind.jpg" style="width:300px;height:300px;margin:150px 0px 0px 250px" />
+    <label style="font-family:STXingkai">什么都没有哦~~~~</label>
+}
+else
+{
+    foreach (var item in Model)
+    {
+        <div style="width:100%;height:100px;background-color:antiquewhite;border-radius:5px;margin-top:5px">
+            <div style="padding-left:10px;padding-top:10px"><lable style="font-size:18px">评论内容：</lable>@item.Content</div>
+            <div style="padding-left:10px;padding-top:10px">
+                <lable style="font-size:16px">资源名称：</lable>
+                <a href="/Home/Details?id=@item.ResoucesID" target="_blank">@item.Resouces.Rname</a>
+            </div>
+            <a href="/User/RemoveCom?id=@item.ComID" class="btn btn-danger" style="position:relative;left:88%;top:-40px">删除</a>
+        </div>
+    }
+}
+@if (Model.TotalItemCount < Model.PageSize)
+{
+
+}
+else
+{
+    <div style="height:100px;padding:10px;margin:5px 0px 0px 0px;text-align:center;background-color:white">
+        当前页/总页数（ @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount ）
+        @Html.PagedListPager(Model, page => Url.Action("Details", new
+   {
+       page,
+   }))
+    </div>
+}
 

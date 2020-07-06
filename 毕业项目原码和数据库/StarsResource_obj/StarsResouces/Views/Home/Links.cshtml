@@ -1,0 +1,49 @@
+﻿@model Models.Link
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Links</title>
+</head>
+<body>
+    <div class="text-center">
+        <h4>链接详情</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                链接描述：
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ldescribe)
+            </dd>
+    
+            <dt>
+                相关链接：
+            </dt>
+    
+            <dd>
+                <a href="@Model.Linkline" target="_blank">@Html.DisplayFor(model => model.Linkline)</a>
+            </dd>
+    
+            <dt>
+                链接声明：
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Lremarks)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("返回首页", "Index")
+    </p>
+</body>
+</html>

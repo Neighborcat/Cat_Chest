@@ -1,21 +1,22 @@
 Create database db_StarsResources
-
 --用户表
 create table UserInfo(
 	UserID int primary key identity(1,1),--用户ID
 	RegistrationTime date default (getdate()) not null,--注册时间
 	LoginName varchar(30) not null,--登录账户
 	LoginPwd varchar(30) not null,--登录密码
-	E_mail varchar(50) ,--电子邮箱
-	UserName varchar(20) default ('萌新求带'),--用户名
-	UserSex char(2) check(UserSex=0 or UserSex=1 or UserSex=2) default (0),--用户性别
-	Userdescribe varchar(500) default ('懒得很~没有！'),--用户介绍
-	integral int default (5) ,
-	UserState int check (UserState=0 or UserState=1) default (0)--用户状态0、可用，1、封禁
+	E_mail varchar(50) not null,--电子邮箱
+	UserName varchar(20) default ('萌新求带') not null,--用户名
+	UserSex char(2) check(UserSex=0 or UserSex=1 or UserSex=2) default (0) not null,--用户性别
+	Userdescribe varchar(500) default ('懒得很~没有！') not null,--用户介绍
+	integral int default (5) not null,
+	UserState int check (UserState=0 or UserState=1) default (0) not null,--用户状态0、可用，1、封禁
+	UserPicture varchar(200) default ('default.jpg')
 )
+update UserInfo set LoginPwd=1 where UserID=1
 select * from UserInfo
 insert into UserInfo (LoginName,LoginPwd,E_mail,UserName,UserSex,Userdescribe) values ('2205579785','123123123','xcnw666@126.com','玄不救非，氪不改命','1','山有木兮木有枝，心悦君兮君不知')
-insert into UserInfo(LoginName,LoginPwd,E_mail,integral) values --('10086','8888','China_Mobile@139.com'),
+insert into UserInfo(LoginName,LoginPwd,E_mail,integral) values ('10086','8888','China_Mobile@139.com','5'),
 ('BoyJim','123123','BoyJim@163.com','10'),
 ('LadyAilin','123123','LadyAilin@163.com','15'),
 ('OrdKala','123123','123123123@qq.com','20'),
@@ -72,12 +73,13 @@ Create table Resouces(
 	PictureID int Foreign key references Picture(PictureID),--所属图片
 	CategoryID int Foreign key references Category(CategoryID),--所属类别
 	LableID int Foreign key references Lable(LableID),--所属标签
-	Releasetime date not null,
+	Releasetime date not null,ss
 	Rname varchar(50) not null,--资源名称
 	Rdescribe varchar(1000) not null,--资源描述
 	Rdemand int,--下载需求
 	Rstate int check (Rstate=0 or Rstate=1 or Rstate=2) default (0),--资源状态0、通过，1、审核中，2、未通过或者封禁
 )
+update Resouces set Reading+=1 where ResoucesID=1
 select*from Resouces
 insert into Resouces(UserID,LinkID,PictureID,CategoryID,LableID,Releasetime,Rname,Rdescribe,Rdemand,Rstate) values
 (1,1,1,1,38,getdate(),'变形金刚电影下载','应广大网友要求，收集变形金刚1-5部电影集合开放下载——中英双字，原声放送','0',0)
@@ -119,7 +121,9 @@ create table [Collection](--收藏表
 CollectionID int primary key identity(1,1),
 
 )
-create table Recomment(
-Recomment int primary key identity(1,1),
-
+create table [Collection](
+CollectionID int primary key identity(1,1),
+ResoucesID int Foreign key references Resouces(ResoucesID),
+UserID int Foreign key references UserInfo(UserID)
 )
+select top 7* from Resouces ORDER BY Reading DESC

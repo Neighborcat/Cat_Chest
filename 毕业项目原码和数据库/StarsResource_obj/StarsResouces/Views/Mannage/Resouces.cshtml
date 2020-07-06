@@ -1,0 +1,132 @@
+﻿@*@model IEnumerable<Models.Resouces>*@
+
+@{
+    ViewBag.Title = "Resouces";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+}
+@using Models;
+@using PagedList.Mvc
+@model PagedList.PagedList<Models.Resouces>
+@{
+    List<Category> category = ViewBag.cate;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<form method="get" action="/Mannage/Resouces">
+    <div class="row">
+        <div class="form-group col-4" style="padding-top:10px">
+            <select class="form-control" id="CategoryID" name="CategoryID">
+                <option>请选择类别</option>
+                @foreach (var item in category)
+                {
+                    <option value="@item.CategoryID">@item.CategoryName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-2" style="padding-top:10px">
+            <select class="form-control" id="Rstate" name="Rstate">
+                <option>请选择状态</option>
+                <option value="0">通过</option>
+                <option value="1">审核</option>
+                <option value="2">封禁</option>
+            </select>
+        </div>
+        <div class="input-group col-6" style="padding-top:10px">
+            <input type="text" class="form-control" placeholder="资源搜索" id="searcher" name="searcher" style="max-width:80%">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2" style="border:1px solid #b9b9b9">
+                    <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<br />
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                资源名称
+            </th>
+            <th>
+                获取需求
+            </th>
+            <th>
+                状态
+            </th>
+            <th>
+                阅览量
+            </th>
+            <th>
+                类别
+            </th>
+            <th>
+                标签
+            </th>
+            <th>
+                发布者ID
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rdemand)
+            </td>
+            <td>
+                @if (item.Rstate == 0)
+                {
+                    <label style="color:green">通过</label>
+                }
+                else if (item.Rstate == 1)
+                {
+                    <label style="color:yellow">待审核</label>
+                }
+                else
+                {
+                    <label style="color:red">已拒绝</label>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reading)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lable.LableName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserInfo.UserID)
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", new { id = item.ResoucesID }) |
+                @Html.ActionLink("详情", "Details", new { id = item.ResoucesID }) |
+                @Html.ActionLink("删除", "Delete", new { id = item.ResoucesID })
+            </td>
+
+        </tr>
+    }
+
+</table>
+@if (Model.TotalItemCount < Model.PageSize)
+{
+
+}
+else
+{
+    @:共 @Model.TotalItemCount 条，
+    @:每页 @Model.PageSize 条，
+    @:共 @Model.PageCount 页，
+    @:当前第 @Model.PageNumber 页
+    <br />
+    @Html.PagedListPager(Model, page => Url.Action("Resouces", new { page, State = ViewBag.State, StuName = ViewBag.StuName }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
+}

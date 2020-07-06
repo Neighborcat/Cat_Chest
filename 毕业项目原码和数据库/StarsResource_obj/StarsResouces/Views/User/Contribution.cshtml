@@ -1,22 +1,21 @@
 ﻿
 @{
-    ViewBag.Title = "Contribution";
+    ViewBag.Title = "我要发布";
     Layout = "~/Views/Shared/_LayoutUserMain.cshtml";
     List<Lable> lables = ViewBag.lables;
 }
 @using Models
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<div>
-    <form method="post" action="/User/Contribution">
-        @*资源内容*@
+<div style="margin-top:40px">
+    <form method="post" action="/User/Contribution" enctype="multipart/form-data">
+        @*资源内容*@    
         <div>
             <label>资源名称</label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" name="Rname"/>
             <div class="form-group">
                 <label for="Rdescribe">资源描述(限500字)</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" name="Rdescribe" id="Rdescribe" rows="3"></textarea>
             </div>
-
             <div class="form-group">
                 <label for="Rdemand">下载需求积分</label>
                 <select multiple class="form-control" id="Rdemand" name="Rdemand">
@@ -31,35 +30,35 @@
         </div>
         @*类别标签*@
         <div class="form-group">
-            <label>类    别：</label><select class="province form-control-sm" name="province" id="param_province" onchange="provincechange()"><option>请选择类别</option></select>
+            <label>类    别：</label><select class="CategoryName form-control-sm" name="CategoryName" id="CategoryName" onchange="provincechange()"><option>请选择类别</option></select>
         </div>
         <div class="form-group">
-            <label>标    签：</label><select class="city form-control-sm" name="city" id="param_city"><option>请选择标签</option></select>
+            <label>标    签：</label><select class="LableName form-control-sm" name="LableName" id="LableName"><option>请选择标签</option></select>
         </div>
         @*链接*@
         <div class="form-group">
-            <label>链接描述</label>
-            <input type="text" class="form-control"/>
+            <label>链接描述（100字）</label>
+            <input type="text" class="form-control" id="Ldescribe" name="Ldescribe"/>
         </div>
         <div class="form-group">
             <label>链接地址</label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" id="Linkline" name="Linkline"/>
         </div>
         <div class="form-group">
-            <label>链接备注</label>
-            <input type="text" class="form-control"/>
+            <label>链接备注(50字)</label>
+            <input type="text" class="form-control" id="Lremarks" name="Lremarks"/>
         </div>
         @*图片*@
         <div class="form-group">
-            <label for="FileLable">选择资源图片(请只选取五个文件超出无效！)</label>
-            <input type="file" class="form-control-file btn-lg" id="file" name="file" multiple="multiple">
+            <label for="FileLable">选择资源图片(请最多只选取五个文件超出无效！)</label>
+            <input type="file" class="form-control-file btn-lg" id="Picture" name="Picture" multiple="multiple">
         </div>
         <input type="submit" class="btn btn-success btn-lg" name="submit" id="submit" value="提交审核"  style="float:right"/>
     </form>
 </div>
 <script type="text/javascript">
-    var provinces = ['请选择类别', '福利资源', '手机资源', '学习资源', '建站资源', 'PC端资源'];
-    var citys = [['请选择标签'],
+    var CategoryNames = ['请选择类别', '福利资源', '手机资源', '学习资源', '建站资源', 'PC端资源'];
+    var LableNames = [['请选择标签'],
     ["开放下载", "免费电影"],
     ["安卓", "苹果", "破解软件"],
     ["精品课程", "赚钱教程"],
@@ -69,24 +68,24 @@
         init();
     });
     function init() {
-        var province = document.getElementById('param_province');
-        province.length = provinces.length;
-        for (var i = 0; i < provinces.length; i++) {
-            province.options[i].text = provinces[i];
-            province.options[i].value = provinces[i];
+        var CategoryName = document.getElementById('CategoryName');
+        CategoryName.length = CategoryNames.length;
+        for (var i = 0; i < CategoryNames.length; i++) {
+            CategoryName.options[i].text = CategoryNames[i];
+            CategoryName.options[i].value = CategoryNames[i];
         }
     }
     function provincechange() {
-        var province = document.getElementById("param_province");
-        var num = province.selectedIndex; // 选中option索引
-        var city = document.getElementById('param_city');
-        var citystemp = citys[num];
-        city.length = citystemp.length;
-        for (var i = 0; i < citystemp.length; i++) {
-            city.options[i].text = citystemp[i];
-            city.options[i].value = citystemp[i];
+        var CategoryName = document.getElementById("CategoryName");
+        var num = CategoryName.selectedIndex; // 选中option索引
+        var LableName = document.getElementById('LableName');
+        var LableNamestemp = LableNames[num];
+        LableName.length = LableNamestemp.length;
+        for (var i = 0; i < LableNamestemp.length; i++) {
+            LableName.options[i].text = LableNamestemp[i];
+            LableName.options[i].value = LableNamestemp[i];
         }
-        city.options[0].selected = true;
+        LableName.options[0].selected = true;
     }
 
     $(function () {

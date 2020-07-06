@@ -1,32 +1,35 @@
 ﻿@{
-    ViewBag.Title = "EidtInfo";
+    ViewBag.Title = "修改资料";
     Layout = "~/Views/Shared/_LayoutUserMain.cshtml";
 }
 @using Models
 @model UserInfo
-    <form method="post" action="">
+    <form method="post" action="/User/EidtInfo" enctype="multipart/form-data">
         <div>
             <div class="form-group">
                 <label>头像：</label>
                 <img src="~/Content/icon/@Model.UserPicture" style="width:80px;height:80px" class="img-thumbnail"/>
                 <input type="file" class="form-control-fil" id="UserPicture" name="UserPicture">
+                <input type="hidden" name="UserPicture" value="@Model.UserPicture"/>
+                <input type="hidden" name="UserID" value="@Model.UserID" />
             </div>
             <div class="form-group">
                 <label class="">用户名：</label>
-                <input type="text" class="form-control" value="@Model.UserName" />
+                <input type="text" class="form-control" value="@Model.UserName" name="UserName" />
+                <input type="hidden" name="LoginPwd" value="@Model.LoginPwd" />
             </div>
             <div class="form-group">
                 <label>登录账户：</label>
-                <input type="text" class="form-control" value="@Model.LoginName" />
+                <input type="text" readonly="readonly" class="form-control" value="@Model.LoginName" name="LoginName"/>
             </div>
             <div class="form-group">
                 <label>邮箱：</label>
-                <input type="text" class="form-control" value="@Model.E_mail" />
+                <input type="text" class="form-control" value="@Model.E_mail" name="E_mail"/>
             </div>
             <div class="form-group">
                 <label>性别：</label>
-                <input type="checkbox" id="UserSex" name="UserSex" value="1" checked="@(Convert.ToInt32(Model.UserSex)==1)"/>男
-                <input type="checkbox" id="UserSex" name="UserSex" value="2" checked="@(Convert.ToInt32(Model.UserSex)==2)"/>女
+                <input type="radio" id="UserSex" name="UserSex" value="1" checked="@(Convert.ToInt32(Model.UserSex)==1)"/>男
+                <input type="radio" id="UserSex" name="UserSex" value="2" checked="@(Convert.ToInt32(Model.UserSex)==2)"/>女
             </div>
             <div class="form-group">
                 <label>个性签名(限250字)：</label>
@@ -38,5 +41,14 @@
             </div>
         </div>
     </form>
+    <td id="tdMsg" style="display:none">@ViewBag.sucess</td>
+<script>
+    $(document).ready(function () {
+        if ($('#tdMsg').html().Trim() != "") { //Trim自定义的方法
+            alert($('#tdMsg').html());//可以用jQuery的消息框
+            $('#tdMsg').fadeOut(3000);
+        }
+    });
+</script>
 
 
