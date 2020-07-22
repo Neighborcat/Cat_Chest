@@ -16,6 +16,7 @@ namespace StarsResouces.Controllers
     {
         db_StarsResourcesEntities1 db = new db_StarsResourcesEntities1();
         // GET: User
+        
         //个人中心
         public ActionResult UserCenter(int id)
         {
@@ -109,6 +110,7 @@ namespace StarsResouces.Controllers
             };
             db.Resouces.Add(resouces);
             db.SaveChanges();
+            TempData["sucess"] = "提交成功";
             return View("UserCenter");
         }
         //我的分享
@@ -120,6 +122,66 @@ namespace StarsResouces.Controllers
             int pageNumber = page ?? 1;//页码
             int pageSize = 4;//每页个数
             return View(resouces.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult MyshareEdit(int? id, Resouces resouces)
+        {
+            if (resouces.ResoucesID == 0)
+            {
+                Resouces res = db.Resouces.Find(id);
+                return View(res);
+            }
+            else
+            {
+                db.Entry(resouces).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                TempData["sucess"] = "修改成功";
+                return RedirectToAction("MyShare");
+            }
+        }
+        public ActionResult MyshareDelete(int?id)
+        {
+            List<News> rnlist = db.News.Where(p => p.ResoucesID == id).ToList();
+            List<Recommend> renlist = db.Recommend.Where(p => p.ResoucesID == id).ToList();
+            if (rnlist.Count() > 0 || renlist.Count() > 0)
+            {
+                TempData["sucess"] = "该资源无法删除。";
+                return RedirectToAction("Myshare");
+            }
+            else
+            {
+                List<Collection> colist = db.Collection.Where(p => p.ResoucesID == id).ToList();
+                if (colist.Count() > 0)
+                {
+                    foreach (var item in colist)
+                    {
+                        db.Collection.Remove(item);
+                        db.SaveChanges();
+                    }
+                    List<Comment> com = db.Comment.Where(p => p.ResoucesID == id).ToList();
+                    foreach (var item in com)
+                    {
+                        db.Comment.Remove(item);
+                        db.SaveChanges();
+                    }
+                    Resouces res = db.Resouces.Find(id);
+                    db.Resouces.Remove(res);
+                    db.SaveChanges();
+                    return RedirectToAction("Myshare");
+                }
+                else
+                {
+                    List<Comment> com = db.Comment.Where(p => p.ResoucesID == id).ToList();
+                    foreach (var item in com)
+                    {
+                        db.Comment.Remove(item);
+                        db.SaveChanges();
+                    }
+                    Resouces res = db.Resouces.Find(id);
+                    db.Resouces.Remove(res);
+                    db.SaveChanges();
+                    return RedirectToAction("Myshare");
+                }
+            }
         }
         //我的收藏
         public ActionResult Collection(int? page)
@@ -175,7 +237,7 @@ namespace StarsResouces.Controllers
             }
                 db.Entry(info).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                ViewBag.sucess = "修改成功";
+                TempData["sucess"] = "修改成功";
                 Session["user"] = info;
                 return View("UserCenter");
         }
@@ -184,15 +246,16 @@ namespace StarsResouces.Controllers
         {
             List<Comment> clist = db.Comment.Where(p => p.UserID == id).ToList();
             int pageNumber = page ?? 1;//页码
-            int pageSize = 4;//每页个数
+            int pageSize = 7;//每页个数
             return View(clist.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult RemoveCom(int? id)
         {
+            int uid = Convert.ToInt32(Session["userid"]);
             Comment com = db.Comment.Find(id);
             db.Comment.Remove(com);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Comment",new { id= uid });
         }
         //修改密码
         public ActionResult ChangePwd()
@@ -200,19 +263,29 @@ namespace StarsResouces.Controllers
             int uid = Convert.ToInt32(Session["userid"]);
             UserInfo user = db.UserInfo.Find(uid);
             ViewBag.pwd = user.LoginPwd;
+            Session["orldpwd"]= user.LoginPwd;
             return View();
         }
         [HttpPost]
-        public ActionResult ChangePwd(string LoginPwd)
+        public ActionResult ChangePwd(string LoginPwd,string OrldLoginPwd)
         {
-            int uid = Convert.ToInt32(Session["userid"]);
-            db.Database.ExecuteSqlCommand($"update UserInfo set LoginPwd='{LoginPwd}' where UserID={uid}");
-            return Content("<script>alert('修改成功');history.go(-1)</script>");
+            string UPwd =Convert.ToString(Session["orldpwd"]);
+            if (OrldLoginPwd == UPwd)
+            {
+                int uid = Convert.ToInt32(Session["userid"]);
+                db.Database.ExecuteSqlCommand($"update UserInfo set LoginPwd='{LoginPwd}' where UserID={uid}");
+                return Content("<script>alert('修改成功');history.go(-1)</script>");
+            }
+            else
+            {
+                TempData["fail"] = "原密码不正确";
+                return RedirectToAction("ChangePwd");
+            }
         }
         //退出账户
         public ActionResult Exit()
         {
-            Session["user"] = null;
+            Session.Clear();
             return RedirectToAction("Index","Home");
         }
     }

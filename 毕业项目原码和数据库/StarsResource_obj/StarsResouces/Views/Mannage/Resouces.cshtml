@@ -1,20 +1,24 @@
-﻿@*@model IEnumerable<Models.Resouces>*@
+﻿@model IEnumerable<Models.Resouces>
 
 @{
     ViewBag.Title = "Resouces";
     Layout = "~/Views/Shared/_MLayout.cshtml";
 }
 @using Models;
-@using PagedList.Mvc
-@model PagedList.PagedList<Models.Resouces>
 @{
+    Administrators adm = Session["Admin"] as Administrators;
     List<Category> category = ViewBag.cate;
+    if (TempData["sucess"] != null)
+    {
+        <script type="text/javascript">
+            alert("@TempData["sucess"]");
+        </script>
+    }
 }
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<form method="get" action="/Mannage/Resouces">
+<form method="get" action="/Mannage/Resouces" id="form">
     <div class="row">
         <div class="form-group col-4" style="padding-top:10px">
-            <select class="form-control" id="CategoryID" name="CategoryID">
+            <select class="form-control" id="CategoryID" name="CategoryID" onchange="select()">
                 <option>请选择类别</option>
                 @foreach (var item in category)
                 {
@@ -23,7 +27,7 @@
             </select>
         </div>
         <div class="form-group col-2" style="padding-top:10px">
-            <select class="form-control" id="Rstate" name="Rstate">
+            <select class="form-control" id="Rstate" name="Rstate" onchange="select()">
                 <option>请选择状态</option>
                 <option value="0">通过</option>
                 <option value="1">审核</option>
@@ -31,9 +35,9 @@
             </select>
         </div>
         <div class="input-group col-6" style="padding-top:10px">
-            <input type="text" class="form-control" placeholder="资源搜索" id="searcher" name="searcher" style="max-width:80%">
+            <input type="text" class="form-control" placeholder="资源搜索" id="searcher" name="searcher" style="max-width:100%">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2" style="border:1px solid #b9b9b9">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
                     <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
                         <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
@@ -108,25 +112,78 @@
                 @Html.DisplayFor(modelItem => item.UserInfo.UserID)
             </td>
             <td>
-                @Html.ActionLink("编辑", "Edit", new { id = item.ResoucesID }) |
-                @Html.ActionLink("详情", "Details", new { id = item.ResoucesID }) |
-                @Html.ActionLink("删除", "Delete", new { id = item.ResoucesID })
+                @if (Session["Admin"] != null && adm.Jurisdiction != 0)
+                {
+                    <a href="/Mannage/ResDetails?id=@item.ResoucesID" class="btn btn-info">处理</a>
+                    <a href="/Mannage/ResDelete?id=@item.ResoucesID" class="btn btn-danger" onclick="return confirm('确认删除？')">删除</a>
+                }
+                else
+                {
+
+                }
             </td>
 
         </tr>
     }
 
 </table>
-@if (Model.TotalItemCount < Model.PageSize)
-{
+@*分页*@
+<div class="row">
+    <div class="col-lg-8 form-inline">
+        <label>总共 @ViewBag.tatalCount 行</label>
+        <lable>选择显示的行数：</lable>
+        <select name="pageCount" id="pageCount" onchange="window.location = this.value;">
+            @{
+                int[] count = new[] { 5, 10, 20, 30, 40, 50 };
+            }
+            @foreach (var item in count)
+            {
+                if (item.Equals(ViewBag.pageCount))
+                {
+                    <option selected value="~/Mannage/Resouces?pageIndex=1&pageCount=@item">@item</option>
+                }
+                else
+                {
+                    <option value="~/Mannage/Resouces?pageIndex=1&pageCount=@item">@item</option>
+                }
 
-}
-else
-{
-    @:共 @Model.TotalItemCount 条，
-    @:每页 @Model.PageSize 条，
-    @:共 @Model.PageCount 页，
-    @:当前第 @Model.PageNumber 页
-    <br />
-    @Html.PagedListPager(Model, page => Url.Action("Resouces", new { page, State = ViewBag.State, StuName = ViewBag.StuName }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
-}
+            }
+
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="~/Mannage/Resouces?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a></li>
+                @if (ViewBag.pageIndex > 1)
+                {
+                    <li class="page-item"><a class="page-link" href="~/Mannage/Resouces?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a></li>
+
+                }
+                else
+                {
+                    <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+                }
+                <li class="page-item">
+                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                </li>
+                @if (ViewBag.pageIndex < ViewBag.tatalPage)
+                {
+                    <li class="page-item"><a class="page-link" href="~/Mannage/Resouces?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a></li>
+
+                }
+                else
+                {
+                    <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
+                }
+
+                <li class="page-item"><a class="page-link" href="~/Mannage/Resouces?pageIndex=@ViewBag.tatalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<script>
+    function select() {
+        $("#form").submit();
+    }
+</script>

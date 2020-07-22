@@ -53,4 +53,3 @@ C:\Users\Administrator\Desktop\StarsResource_obj\Models\obj\Debug\Models.csproj.
 C:\Users\Administrator\Desktop\StarsResource_obj\Models\obj\Debug\Models.csproj.CopyComplete
 C:\Users\Administrator\Desktop\StarsResource_obj\Models\obj\Debug\Models.dll
 C:\Users\Administrator\Desktop\StarsResource_obj\Models\obj\Debug\Models.pdb
-D:\学习用临时文件\StarsResource_obj\Models\obj\Debug\Models.csprojAssemblyReference.cache

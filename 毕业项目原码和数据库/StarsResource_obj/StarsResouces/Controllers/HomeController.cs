@@ -16,11 +16,67 @@ namespace StarsResouces.Controllers
     public class HomeController : Controller
     {
         db_StarsResourcesEntities1 db = new db_StarsResourcesEntities1();
+        //用户信息介绍模板
+        public ActionResult UserInfo(int ?id, int? tpid, int pageIndex = 1, int pageCount = 8 )
+        {
+            Session["uid"] = id;
+            Session["tpid"] = tpid;
+            UserInfo user = db.UserInfo.Find(id);
+            ViewBag.user = user;
+            if (tpid==1)
+            {
+                int tatalCount = db.Resouces.OrderByDescending(p => p.ResoucesID).Where(p => p.UserID == id).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Resouces> uList = db.Resouces.Where(p => p.UserID == id).OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                ViewBag.list = uList;
+            }
+            else if (tpid == 2)
+            {
+                int tatalCount = db.Collection.OrderByDescending(p => p.ResoucesID).Where(p => p.UserID == id).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Collection> uList = db.Collection.Where(p => p.UserID == id).OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                ViewBag.list = uList;
+            }
+            else if (tpid == 3)
+            {
+
+            }
+            return View();
+        }
+        public ActionResult UserComment()
+        {
+            return View();
+        }
+        public ActionResult UserCollection()
+        {
+            return View();
+        }
         public ActionResult Index(int? page,string search)
         {
+            List<News> nlist = db.News.ToList();
+            Session["a"] = db.Advertisement.ToList();
+            Session["hlist"] = db.HotLable.ToList();
+            Session["Recommend"] = db.Recommend.ToList();
+            ViewBag.nlist = nlist;
             if (search==null)
             {
-                List<Resouces> list = db.Resouces.OrderByDescending(p=>p.Reading).ToList();
+                List<Resouces> list = db.Resouces.Where(p=>p.Rstate==0).OrderByDescending(p=>p.Reading).ToList();
                 int pageNumber = page ?? 1;//页码
                 int pageSize = 6;//每页个数
                 return View(list.ToPagedList(pageNumber, pageSize));
@@ -40,6 +96,10 @@ namespace StarsResouces.Controllers
                 ViewBag.count = fuli.Count();
                 int pageNumber = page ?? 1;//页码
                 int pageSize = 8;//每页个数
+                if (fuli.Count()< pageSize)
+                {
+                    pageSize = 5;
+                }
                 return View(fuli.ToPagedList(pageNumber, pageSize));
             }
             else
@@ -47,6 +107,10 @@ namespace StarsResouces.Controllers
                 List<Resouces> fuli = db.Resouces.Where(p => p.CategoryID == 1 && p.LableID == id).ToList();
                 int pageNumber = page ?? 1;//页码
                 int pageSize = 8;//每页个数
+                if (fuli.Count() < pageSize)
+                {
+                    pageSize = 5;
+                }
                 return View(fuli.ToPagedList(pageNumber, pageSize));
             }
             
@@ -149,6 +213,7 @@ namespace StarsResouces.Controllers
             };
             db.Comment.Add(com);
             db.SaveChanges();
+            db.Database.ExecuteSqlCommand($"update UserInfo set integral-=1 where UserID={uid}");
             return RedirectToAction("Details","Home",new { id= id });
         }
         public ActionResult AddCollection(int ?id)
@@ -191,18 +256,38 @@ namespace StarsResouces.Controllers
             }
             else if (info.integral< resouces.Rdemand)
             {
-                TempData["nofull"] = "您的积分不足";
-                return RedirectToAction("Details", new { id = rid });
+                int? ruid = resouces.UserID;
+                if (ruid == uid)
+                {
+                    Link link = db.Link.Where(p => p.LinkID == id).SingleOrDefault();
+                    return View(link);
+                }
+                else
+                {
+                    TempData["nofull"] = "您的积分不足";
+                    return RedirectToAction("Details", new { id = rid });
+                }
             }
             else
             {
-                db.Database.ExecuteSqlCommand($"update UserInfo set integral-={resouces.Rdemand} where UserID={uid}");
-                Link link = db.Link.Where(p => p.LinkID == id).SingleOrDefault();
-                return View(link);
+                int ?ruid = resouces.UserID;
+                if (ruid== uid)
+                {
+                    Link link = db.Link.Where(p => p.LinkID == id).SingleOrDefault();
+                    return View(link);
+                }
+                else
+                {
+                    db.Database.ExecuteSqlCommand($"update UserInfo set integral-={resouces.Rdemand} where UserID={uid}");
+                    db.Database.ExecuteSqlCommand($"update UserInfo set integral+={resouces.Rdemand} where UserID={ruid}");
+                    Link link = db.Link.Where(p => p.LinkID == id).SingleOrDefault();
+                    return View(link);
+                }
             }
         }
         public ActionResult Loading(int id)
         {
+            List<Advertisement> alist = Session["a"] as List<Advertisement>;
             if (id==1)
             {
                 ViewBag.link = "https://voice.baidu.com/act/newpneumonia/newpneumonia";
@@ -214,6 +299,22 @@ namespace StarsResouces.Controllers
             else if (id == 3)
             {
                 ViewBag.link = "https://www.thepaper.cn/";
+            }
+            else if (id == 4)
+            {
+                ViewBag.link = alist[0].Adverlink;
+            }
+            else if (id == 5)
+            {
+                ViewBag.link = alist[1].Adverlink;
+            }
+            else if (id == 6)
+            {
+                ViewBag.link = alist[2].Adverlink;
+            }
+            else if (id == 7)
+            {
+                ViewBag.link = alist[3].Adverlink;
             }
             return View();
         }
@@ -228,7 +329,9 @@ namespace StarsResouces.Controllers
         public ActionResult LoginModal(UserInfo user)
         {
                 var result = db.UserInfo.Where(p => p.LoginName == user.LoginName && p.LoginPwd == user.LoginPwd).SingleOrDefault();
-                if (result!=null)
+            if (result != null)
+            {
+                if (result.UserState != 1)
                 {
                     Session["user"] = result;
                     Session["userid"] = result.UserID;
@@ -236,25 +339,35 @@ namespace StarsResouces.Controllers
                 }
                 else
                 {
+                    TempData["fall"] = "该用户已被封禁";
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+                {
                     return Content("<script>alert('账号或密码输入错误！');history.go(-1)</script>");
                 }
         }
         [HttpPost]
-        public ActionResult RegisterModal(string LoginName,string LoginPwd,string E_mail)
+        public ActionResult RegisterModal(string LoginNames,string LoginPwds,string E_mails,string validateCode)
         {
-            var result = db.UserInfo.Where(p => p.LoginName == LoginName).SingleOrDefault();
-            if (result != null)
+            var result = db.UserInfo.Where(p => p.LoginName == LoginNames).SingleOrDefault();
+            if (result != null )
             {
                 return Content("<script>alert('该账号已被注册!');history.go(-1)</script>");
             }
-            else
+            else if (Session["vilidateCode"].ToString().Trim().ToLower()!= validateCode.Trim().ToLower())
             {
+                return Content("<script>alert('验证码不正确!');history.go(-1)</script>");
+            }
+            else
+                {
                 UserInfo info = new UserInfo()
                 {
                     RegistrationTime=DateTime.Now,
-                    LoginName = LoginName,
-                    LoginPwd = LoginPwd,
-                    E_mail = E_mail,
+                    LoginName = LoginNames,
+                    LoginPwd = LoginPwds,
+                    E_mail = E_mails,
                     UserName = "萌新求带",
                     UserSex="0",
                     Userdescribe="懒得很，什么都没有~",

@@ -12,7 +12,7 @@ namespace Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class UserInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,23 +22,24 @@ namespace Models
             this.Comment = new HashSet<Comment>();
             this.Resouces = new HashSet<Resouces>();
         }
-        [Display(Name ="编号")]
+
+        [Display(Name = "UID")]
         public int UserID { get; set; }
         [Display(Name = "注册时间")]
         public System.DateTime RegistrationTime { get; set; }
-        [Display(Name = "登录名")]
+        [Display(Name ="登录名")]
         public string LoginName { get; set; }
         [Display(Name = "登录密码")]
         public string LoginPwd { get; set; }
         [Display(Name = "邮箱")]
         public string E_mail { get; set; }
-        [Display(Name = "用户名")]
+        [Display(Name = "用户命名")]
         public string UserName { get; set; }
         [Display(Name = "性别")]
         public string UserSex { get; set; }
-        [Display(Name = "签名")]
+        [Display(Name = "描述")]
         public string Userdescribe { get; set; }
-        [Display(Name = "拥有积分")]
+        [Display(Name = "积分")]
         public int integral { get; set; }
         [Display(Name = "状态")]
         public int UserState { get; set; }

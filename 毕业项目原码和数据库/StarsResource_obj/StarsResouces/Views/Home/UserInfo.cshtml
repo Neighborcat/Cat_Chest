@@ -1,0 +1,197 @@
+﻿
+@{
+    ViewBag.Title = "用户资料";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Models;
+@{ 
+    List<Models.Resouces> resouces = ViewBag.list;
+    UserInfo info = ViewBag.user;
+    int uid =Convert.ToInt32(Session["uid"]);
+    int tpid= Convert.ToInt32(Session["tpid"]);
+}
+<!DOCTYPE html>
+<style>
+    .page {
+        width: 1000px;
+        height: 1360px;
+        margin: 0 auto;
+    }
+
+    .page_1 {
+        width: 100%;
+        height: 410px;
+    }
+    .gray {
+        width: 100%;
+        height: 410px;
+        background-color:floralwhite;
+        opacity:0.8;
+    }
+        .page_1 img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            position: relative;
+            left: 425px;
+            top: -80px;
+            border:3px solid #FFFFFF;
+        }
+
+    .page_2 {
+        width: 100%;
+        height: 940px;
+        border: 1px solid #FFFFFF;
+        background-color:whitesmoke;
+    }
+    .page_3 {
+        width: 900px;
+        height: 660px;
+        border: 1px solid #FFFFFF;
+        background-color: #eee0e0;
+        position: relative;
+        left: 55px;
+        margin-top: 10px;
+    }
+    .rows {
+        width: 900px;
+        margin-top: 140px;
+        position:relative;
+        left:70px;
+    }
+    .rows_4 a {
+        display: block;
+        width: 270px;
+        height:100px;
+        text-decoration:none;
+        color:darkblue;
+        background-color:floralwhite;
+        font-family:STXingkai;
+        font-size:22px
+    }
+    .rows .rows_4 a:hover {
+        transition: all 400ms;
+        border-bottom: 5px solid #ff9700;
+        background-color: #525252;
+        color: #ff9700;
+    }
+    .rows_4 {
+        height: 110px;
+        line-height:110px;
+        font-size:18px;
+    }
+    .UID {
+        position: relative;
+        top: 55px;
+        left: 600px;
+        font-family:STZhongsong;
+        font-size:24px;
+        font-weight:bold;
+    }
+    .LNAME {
+        position: relative;
+        top: 125px;
+        left: 0px;
+    }
+</style>
+<div class="page" style="background-repeat: no-repeat;background-size: 100% 100%;background-attachment: fixed;background-image: url('../../Content/icon/@info.UserPicture');">
+    <div class="page_1">
+        <div class="gray"></div>
+        <img src="~/Content/icon/@info.UserPicture" />
+    </div>
+    <lable class="UID">
+        <svg t="1594341885106" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5896" width="26" height="26"><path d="M921.581937 108.378903H102.418063C45.880402 108.378903 0 156.246252 0 215.132122v593.735756c0 59.066502 45.880402 106.753219 102.418063 106.753219h819.163874c56.537661 0 102.418063-47.867349 102.418063-106.753219V215.132122c0-58.885871-45.880402-106.753219-102.418063-106.753219z m30.165461 689.289822c0 23.662727-18.424413 42.629035-41.003351 42.629035H113.255953c-22.578938 0-41.003352-19.146939-41.003351-42.629035V226.511907c0-23.662727 18.424413-42.629035 41.003351-42.629035h797.668725c22.578938 0 41.003352 19.146939 41.003352 42.629035v571.156818z" fill="#323333" p-id="5897"></path><path d="M748.536955 267.334627c-77.852179 0-140.892574 63.040395-140.892573 140.892574s63.040395 140.892574 140.892573 140.892573 140.892574-63.040395 140.892574-140.892573-63.221027-140.892574-140.892574-140.892574z m0 209.351914c-37.751984 0-68.639972-30.707356-68.639971-68.639972 0-37.751984 30.707356-68.639972 68.639971-68.639972s68.639972 30.707356 68.639972 68.639972c-0.180632 37.932616-30.887987 68.639972-68.639972 68.639972zM170.877403 548.939143h353.134592c19.869466 0 36.126301-16.256835 36.126301-36.126301s-16.256835-36.126301-36.126301-36.126301H170.877403c-19.869466 0-36.126301 16.256835-36.126301 36.126301s16.256835 36.126301 36.126301 36.126301zM853.122597 669.962251H174.851297c-19.869466 0-36.126301 16.256835-36.126301 36.126301s16.256835 36.126301 36.126301 36.126301h678.2713c19.869466 0 36.126301-16.256835 36.126301-36.126301s-16.076204-36.126301-36.126301-36.126301z" fill="#323333" p-id="5898"></path></svg>
+        @info.UserName
+    </lable>
+    <lable class="LNAME">
+        <svg t="1594313395494" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2189" width="32" height="32"><path d="M832 320H192V192c0-47.146667 38.186667-85.333333 85.333333-85.333333h469.333334c47.146667 0 85.333333 38.186667 85.333333 85.333333v128z" fill="#FCCA1E" p-id="2190"></path><path d="M737.28 914.133333l-237.653333-101.12-211.84 98.773334c-47.36 15.786667-95.786667-21.973333-95.786667-74.666667V362.666667h640v476.16c0 52.48-47.36 90.026667-94.72 75.306666z" fill="#2953FF" p-id="2191"></path></svg>
+        @info.Userdescribe
+    </lable>
+    <div class="page_2">
+        <div class="row rows">
+            <div class="rows_4 col-lg-4 text-center">
+                <a href="/Home/UserInfo?id=@uid&tpid=1">
+                    他的分享(@info.Resouces.Count())
+                </a>
+            </div>
+            <div class="rows_4 col-lg-4 text-center">
+                <a href="#">
+                    他的收藏(@info.Collection.Count())
+                </a>
+            </div>
+            <div class="rows_4 col-lg-4 text-center">
+                <a href="#">
+                    他的评论(@info.Comment.Count())
+                </a>
+            </div>
+        </div>
+        <div class="page_3">
+            @if (tpid==1)
+            {
+                if (ViewBag.number != 0)
+                {
+                    <div class="row" style="margin-left:25px;margin-top:10px">
+                        @foreach (var item in resouces)
+                        {
+                            <dl style="width:200px;height:240px;overflow:hidden;margin-left:10px;background-color:whitesmoke" class="row-cols-1">
+                                <dt style="height:30%">
+                                    <a href="/Home/Details?id=@item.ResoucesID">
+                                        @if (item.Picture.Picture_a != null)
+                                        {
+                                            <img src="~/Content/Resouces/Images/@item.Picture.Picture_a" class="card-img-top" alt="..." style="height:100%" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/Resouces/Img/notfound.jpg" class="card-img-top" alt="..." style="height:100%" />
+                                        }
+                                    </a>
+                                </dt>
+                                <dd style="height:20%;padding-top:3px"><h5 class="card-title">@item.Rname</h5></dd>
+                                <dd style="height:45%;overflow:hidden"><a href="/Home/Details?id=@item.ResoucesID" style="text-decoration:none;color:black;font-size:10px">@item.Rdescribe</a></dd>
+                            </dl>
+                        }
+                        @*分页*@
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="~/Home/UserInfo?id=@uid&tpid=@tpid&pageIndex=1&pageCount=@ViewBag.pageCount">首页</a></li>
+                                @if (ViewBag.pageIndex > 1)
+                                {
+                                    <li class="page-item"><a class="page-link" href="~/Home/UserInfo?id=@uid&tpid=@tpid&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a></li>
+
+                                }
+                                else
+                                {
+                                    <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+                                }
+                                <li class="page-item">
+                                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                                </li>
+                                @if (ViewBag.pageIndex < ViewBag.tatalPage)
+                                {
+                                    <li class="page-item"><a class="page-link" href="~/Home/UserInfo?id=@uid&tpid=@tpid&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a></li>
+
+                                }
+                                else
+                                {
+                                    <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
+                                }
+
+                                <li class="page-item"><a class="page-link" href="~/Home/UserInfo?id=@uid&tpid=@tpid&pageIndex=@ViewBag.tatalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                }
+                else
+                {
+                    <img src="~/Content/icon/NoFind.jpg" style="width:300px;height:300px;margin:150px 0px 0px 250px" />
+                    <label style="font-family:STXingkai">什么都没有哦~~~~</label>
+                }
+            }
+            else
+            {
+
+            }
+
+        </div>
+    </div>
+</div>

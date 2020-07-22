@@ -22,6 +22,54 @@ namespace Mannage.Controllers
         {
             return View();
         }
+        public ActionResult UserDelete(int ?id)
+        {
+            List<Resouces> urlist = db.Resouces.Where(p => p.UserID == id).ToList();
+            if (urlist.Count()>0)
+            {
+                TempData["sucess"] = "该用户无法删除。";
+                return RedirectToAction("Users");
+            }
+            else
+            {
+                List<Collection> colist = db.Collection.Where(p => p.UserID == id).ToList();
+                if (colist.Count()==0)
+                {
+                    UserInfo user = db.UserInfo.Find(id);
+                    db.UserInfo.Remove(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Users");
+                }
+                else
+                {
+
+                    for (int i = 0; i < colist.Count(); i++)
+                    {
+                        db.Collection.Remove(colist[i]);
+                        db.SaveChanges();
+                    }
+                    UserInfo user = db.UserInfo.Find(id);
+                    db.UserInfo.Remove(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Users");
+                }
+            }
+        }
+        public ActionResult UserDetails(int ?id,UserInfo info)
+        {
+            if (info.UserID == 0)
+            {
+                UserInfo user = db.UserInfo.Find(id);
+                return View(user);
+            }
+            else
+            {
+                db.Entry(info).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                TempData["sucess"] = "审批成功";
+                return RedirectToAction("Users");
+            }
+        }
         [HttpPost]
         public ActionResult AddUser(string LoginName, string LoginPwd, string E_mail,string UserName,string UserSex,int UserState)
         {
@@ -50,27 +98,135 @@ namespace Mannage.Controllers
                 return Content("<script>alert('添加成功!');history.go(-1)</script>");
             }
         }
-        public ActionResult Users(int? page,string searcher)
+        public ActionResult Users(int ?UserState, string searcher, int pageIndex = 1, int pageCount = 10)
         {
-            if (searcher==null)
+            if (searcher==null&& UserState==null)
             {
-                List<UserInfo> ulist = db.UserInfo.ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(ulist.ToPagedList(pageNumber, pageSize));
+                int tatalCount = db.UserInfo.OrderBy(p => p.UserID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<UserInfo> uList = db.UserInfo.OrderBy(p => p.UserID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
+            }
+            else if(searcher != null && UserState == null)
+            {
+                int tatalCount = db.UserInfo.Where(p => p.LoginName.Contains(searcher) || p.UserName.Contains(searcher)).OrderBy(p => p.UserID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<UserInfo> uList = db.UserInfo.Where(p => p.LoginName.Contains(searcher) || p.UserName.Contains(searcher)).OrderBy(p => p.UserID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
+            }
+            else if (searcher == null || UserState != null)
+            {
+                int tatalCount = db.UserInfo.Where(p => p.UserState==UserState).OrderBy(p => p.UserID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<UserInfo> uList = db.UserInfo.Where(p => p.UserState == UserState).OrderBy(p => p.UserID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
             }
             else
             {
-                List<UserInfo> ulist = db.UserInfo.Where(p=>p.LoginName.Contains(searcher)||p.UserName.Contains(searcher)).ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(ulist.ToPagedList(pageNumber, pageSize));
+                int tatalCount = db.UserInfo.Where(p => p.LoginName.Contains(searcher) || p.UserName.Contains(searcher) && p.UserState == UserState).OrderBy(p => p.UserID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<UserInfo> uList = db.UserInfo.Where(p => p.LoginName.Contains(searcher) || p.UserName.Contains(searcher) && p.UserState == UserState).OrderBy(p => p.UserID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
             }
-            
+
+
         }
         public ActionResult AddRes()
         {
             return View();
+        }
+        public ActionResult ResDetails(int ?id,Resouces resouces)
+        {
+            if (resouces.ResoucesID == 0)
+            {
+                Resouces res = db.Resouces.Find(id);
+                return View(res);
+            }
+            else
+            {
+                db.Entry(resouces).State= System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                TempData["sucess"] = "审批成功";
+                return RedirectToAction("Resouces");
+            }
+            
+        }
+        public ActionResult ResDelete(int ?id)
+        {
+            List<News> rnlist = db.News.Where(p => p.ResoucesID == id).ToList();
+            List<Recommend> renlist = db.Recommend.Where(p => p.ResoucesID == id).ToList();
+            if (rnlist.Count() > 0|| renlist.Count() > 0)
+            {
+                TempData["sucess"] = "该资源无法删除。";
+                return RedirectToAction("Resouces");
+            }
+            else
+            {
+                List<Collection> colist = db.Collection.Where(p => p.ResoucesID == id).ToList();
+                if (colist.Count()>0)
+                {
+                    foreach (var item in colist)
+                    {
+                        db.Collection.Remove(item);
+                        db.SaveChanges();
+                    }
+                    List<Comment> com = db.Comment.Where(p => p.ResoucesID == id).ToList();
+                    foreach (var item in com)
+                    {
+                        db.Comment.Remove(item);
+                        db.SaveChanges();
+                    }
+                    Resouces res = db.Resouces.Find(id);
+                    db.Resouces.Remove(res);
+                    db.SaveChanges();
+                    return RedirectToAction("Resouces");
+                }
+                else
+                {
+                    List<Comment> com = db.Comment.Where(p=>p.ResoucesID==id).ToList();
+                    foreach (var item in com)
+                    {
+                        db.Comment.Remove(item);
+                        db.SaveChanges();
+                    }
+                    Resouces res = db.Resouces.Find(id);
+                    db.Resouces.Remove(res);
+                    db.SaveChanges();
+                    return RedirectToAction("Resouces");
+                }
+            }
         }
         [HttpPost]
         public ActionResult AddRes(List<HttpPostedFileBase> Picture, string Rname, string Rdescribe, int Rdemand, string CategoryName, string LableName, string Ldescribe, string Linkline, string Lremarks)
@@ -152,81 +308,182 @@ namespace Mannage.Controllers
             };
             db.Resouces.Add(resouces);
             db.SaveChanges();
-            TempData["saozhu"] = "添加成功IIIIII，骚猪";
+            TempData["saozhu"] = "添加成功";
             return View();
         }
-        public ActionResult Resouces(int? page, string searcher,int ?CategoryID,int ?Rstate)
+        public ActionResult Resouces(int? page, string searcher,int ?CategoryID,int ?Rstate,int pageIndex = 1, int pageCount = 10)
         {
             List<Category> category = db.Category.ToList();
             ViewBag.cate = category;
             //没有查询条件
             if (searcher == null&& CategoryID == null&& Rstate==null)
             {
-                List<Resouces> rlist = db.Resouces.ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(rlist.ToPagedList(pageNumber, pageSize));
+                //带分页
+                int tatalCount = db.Resouces.OrderByDescending(p => p.ResoucesID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Resouces> uList = db.Resouces.OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
+
             }
             //只有查询内容
             else if(searcher != null && CategoryID == null && Rstate == null)
             {
-                List<Resouces> rlist = db.Resouces.Where(p => p.Rname.Contains(searcher) || p.Rdescribe.Contains(searcher)).ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(rlist.ToPagedList(pageNumber, pageSize));
+                int tatalCount = db.Resouces.Where(p => p.Rname.Contains(searcher) || p.Rdescribe.Contains(searcher)).OrderByDescending(p => p.ResoucesID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Resouces> uList = db.Resouces.Where(p => p.Rname.Contains(searcher) || p.Rdescribe.Contains(searcher)).OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
             }
             //既有内容又有类别
             else if (searcher != null && CategoryID != null && Rstate == null)
             {
-                List<Resouces> rlist = db.Resouces.Where(p => p.Rname.Contains(searcher) && p.Rdescribe.Contains(searcher)&&p.CategoryID== CategoryID).ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(rlist.ToPagedList(pageNumber, pageSize));
+                int tatalCount = db.Resouces.Where(p => p.Rname.Contains(searcher) && p.Rdescribe.Contains(searcher) && p.CategoryID == CategoryID).OrderByDescending(p => p.ResoucesID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Resouces> uList = db.Resouces.Where(p => p.Rname.Contains(searcher) && p.Rdescribe.Contains(searcher) && p.CategoryID == CategoryID).OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
             }
             //三个条件都有
             else if (searcher != null && CategoryID != null && Rstate != null)
             {
-                List<Resouces> rlist = db.Resouces.Where(p => p.Rname.Contains(searcher) && p.Rdescribe.Contains(searcher) && p.CategoryID == CategoryID&&p.Rstate== Rstate).ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(rlist.ToPagedList(pageNumber, pageSize));
+                int tatalCount = db.Resouces.Where(p => p.Rname.Contains(searcher) && p.Rdescribe.Contains(searcher) && p.CategoryID == CategoryID && p.Rstate == Rstate).OrderByDescending(p => p.ResoucesID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Resouces> uList = db.Resouces.Where(p => p.Rname.Contains(searcher) && p.Rdescribe.Contains(searcher) && p.CategoryID == CategoryID && p.Rstate == Rstate).OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
             }
             //只有类别
             else if (searcher == null && CategoryID != null && Rstate == null)
             {
-                List<Resouces> rlist = db.Resouces.Where(p =>p.CategoryID == CategoryID).ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(rlist.ToPagedList(pageNumber, pageSize));
+                int tatalCount = db.Resouces.Where(p => p.CategoryID == CategoryID).OrderByDescending(p => p.ResoucesID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Resouces> uList = db.Resouces.Where(p => p.CategoryID == CategoryID).OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
             }
             //只有状态
             else if (searcher == null && CategoryID == null && Rstate != null)
             {
-                List<Resouces> rlist = db.Resouces.Where(p =>p.Rstate == Rstate).ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(rlist.ToPagedList(pageNumber, pageSize));
+                int tatalCount = db.Resouces.Where(p => p.Rstate == Rstate).OrderByDescending(p => p.ResoucesID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Resouces> uList = db.Resouces.Where(p => p.Rstate == Rstate).OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
             }
             //既有内容又有状态
             else if (searcher != null && CategoryID == null && Rstate != null)
             {
-                List<Resouces> rlist = db.Resouces.Where(p => p.Rname.Contains(searcher) && p.Rdescribe.Contains(searcher)&& p.Rstate == Rstate).ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(rlist.ToPagedList(pageNumber, pageSize));
+                int tatalCount = db.Resouces.Where(p => p.Rname.Contains(searcher) && p.Rdescribe.Contains(searcher) && p.Rstate == Rstate).OrderByDescending(p => p.ResoucesID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Resouces> uList = db.Resouces.Where(p => p.Rname.Contains(searcher) && p.Rdescribe.Contains(searcher) && p.Rstate == Rstate).OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
             }
             //没有查询内容有类别和状态
             else
             {
-                List<Resouces> rlist = db.Resouces.Where(p =>p.CategoryID == CategoryID && p.Rstate == Rstate).ToList();
-                int pageNumber = page ?? 1;//页码
-                int pageSize = 6;//每页个数
-                return View(rlist.ToPagedList(pageNumber, pageSize));
+                int tatalCount = db.Resouces.Where(p => p.CategoryID == CategoryID && p.Rstate == Rstate).OrderByDescending(p => p.ResoucesID).Count();
+                double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+                List<Resouces> uList = db.Resouces.Where(p => p.CategoryID == CategoryID && p.Rstate == Rstate).OrderByDescending(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                //当前页
+                ViewBag.pageIndex = pageIndex;
+                //每页行数
+                ViewBag.pageCount = pageCount;
+                //总行数
+                ViewBag.tatalCount = tatalCount;
+                //总页数
+                ViewBag.tatalPage = tatalPage;
+                return View(uList);
             }
         }
-        public ActionResult RComment()
+        public ActionResult RComment (int pageIndex = 1, int pageCount = 10)
         {
-            return View();
+            int tatalCount = db.Resouces.Where(p=>p.Comment.Count()>0).OrderByDescending(p => p.ResoucesID).Count();
+            double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+            List<Resouces> uList = db.Resouces.Where(p => p.Comment.Count() > 0).OrderBy(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            //当前页
+            ViewBag.pageIndex = pageIndex;
+            //每页行数
+            ViewBag.pageCount = pageCount;
+            //总行数
+            ViewBag.tatalCount = tatalCount;
+            //总页数
+            ViewBag.tatalPage = tatalPage;
+            return View(uList);
+        }
+        public ActionResult ComDetails(int? id,int pageIndex = 1, int pageCount = 10)
+        {
+            Session["rid"] = id;
+            int tatalCount = db.Comment.Where(p => p.ResoucesID==id).OrderByDescending(p => p.ResoucesID).Count();
+            double tatalPage = Math.Ceiling(tatalCount / (double)pageCount);
+            List<Comment> uList = db.Comment.Where(p => p.ResoucesID == id).OrderBy(p => p.ResoucesID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            //当前页
+            ViewBag.pageIndex = pageIndex;
+            //每页行数
+            ViewBag.pageCount = pageCount;
+            //总行数
+            ViewBag.tatalCount = tatalCount;
+            //总页数
+            ViewBag.tatalPage = tatalPage;
+            return View(uList);
+        }
+        public ActionResult RemoveCom(int? id)
+        {
+            int rid = Convert.ToInt32(Session["rid"]);
+            Comment com = db.Comment.Find(id);
+            db.Comment.Remove(com);
+            db.SaveChanges();
+            return RedirectToAction("ComDetails",new { id= rid });
         }
         public ActionResult Advertisement()
         {
@@ -247,7 +504,7 @@ namespace Mannage.Controllers
             Administrators adm = db.Administrators.Where(p=>p.LoginName== LoginName && p.LoginPwd== LoginPwd).FirstOrDefault();
             if (adm!=null)
             {
-                Session["result"] = adm;
+                Session["Admin"] = adm;
                 return RedirectToAction("Index");
             }
             else
@@ -258,7 +515,7 @@ namespace Mannage.Controllers
         }
         public ActionResult Exit()
         {
-            Session["result"] = null;
+            Session["Admin"] = null;
             return RedirectToAction("Index");
         }
     }

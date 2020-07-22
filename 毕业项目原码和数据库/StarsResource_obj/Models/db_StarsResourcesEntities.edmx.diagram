@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="17ebd1a4f2f14f31b1aca36436affaa7" Name="Diagram1">
+      <Diagram DiagramId="17ebd1a4f2f14f31b1aca36436affaa7" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="db_StarsResourcesModel.Administrators" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="db_StarsResourcesModel.Category" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_StarsResourcesModel.Collection" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
@@ -25,6 +25,15 @@
         <AssociationConnector Association="db_StarsResourcesModel.FK__Resouces__LinkID__2A4B4B5E" ManuallyRouted="false" />
         <AssociationConnector Association="db_StarsResourcesModel.FK__Resouces__Pictur__2B3F6F97" ManuallyRouted="false" />
         <AssociationConnector Association="db_StarsResourcesModel.FK_Resouces_UserInfo" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="db_StarsResourcesModel.AdverPosition" Width="1.5" PointX="10.375" PointY="1.125" />
+        <EntityTypeShape EntityType="db_StarsResourcesModel.Advertisement" Width="1.5" PointX="12.625" PointY="0.875" />
+        <EntityTypeShape EntityType="db_StarsResourcesModel.HotLable" Width="1.5" PointX="6" PointY="11.5" />
+        <EntityTypeShape EntityType="db_StarsResourcesModel.News" Width="1.5" PointX="8.25" PointY="8.375" />
+        <EntityTypeShape EntityType="db_StarsResourcesModel.Recommend" Width="1.5" PointX="8.25" PointY="6" />
+        <AssociationConnector Association="db_StarsResourcesModel.FK__Advertise__Adver__47A6A41B" />
+        <AssociationConnector Association="db_StarsResourcesModel.FK__HotLable__LableI__3E1D39E1" />
+        <AssociationConnector Association="db_StarsResourcesModel.FK__News__ResoucesID__40F9A68C" />
+        <AssociationConnector Association="db_StarsResourcesModel.FK__Recommend__Resou__43D61337" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

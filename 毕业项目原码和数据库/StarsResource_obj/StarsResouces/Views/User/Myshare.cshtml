@@ -6,6 +6,14 @@
 @using Models
 @using PagedList.Mvc
 @model PagedList.PagedList<Resouces>
+@{
+    if (TempData["sucess"] != null)
+    {
+        <script type="text/javascript">
+            alert("@TempData["sucess"]");
+        </script>
+    }
+}
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 @if (ViewBag.count == 0)
 {
@@ -14,7 +22,7 @@
 }
 else
 {
-    <div class="input-group" style="padding-top:28px;margin-bottom:20px">
+    <div class="input-group" style="padding-top:28px;margin-bottom:20px;">
         <input type="text" class="form-control" placeholder="资源搜索" aria-label="Recipient's username" aria-describedby="button-addon2">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" id="button-addon2">
@@ -26,7 +34,7 @@ else
     <div style="margin-left:0px">
         @foreach (var item in Model)
         {
-            <div class="asb">
+            <div class="asb" style="border: 3px dotted #f0f3d9;margin-top:5px;border-radius:5px">
                 <a href="/Home/Details?id=@item.ResoucesID" style="color:black;text-decoration:none;display:block;">
                     <dl style="background-color: whitesmoke;width: 100%;height: 160px;border-radius: 5px;text-align:left">
                         <dt>
@@ -75,6 +83,8 @@ else
                         </dd>
                     </dl>
                 </a>
+                <a href="/User/MyshareEdit?id=@item.ResoucesID" class="btn btn-outline-info">编辑</a>
+                <a href="/User/MyshareDelete?id=@item.ResoucesID" class="btn btn-outline-danger" onclick="return confirm('确定删除？')">删除</a>
             </div>
         }
 

@@ -1,0 +1,135 @@
+﻿@model Models.Resouces
+
+@{
+    ViewBag.Title = "ResDetails";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+}
+
+<h2>资源详情</h2>
+<hr />
+<form method="get" action="/Mannage/ResDetails">
+    <input type="hidden" id="ResoucesID" name="ResoucesID" value="@Model.ResoucesID" />
+    <div class="form-group">
+        发布时间：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.Releasetime" id="Releasetime" name="Releasetime" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        资源名称：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.Rname" id="Rname" name="Rname" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        资源描述：
+        <div class="col-md-10">
+            <textarea class="form-control" readonly="readonly" id="Rdescribe" name="Rdescribe">@Model.Rdescribe</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        需求积分：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.Rdemand" id="Rdemand" name="Rdemand" readonly="readonly" />
+        </div>
+    </div>
+    <input type="hidden" id="Reading" name="Reading" value="@Model.Reading" />
+    <div class="form-group">
+        所属类别：
+        <div class="col-md-10">
+            <input type="hidden" id="CategoryID" name="CategoryID" value="@Model.CategoryID" />
+            <input class="form-control" type="text" value="@Model.Category.CategoryName" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        所属标签：
+        <div class="col-md-10">
+            <input type="hidden" id="LableID" name="LableID" value="@Model.LableID" />
+            <input class="form-control" type="text" value="@Model.Lable.LableName" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        链接描述：
+        <div class="col-md-10">
+            <input type="hidden" id="LinkID" name="LinkID" value="@Model.LinkID" />
+            <input class="form-control" type="text" value="@Model.Link.Ldescribe" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        链接声明：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.Link.Lremarks" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        拥有图片：
+        <div class="col-md-10">
+            <input type="hidden" id="PictureID" name="PictureID" value="@Model.PictureID" />
+            @if (Model.Picture.Picture_a != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+            }
+            else if (Model.Picture.Picture_b != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_b" style="width:100px;height:100px" />
+            }
+            else if (Model.Picture.Picture_c != null && Model.Picture.Picture_b != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_b" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_c" style="width:100px;height:100px" />
+            }
+            else if (Model.Picture.Picture_d != null && Model.Picture.Picture_c != null && Model.Picture.Picture_b != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_b" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_c" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_d" style="width:100px;height:100px" />
+            }
+            else if (Model.Picture.Picture_e != null && Model.Picture.Picture_d != null && Model.Picture.Picture_c != null && Model.Picture.Picture_b != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_b" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_c" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_d" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_e" style="width:100px;height:100px" />
+            }
+            else
+            {
+                @:没有图片
+            }
+        </div>
+    </div>
+    <input type="hidden" id="UserID" name="UserID" value="@Model.UserID" />
+    <div class="form-group">
+        状态：
+        <div class="col-md-10">
+            <select class="form-control" id="Rstate" name="Rstate">
+                @if (Model.Rstate == 0)
+                {
+                    <option value="1">审核</option>
+                    <option value="0" selected="selected">通过</option>
+                    <option value="2">驳回</option>
+                }
+                else if (Model.Rstate == 1)
+                {
+                    <option value="1" selected="selected">审核</option>
+                    <option value="0">通过</option>
+                    <option value="2">驳回</option>
+                }
+                else
+                {
+                    <option value="1">审核</option>
+                    <option value="0">通过</option>
+                    <option value="2" selected="selected">驳回</option>
+                }
+
+            </select>
+        </div>
+    </div>
+    <p>
+        <a href="Resouces" class="btn btn-outline-success">返回上级列表</a>
+        <input type="submit" value="确认核实" class="btn btn-info" />
+    </p>
+</form>

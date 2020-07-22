@@ -18,6 +18,7 @@ namespace Models
         public Lable()
         {
             this.Resouces = new HashSet<Resouces>();
+            this.HotLable = new HashSet<HotLable>();
         }
     
         public int LableID { get; set; }
@@ -27,5 +28,7 @@ namespace Models
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Resouces> Resouces { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HotLable> HotLable { get; set; }
     }
 }

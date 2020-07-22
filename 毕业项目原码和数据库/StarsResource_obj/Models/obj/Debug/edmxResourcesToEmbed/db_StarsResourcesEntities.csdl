@@ -49,6 +49,7 @@
     <Property Name="LableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Category" Relationship="Self.FK__Lable__CategoryI__1ED998B2" FromRole="Lable" ToRole="Category" />
     <NavigationProperty Name="Resouces" Relationship="Self.FK__Resouces__LableI__2D27B809" FromRole="Lable" ToRole="Resouces" />
+    <NavigationProperty Name="HotLable" Relationship="db_StarsResourcesModel.FK__HotLable__LableI__3E1D39E1" FromRole="Lable" ToRole="HotLable" />
   </EntityType>
   <EntityType Name="Link">
     <Key>
@@ -95,6 +96,8 @@
     <NavigationProperty Name="Link" Relationship="Self.FK__Resouces__LinkID__2A4B4B5E" FromRole="Resouces" ToRole="Link" />
     <NavigationProperty Name="Picture" Relationship="Self.FK__Resouces__Pictur__2B3F6F97" FromRole="Resouces" ToRole="Picture" />
     <NavigationProperty Name="UserInfo" Relationship="Self.FK_Resouces_UserInfo" FromRole="Resouces" ToRole="UserInfo" />
+    <NavigationProperty Name="News" Relationship="db_StarsResourcesModel.FK__News__ResoucesID__40F9A68C" FromRole="Resouces" ToRole="News" />
+    <NavigationProperty Name="Recommend" Relationship="db_StarsResourcesModel.FK__Recommend__Resou__43D61337" FromRole="Resouces" ToRole="Recommend" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -296,5 +299,116 @@
       <End Role="UserInfo" EntitySet="UserInfo" />
       <End Role="Resouces" EntitySet="Resouces" />
     </AssociationSet>
+    <EntitySet Name="AdverPosition" EntityType="db_StarsResourcesModel.AdverPosition" />
+    <EntitySet Name="Advertisement" EntityType="db_StarsResourcesModel.Advertisement" />
+    <EntitySet Name="HotLable" EntityType="db_StarsResourcesModel.HotLable" />
+    <EntitySet Name="News" EntityType="db_StarsResourcesModel.News" />
+    <EntitySet Name="Recommend" EntityType="db_StarsResourcesModel.Recommend" />
+    <AssociationSet Name="FK__Advertise__Adver__47A6A41B" Association="db_StarsResourcesModel.FK__Advertise__Adver__47A6A41B">
+      <End Role="AdverPosition" EntitySet="AdverPosition" />
+      <End Role="Advertisement" EntitySet="Advertisement" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotLable__LableI__3E1D39E1" Association="db_StarsResourcesModel.FK__HotLable__LableI__3E1D39E1">
+      <End Role="Lable" EntitySet="Lable" />
+      <End Role="HotLable" EntitySet="HotLable" />
+    </AssociationSet>
+    <AssociationSet Name="FK__News__ResoucesID__40F9A68C" Association="db_StarsResourcesModel.FK__News__ResoucesID__40F9A68C">
+      <End Role="Resouces" EntitySet="Resouces" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Recommend__Resou__43D61337" Association="db_StarsResourcesModel.FK__Recommend__Resou__43D61337">
+      <End Role="Resouces" EntitySet="Resouces" />
+      <End Role="Recommend" EntitySet="Recommend" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="AdverPosition">
+    <Key>
+      <PropertyRef Name="AdverPositionID" />
+    </Key>
+    <Property Name="AdverPositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Position" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Advertisement" Relationship="db_StarsResourcesModel.FK__Advertise__Adver__47A6A41B" FromRole="AdverPosition" ToRole="Advertisement" />
+  </EntityType>
+  <EntityType Name="Advertisement">
+    <Key>
+      <PropertyRef Name="AdverID" />
+    </Key>
+    <Property Name="AdverID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Illustration" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Adverlink" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="AdverPositionID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AdverPosition" Relationship="db_StarsResourcesModel.FK__Advertise__Adver__47A6A41B" FromRole="Advertisement" ToRole="AdverPosition" />
+  </EntityType>
+  <EntityType Name="HotLable">
+    <Key>
+      <PropertyRef Name="HotLableID" />
+    </Key>
+    <Property Name="HotLableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LableID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Lable" Relationship="db_StarsResourcesModel.FK__HotLable__LableI__3E1D39E1" FromRole="HotLable" ToRole="Lable" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResoucesID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Resouces" Relationship="db_StarsResourcesModel.FK__News__ResoucesID__40F9A68C" FromRole="News" ToRole="Resouces" />
+  </EntityType>
+  <EntityType Name="Recommend">
+    <Key>
+      <PropertyRef Name="RecommendID" />
+    </Key>
+    <Property Name="RecommendID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResoucesID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Resouces" Relationship="db_StarsResourcesModel.FK__Recommend__Resou__43D61337" FromRole="Recommend" ToRole="Resouces" />
+  </EntityType>
+  <Association Name="FK__Advertise__Adver__47A6A41B">
+    <End Type="db_StarsResourcesModel.AdverPosition" Role="AdverPosition" Multiplicity="1" />
+    <End Type="db_StarsResourcesModel.Advertisement" Role="Advertisement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdverPosition">
+        <PropertyRef Name="AdverPositionID" />
+      </Principal>
+      <Dependent Role="Advertisement">
+        <PropertyRef Name="AdverPositionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotLable__LableI__3E1D39E1">
+    <End Type="db_StarsResourcesModel.Lable" Role="Lable" Multiplicity="1" />
+    <End Type="db_StarsResourcesModel.HotLable" Role="HotLable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lable">
+        <PropertyRef Name="LableID" />
+      </Principal>
+      <Dependent Role="HotLable">
+        <PropertyRef Name="LableID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__News__ResoucesID__40F9A68C">
+    <End Type="db_StarsResourcesModel.Resouces" Role="Resouces" Multiplicity="1" />
+    <End Type="db_StarsResourcesModel.News" Role="News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resouces">
+        <PropertyRef Name="ResoucesID" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="ResoucesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Recommend__Resou__43D61337">
+    <End Type="db_StarsResourcesModel.Resouces" Role="Resouces" Multiplicity="1" />
+    <End Type="db_StarsResourcesModel.Recommend" Role="Recommend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resouces">
+        <PropertyRef Name="ResoucesID" />
+      </Principal>
+      <Dependent Role="Recommend">
+        <PropertyRef Name="ResoucesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

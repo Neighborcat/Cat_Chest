@@ -116,5 +116,47 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AdverPosition">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.AdverPosition">
+        <MappingFragment StoreEntitySet="AdverPosition">
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="AdverPositionID" ColumnName="AdverPositionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Advertisement">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Advertisement">
+        <MappingFragment StoreEntitySet="Advertisement">
+          <ScalarProperty Name="AdverPositionID" ColumnName="AdverPositionID" />
+          <ScalarProperty Name="Adverlink" ColumnName="Adverlink" />
+          <ScalarProperty Name="Illustration" ColumnName="Illustration" />
+          <ScalarProperty Name="AdverID" ColumnName="AdverID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotLable">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.HotLable">
+        <MappingFragment StoreEntitySet="HotLable">
+          <ScalarProperty Name="LableID" ColumnName="LableID" />
+          <ScalarProperty Name="HotLableID" ColumnName="HotLableID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="ResoucesID" ColumnName="ResoucesID" />
+          <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recommend">
+      <EntityTypeMapping TypeName="db_StarsResourcesModel.Recommend">
+        <MappingFragment StoreEntitySet="Recommend">
+          <ScalarProperty Name="ResoucesID" ColumnName="ResoucesID" />
+          <ScalarProperty Name="RecommendID" ColumnName="RecommendID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

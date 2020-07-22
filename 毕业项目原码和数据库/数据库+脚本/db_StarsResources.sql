@@ -127,3 +127,34 @@ ResoucesID int Foreign key references Resouces(ResoucesID),
 UserID int Foreign key references UserInfo(UserID)
 )
 select top 7* from Resouces ORDER BY Reading DESC
+
+USE [db_StarsResources]
+GO
+
+create table Advertisement--广告内容
+(
+AdverID int primary key identity(1,1),
+Illustration varchar(200) not null,
+Adverlink varchar(400) not null,
+AdverPositionID int Foreign key references AdverPosition(AdverPositionID) not null, 
+)
+create table AdverPosition--广告位置
+(
+AdverPositionID int primary key identity(1,1),
+Position varchar(200) not null,
+)
+create table HotLable--最热标签推荐
+(
+HotLableID int primary key identity(1,1),
+LableID int Foreign key references Lable(LableID) not null,
+)
+create table News--最新推荐
+(
+NewsID int primary key identity(1,1),
+ResoucesID int Foreign key references Resouces(ResoucesID) not null,
+)
+create table Recommend--推荐
+(
+RecommendID int primary key identity(1,1),
+ResoucesID int Foreign key references Resouces(ResoucesID) not null,
+)

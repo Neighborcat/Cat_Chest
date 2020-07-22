@@ -5,7 +5,7 @@
 @using Models;
 @{
 
-    Administrators adm = Session["result"] as Administrators;
+    Administrators adm = Session["Admin"] as Administrators;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -35,39 +35,41 @@
             </div>
             <div class="sidebar-inner niceScrollleft" tabindex="5000" style="overflow: hidden; outline: none;">
                 <div id="sidebar-menu" class="active">
-                    @if (Session["result"] != null && adm.Jurisdiction == 3)
+                    @if (Session["Admin"] != null && adm.Jurisdiction == 3)
                     {
                         <ul>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><span>用户模块</span></a>
+                                <a href="javascript:void(0);"><span>用户模块</span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="/Mannage/AddUser">新增用户</a></li>
                                     <li><a href="/Mannage/Users">浏览用户</a></li>
                                 </ul>
                             </li>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><span>资源模块 </span><span class="float-right"></span></a>
+                                <a href="javascript:void(0);"><span>资源模块 </span><span class="float-right"></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="/Mannage/AddRes">添加资源</a></li>
                                     <li><a href="/Mannage/Resouces">浏览资源</a></li>
                                 </ul>
                             </li>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><span>评论模块 </span><span class="float-right"></span></a>
+                                <a href="javascript:void(0);"><span>评论模块 </span><span class="float-right"></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="/Mannage/RComment">资源评论管理</a></li>
                                 </ul>
                             </li>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><span>广告模块 </span><span class="float-right"></span></a>
+                                <a href="javascript:void(0);"><span>广告模块 </span><span class="float-right"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="/Mannage/Advertisement">已有广告</a></li>
-                                    <li><a href="/Mannage/EditAdver">修改广告</a></li>
+                                    <li><a href="#">已有广告</a></li>
+                                    <li><a href="#">修改广告</a></li>
+                                    @*<li><a href="/Mannage/Advertisement">已有广告</a></li>
+                        <li><a href="/Mannage/EditAdver">修改广告</a></li>*@
                                 </ul>
                             </li>
                         </ul>
                     }
-                    else if (Session["result"] != null && adm.Jurisdiction == 2)
+                    else if (Session["Admin"] != null && adm.Jurisdiction == 2)
                     {
                         <ul>
                             <li class="has_sub">
@@ -85,7 +87,7 @@
                             </li>
                         </ul>
                     }
-                    else if (Session["result"] != null && adm.Jurisdiction == 1)
+                    else if (Session["Admin"] != null && adm.Jurisdiction == 1)
                     {
 
                         <ul>
@@ -99,13 +101,15 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><span>广告模块 </span><span class="float-right"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="/Mannage/Advertisement">已有广告</a></li>
-                                    <li><a href="/Mannage/EditAdver">修改广告</a></li>
+                                    <li><a href="#">已有广告</a></li>
+                                    <li><a href="#">修改广告</a></li>
+                                    @*<li><a href="/Mannage/Advertisement">已有广告</a></li>
+                                        <li><a href="/Mannage/EditAdver">修改广告</a></li>*@
                                 </ul>
                             </li>
                         </ul>
                     }
-                    else if (Session["result"] != null && adm.Jurisdiction == 0)
+                    else if (Session["Admin"] != null && adm.Jurisdiction == 0)
                     {
                         <ul>
                             <li class="has_sub">
@@ -123,7 +127,7 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><span>广告模块 </span><span class="float-right"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="/Mannage/Advertisement">已有广告</a></li>
+                                    <li><a href="#">已有广告</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -144,15 +148,15 @@
         <div class="content-page">
             <div class="content">
                 <div class="topbar">
-                    <nav class="navbar-custom" style="background-color:#6eadaa">
+                    <nav class="navbar-custom" style="background-color:#6eadaa;">
                         <ul class="list-inline float-right mb-0">
-                            @if (Session["result"] != null)
+                            @if (Session["Admin"] != null)
                             {
-                                <li class="list-inline-item dropdown notification-list text-white"><a href="#">@adm.LoginName</a></li>
+                                <li class="list-inline-item dropdown notification-list text-white">欢迎~ @adm.LoginName</li>
                             }
                             else
                             {
-                                <li class="list-inline-item dropdown notification-list text-white"><a href="#">点击头像进行登录</a></li>
+                                <li class="list-inline-item dropdown notification-list text-white">点击头像进行登录</li>
                             }
 
                             <li class="list-inline-item dropdown notification-list">
@@ -160,7 +164,7 @@
                                     <img src="~/Content/Header/管理员.jpg" alt="user" class="rounded-circle" />
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                                    @if (Session["result"] != null)
+                                    @if (Session["Admin"] != null)
                                     {
                                         <div class="dropdown-item noti-title"><h5>欢迎登录</h5></div>
                                         <a class="dropdown-item" href="~/Mannage/Exit">注销</a>

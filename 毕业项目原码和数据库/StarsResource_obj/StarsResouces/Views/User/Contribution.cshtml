@@ -5,13 +5,18 @@
     List<Lable> lables = ViewBag.lables;
 }
 @using Models
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<style>
+    .error {
+    color:red;
+    }
+</style>
+
 <div style="margin-top:40px">
-    <form method="post" action="/User/Contribution" enctype="multipart/form-data">
-        @*资源内容*@    
+    <form method="post" action="/User/Contribution" enctype="multipart/form-data" id="form">
+        @*资源内容*@
         <div>
             <label>资源名称</label>
-            <input type="text" class="form-control" name="Rname"/>
+            <input type="text" class="form-control" name="Rname" id="Rname" />
             <div class="form-group">
                 <label for="Rdescribe">资源描述(限500字)</label>
                 <textarea class="form-control" name="Rdescribe" id="Rdescribe" rows="3"></textarea>
@@ -38,24 +43,26 @@
         @*链接*@
         <div class="form-group">
             <label>链接描述（100字）</label>
-            <input type="text" class="form-control" id="Ldescribe" name="Ldescribe"/>
+            <input type="text" class="form-control" id="Ldescribe" name="Ldescribe" />
         </div>
         <div class="form-group">
             <label>链接地址</label>
-            <input type="text" class="form-control" id="Linkline" name="Linkline"/>
+            <input type="text" class="form-control" id="Linkline" name="Linkline" />
         </div>
         <div class="form-group">
             <label>链接备注(50字)</label>
-            <input type="text" class="form-control" id="Lremarks" name="Lremarks"/>
+            <input type="text" class="form-control" id="Lremarks" name="Lremarks" />
         </div>
         @*图片*@
         <div class="form-group">
             <label for="FileLable">选择资源图片(请最多只选取五个文件超出无效！)</label>
             <input type="file" class="form-control-file btn-lg" id="Picture" name="Picture" multiple="multiple">
         </div>
-        <input type="submit" class="btn btn-success btn-lg" name="submit" id="submit" value="提交审核"  style="float:right"/>
+        <input type="submit" class="btn btn-success btn-lg" name="submit" id="submit" value="提交审核" style="float:right" />
     </form>
 </div>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
 <script type="text/javascript">
     var CategoryNames = ['请选择类别', '福利资源', '手机资源', '学习资源', '建站资源', 'PC端资源'];
     var LableNames = [['请选择标签'],
@@ -87,7 +94,28 @@
         }
         LableName.options[0].selected = true;
     }
-
+    $("#form").validate({
+        rules: {
+            Rname: { required: true, maxlength: 30 },
+            Rdescribe: { required: true, maxlength: 500 },
+            Rdemand: { required: true },
+            CategoryName: { required: true },
+            LableName: { required: true },
+            Ldescribe: { required: true, maxlength: 100 },
+            Linkline: { required: true },
+            Lremarks: { required: true, maxlength: 50 },
+        },
+        messages: {
+            Rname: { required: "*内容非空", maxlength: "账号输入内容不能超过30字" },
+            Rdescribe: { required: "*内容非空", maxlength: "账号输入内容不能超过500字" },
+            Rdemand: { required: "*内容非空" },
+            CategoryName: { required: "*内容非空" },
+            LableName: { required: "*内容非空" },
+            Ldescribe: { required: "*内容非空", maxlength: "账号输入内容不能超过100字" },
+            Linkline: { required: "*内容非空" },
+            Lremarks: { required: "*内容非空", maxlength: "账号输入内容不能超过50字" },
+        }
+    })
     $(function () {
         $("#submit").click(function () {
             //通过FormData构造函数创建一个空对象，存储格式为键，值

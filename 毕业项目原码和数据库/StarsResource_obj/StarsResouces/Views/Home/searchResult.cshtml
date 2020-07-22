@@ -14,13 +14,13 @@
             <a href="/Home/Details?id=@item.ResoucesID" style="text-decoration:none;display:block;overflow:hidden" class="asb">
                 <dl style="background-color: whitesmoke;width: 100%;height: 160px;text-align:left;overflow:hidden">
                     <dt>
-                        @if (item.Picture.Picture_a == "null")
+                        @if (item.Picture.Picture_a != null)
                         {
-                            <img src="~/Content/Resouces/Img/notfound.jpg" style="width:40%;height:160px;float:left" />
+                            <img src="~/Content/Resouces/Images/@item.Picture.Picture_a" style="width:40%;height:160px;float:left" />
                         }
                         else
                         {
-                            <img src="~/Content/Resouces/Images/@item.Picture.Picture_a" style="width:40%;height:160px;float:left" />
+                            <img src="~/Content/Resouces/Img/notfound.jpg" style="width:40%;height:160px;float:left" />
                         }
                     </dt>
                     <dd style="height:120px;padding:6px;overflow:hidden;color:palevioletred">

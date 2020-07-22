@@ -7,26 +7,46 @@
 @using Models
 @using PagedList.Mvc
 @model PagedList.PagedList<Resouces>
+@{
+    List<Advertisement> alist = Session["a"] as List<Advertisement>;
+    List<Recommend> rlist = Session["Recommend"] as List<Recommend>;
+}
 <style>
     .asb:hover {
-        border-radius: 10px;
         transition: all 420ms;
         box-shadow: 0px 0px 10px #ff6a00;
     }
+
+    #centents {
+        background-color: ghostwhite;
+        border-bottom: 1px solid #d0cfcf;
+        width: 100%;
+        height: 40px;
+        margin-top: 5px;
+        color: #808080;
+    }
+
+        #centents:hover {
+            transition: all 320ms;
+            background-color: #808080;
+            border-top: ghostwhite;
+            color: #FFFFFF;
+        }
 </style>
 <div style="border:1px solid black;width:100%;height:100px;background-color:black">
-    <a href="#">
-        <img src="~/Content/GuangGao/music.gif" style="width:40%;height:100%;margin:0 auto" />
+    <a href="/Home/Loading?id=6" target="_blank">
+        <img src="~/Content/GuangGao/@alist[2].Illustration" style="width:40%;height:100%;margin:0 auto" />
         <label style="color:white;font-family:YouYuan">不是广告是情怀!这些曾经脍炙人口的广告歌曲,你听过几首?</label>
     </a>
 </div>
+<div style="font-size:20px;color:white">手机资源</div>
 <div class="row" style="margin-top:20px">
-    <div class="col-9 row">
+    <div class="col-9 row" style="min-height:800px">
         @foreach (var item in Model)
         {
             if (Model.Count() < 8)
             {
-                <div style="width:100%;height:200px;background-color: whitesmoke;" class="asb">
+                <div style="width:100%;height:200px;background-color: whitesmoke;margin-top:10px" class="asb">
                     <a href="/Home/Details?id=@item.ResoucesID" style="text-decoration: none;">
                         <dl style="width: 100%;height: 200px;text-align:left;overflow:hidden">
                             <dt>
@@ -68,7 +88,7 @@
             {
                 <div class="col-md-6">
                     <a href="/Home/Details?id=@item.ResoucesID" style="text-decoration:none;display:block" class="asb">
-                        <dl style="background-color: whitesmoke;width: 100%;height: 160px;text-align:left;overflow:hidden">
+                        <dl style="background-color: whitesmoke;width: 100%;height:160px;text-align:left;overflow:hidden">
                             <dt>
                                 @if (item.Picture.Picture_a != null)
                                 {
@@ -117,8 +137,9 @@
     @*//右边部分*@
     <div class="col-3">
         <div class="lable">
-            <a href="/Home/ShouJi?id=39" class="btn btn-outline-success btn-sm">开放下载</a>
-            <a href="/Home/ShouJi?id=40" class="btn btn-outline-danger btn-sm">免费电影</a>
+            <a href="/Home/ShouJi?id=39" class="btn btn-outline-success btn-sm">安卓</a>
+            <a href="/Home/ShouJi?id=40" class="btn btn-outline-danger btn-sm">苹果</a>
+            <a href="/Home/ShouJi?id=41" class="btn btn-outline-danger btn-sm">破解软件</a>
         </div>
         <form method="post" action="/Home/Index">
             <div class="input-group" style="padding-top:18px">
@@ -136,14 +157,18 @@
         <div style="width:100%;height:420px;border:1px solid black;background-color:whitesmoke;margin-top:25px">
             <h5 style="padding-left:15px;padding-top:10px;font-family:STXinwei">推荐文章</h5>
             <div class="dropdown-divider"></div>
-            @for (int i = 0; i < 8; i++)
+            @for (int i = 0; i < rlist.Count(); i++)
             {
-                <div style="background-color:blueviolet;width:100%;height:40px;margin-top:5px"></div>
+                <a href="/Home/Details?id=@rlist[i].ResoucesID" style="text-decoration:none">
+                    <div class="text-center" id="centents">
+                        @rlist[i].Resouces.Rname
+                    </div>
+                </a>
             }
         </div>
         <div style="border:1px solid black;width:100%;height:220px;background-color:whitesmoke;margin-top:20px;text-align:center">
-            <a href="#">
-                <img src="~/Content/GuangGao/tiktalk.gif" style="width:100%;height:180px" />
+            <a href="/Home/Loading?id=7" target="_blank">
+                <img src="~/Content/GuangGao/@alist[3].Illustration" style="width:100%;height:180px" />
                 <label style="color:cornflowerblue;font-family:STCaiyun">抖音记录美好生活~</label>
             </a>
         </div>

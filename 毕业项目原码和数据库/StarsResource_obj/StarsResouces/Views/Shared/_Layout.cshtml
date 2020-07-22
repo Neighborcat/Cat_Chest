@@ -5,6 +5,7 @@
     {
         Session["uid"] = infos.UserID;
     }
+    List<Advertisement> alist = Session["a"] as List<Advertisement>;
 }
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,8 @@
     <link rel="Shortcut Icon" href="~/Content/Layout/Titile.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="~/Content/PagedList.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery.validate.min.js"></script>
+    @*<script src="~/Scripts/jquery.validate.min.js"></script>*@
+    <script src="~/Scripts/jquery.validate.js"></script>
     <style>
         body {
             background-repeat: no-repeat;
@@ -193,7 +195,7 @@
                                     <svg t="1592210331443" class="icon" viewBox="0 0 1126 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2970" width="16" height="16"><path d="M792.576 379.392a25.6 25.6 0 0 0 25.2928 25.8048h283.2384A25.6 25.6 0 0 0 1126.4 379.392a25.6 25.6 0 0 0-25.2928-25.8048h-283.2384a25.6 25.6 0 0 0-25.344 25.8048z m303.9232 80.7424H761.856c-16.5376 0-29.9008 11.6224-29.9008 25.7536 0 14.1824 13.312 25.7536 29.9008 25.7536h334.6432c16.4864 0 29.9008-11.5712 29.9008-25.7536 0-14.1312-13.4144-25.7536-29.9008-25.7536z m4.608 106.496h-283.2384a25.6 25.6 0 0 0-25.344 25.7536 25.6 25.6 0 0 0 25.344 25.7536h283.2384A25.6 25.6 0 0 0 1126.4 592.384a25.6 25.6 0 0 0-25.2928-25.8048zM543.0272 1024H341.6576C150.8352 1024 0 1024 0 923.648v-20.1216c0-188.16 153.2928-341.1968 341.7088-341.1968h201.2672c188.416 0 341.76 153.0368 341.76 341.1968v20.0704C884.6848 1024 726.3232 1024 542.976 1024z m-203.1616-405.1456c-158.464 0-287.4368 128.4096-287.4368 286.208v20.48c0 40.9088 166.0928 40.9088 287.4368 40.9088h204.9536c100.4544 0 287.4368 0 287.4368-40.96v-20.3776c0-157.8496-128.9728-286.208-287.4368-286.208H339.8656z m92.416-76.7488a271.4112 271.4112 0 0 1-271.2064-271.0528A271.36 271.36 0 0 1 432.2816 0a271.36 271.36 0 0 1 271.2064 271.0528 271.4624 271.4624 0 0 1-271.2064 271.0528z m-215.3472-271.872c0 118.1696 96.6144 214.3232 215.3472 214.3232 118.784 0 215.3984-96.1536 215.3984-214.3232 0-118.2208-96.6144-214.3232-215.3984-214.3232S216.9344 152.0128 216.9344 270.2336z" p-id="2971" fill="#cdcdcd"></path></svg>
                                 </span>
                             </div>
-                            <input type="text" class="form-control" placeholder="注册账号" aria-label="LoginName" id="LoginNames" name="LoginName" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" placeholder="注册账号" id="LoginNames" name="LoginNames">
                         </div>
                         @*密码*@
                     <div class="input-group mb-3">
@@ -202,8 +204,7 @@
                                 <svg t="1592210398974" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4083" width="16" height="16"><path d="M807.936 336.384h-12.288c-5.12-66.56-33.792-128.512-81.92-176.64C659.968 106.496 589.312 76.8 514.56 76.8c-147.968 0-269.312 114.688-280.576 259.072h-12.288c-78.848 0-143.36 64.512-143.36 143.36v327.168c0 78.848 64.512 143.36 143.36 143.36h586.24c78.848 0 143.36-64.512 143.36-143.36V479.744c0-79.36-64.512-143.36-143.36-143.36zM514.56 158.72c53.248 0 102.912 20.992 140.8 58.88 32.768 32.768 52.736 74.24 57.344 118.784H315.904C327.168 236.544 412.16 158.72 514.56 158.72z m354.816 647.68c0 33.792-27.648 61.44-61.44 61.44H221.696c-33.792 0-61.44-27.648-61.44-61.44V479.744c0-33.792 27.648-61.44 61.44-61.44h586.752c33.792 0 61.44 27.648 61.44 61.44v326.656z" fill="#cdcdcd" p-id="4084"></path><path d="M514.56 507.904c-22.528 0-40.96 18.432-40.96 40.96v158.72c0 22.528 18.432 40.96 40.96 40.96s40.96-18.432 40.96-40.96v-158.72c0-22.528-18.432-40.96-40.96-40.96z" fill="#cdcdcd" p-id="4085"></path></svg>
                             </span>
                         </div>
-                        <input type="password" class="form-control" placeholder="输入密码" id="LoginPwds" name="LoginPwd" aria-label="LoginPwd" aria-describedby="basic-addon1"><br />
-                        <label id="LoginPwd" class="error" for="LoginPwd"></label>
+                        <input type="password" class="form-control" placeholder="输入密码" id="LoginPwds" name="LoginPwds"><br />
                     </div>
                         @*确认密码*@
                         <div class="input-group mb-3">
@@ -212,10 +213,8 @@
                                     <svg t="1592212082001" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5775" width="16" height="16"><path d="M718.77 960H305.23c-66.51 0-120.62-54.12-120.62-120.62V502.91c0-66.5 54.11-120.62 120.62-120.62h383.52V275.21c0-97.46-79.29-176.75-176.75-176.75s-176.75 79.29-176.75 176.75v38.89c0 9.52-7.72 17.23-17.23 17.23s-17.23-7.71-17.23-17.23v-38.89C300.79 158.75 395.54 64 512 64s211.21 94.75 211.21 211.21v107.17c64.46 2.34 116.17 55.51 116.17 120.53v336.47c0 66.5-54.1 120.62-120.61 120.62zM305.23 416.76c-47.5 0-86.15 38.65-86.15 86.15v336.47c0 47.5 38.65 86.15 86.15 86.15h413.54c47.5 0 86.15-38.65 86.15-86.15V502.91c0-47.5-38.65-86.15-86.15-86.15H305.23zM512 860.69c-104.51 0-189.54-85.03-189.54-189.52 0-104.53 85.03-189.56 189.54-189.56s189.54 85.03 189.54 189.56c0 104.49-85.03 189.52-189.54 189.52z m0-344.62c-85.51 0-155.08 69.58-155.08 155.09 0 85.5 69.57 155.06 155.08 155.06s155.08-69.56 155.08-155.06c0-85.51-69.57-155.09-155.08-155.09z m-25.11 227.94c-4.57 0-8.95-1.82-12.18-5.05l-61.05-61.06c-6.73-6.73-6.73-17.63 0-24.37s17.63-6.73 24.37 0l48.87 48.88 99.08-99.08c6.73-6.73 17.63-6.73 24.37 0s6.73 17.63 0 24.37L499.08 738.96a17.251 17.251 0 0 1-12.19 5.05z" p-id="5776" fill="#cdcdcd"></path></svg>
                                 </span>
                             </div>
-                            <input type="password" class="form-control" placeholder="确认密码" id="TrueLoginPwds" name="TrueLoginPwd" aria-label="TrueLoginPwd" aria-describedby="basic-addon1"><br />
-                            <label id="TrueLoginPwd" class="error" for="TrueLoginPwd"></label>
+                            <input type="password" class="form-control" placeholder="确认密码" id="TrueLoginPwds" name="TrueLoginPwds" /><br />
                         </div>
-
                         @*邮箱*@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -223,7 +222,7 @@
                                     <svg t="1592212105636" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6730" width="16" height="16"><path d="M938.666667 853.333333 85.333333 853.333333c-47.061333 0-85.333333-38.272-85.333333-85.333333L0 256c0-47.061333 38.272-85.333333 85.333333-85.333333l853.333333 0c47.061333 0 85.333333 38.272 85.333333 85.333333l0 512C1024 815.061333 985.728 853.333333 938.666667 853.333333zM85.333333 213.333333c-23.530667 0-42.666667 19.136-42.666667 42.666667l0 512c0 23.530667 19.136 42.666667 42.666667 42.666667l853.333333 0c23.530667 0 42.666667-19.136 42.666667-42.666667L981.333333 256c0-23.530667-19.136-42.666667-42.666667-42.666667L85.333333 213.333333z" p-id="6731" fill="#cdcdcd"></path><path d="M512 622.741333 137.749333 380.586667c-9.898667-6.421333-12.736-19.605333-6.336-29.504s19.605333-12.714667 29.504-6.336L512 571.925333 863.082667 344.746667c9.898667-6.378667 23.104-3.562667 29.504 6.336s3.562667 23.082667-6.336 29.504L512 622.741333z" p-id="6732" fill="#cdcdcd"></path><path d="M128.021333 725.333333c-6.890667 0-13.674667-3.328-17.770667-9.493333-6.549333-9.813333-3.904-23.04 5.909333-29.589333l192-128c9.813333-6.549333 23.061333-3.904 29.589333 5.909333 6.549333 9.813333 3.904 23.04-5.909333 29.589333l-192 128C136.192 724.16 132.074667 725.333333 128.021333 725.333333z" p-id="6733" fill="#cdcdcd"></path><path d="M895.978667 725.333333c-4.053333 0-8.170667-1.173333-11.818667-3.584l-192-128c-9.813333-6.549333-12.458667-19.776-5.909333-29.589333 6.528-9.813333 19.754667-12.458667 29.589333-5.909333l192 128c9.813333 6.549333 12.458667 19.776 5.909333 29.589333C909.653333 722.005333 902.869333 725.333333 895.978667 725.333333z" p-id="6734" fill="#cdcdcd"></path></svg>
                                 </span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Email" id="E_mails" name="E_mail" aria-label="E_mail" aria-describedby="basic-addon1">
+                            <input type="email" class="form-control" placeholder="Email" id="E_mails" name="E_mails" />
                         </div>
                         @*验证码*@
                         <div class="input-group">
@@ -263,14 +262,16 @@
         rules: {
             LoginNames: { required: true, maxlength: 30 },
             LoginPwds: { required: true },
-            TrueLoginPwds: { required: true, equalTo: "#LoginPwd" },
-            E_mails: { required: true}
+            TrueLoginPwds: { required: true, equalTo: "#LoginPwds" },
+            E_mails: { required: true, email: true },
+            validateCode: { required: true }
         },
         messages: {
             LoginNames: { required: "*账号必填", maxlength: "账号输入内容不能超过30字" },
-            LoginPwds: { required: "*密码必填", checkPwd: "请输入有效的密码：6-15位内的数字"},
+            LoginPwds: { required: "*密码必填", checkPwd: "请输入有效的密码：6-15位内的字符数字"},
             TrueLoginPwds: { required: "确认密码必填", equalTo: "前后两次密码不一致" },
-            E_mails: { required: "邮箱必填", checkEmail:"请输入有效的邮箱格式"}
+            E_mails: { required: "邮箱必填", email: "请输入有效的邮箱格式" },
+            validateCode: { required: "验证码非空！" }
         }
     })
     $.validator.addMethod("checkPwd", function (value, e) {
@@ -278,7 +279,7 @@
         return reg.test(value);
     })
     $.validator.addMethod("checkEmail", function (value, e) {
-        var reg =/^[A-Z0-9a-z._%+-]+[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$/;
+        var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
         return reg.test(value);
     })
 

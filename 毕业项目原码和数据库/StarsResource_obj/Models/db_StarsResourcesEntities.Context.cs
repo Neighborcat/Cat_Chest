@@ -35,5 +35,10 @@ namespace Models
         public virtual DbSet<Resouces> Resouces { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<AdverPosition> AdverPosition { get; set; }
+        public virtual DbSet<Advertisement> Advertisement { get; set; }
+        public virtual DbSet<HotLable> HotLable { get; set; }
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<Recommend> Recommend { get; set; }
     }
 }

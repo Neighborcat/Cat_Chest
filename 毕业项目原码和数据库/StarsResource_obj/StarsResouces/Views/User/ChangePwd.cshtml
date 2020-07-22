@@ -3,23 +3,44 @@
     ViewBag.Title = "修改密码";
     Layout = "~/Views/Shared/_LayoutUserMain.cshtml";
 }
-    <form method="post" action="/User/ChangePwd">
+<style>
+    .error {
+        color:red;
+    }
+</style>
+    <form method="post" action="/User/ChangePwd" id="form">
         <div style="margin-top:50px">
             <div class="form-group">
                 <label class="form-text">请输入原密码：</label>
-                <input type="password" placeholder="原密码" class="form-control" />
+                <input type="password" id="OrldLoginPwd" name="OrldLoginPwd" placeholder="原密码" class="form-control" />
+                <label style="color:red">@TempData["fail"]</label>
             </div>
             <div class="form-group">
                 <label class="form-text">请输入新密码：</label>
-                <input type="password" name="LoginPwd" placeholder="新密码" class="form-control" />
+                <input type="password" id="newLoginPwd" name="newLoginPwd" placeholder="新密码" class="form-control" />
             </div>
             <div class="form-group">
                 <label class="form-text">请确认新密码：</label>
-                <input type="password" placeholder="确认新密码" class="form-control" />
+                <input type="password" id="LoginPwd" name="LoginPwd" placeholder="确认新密码" class="form-control" />
             </div>
             <a href="#" style="float:right">如果您忘记了密码，请点击这里</a>
         </div>
         <input type="submit" value="保存" class="btn btn-info" />
     </form>
-
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $("#form").validate({
+            rules: {
+                OrldLoginPwd: { required: true, maxlength: 30 },
+                newLoginPwd: { required: true },
+                LoginPwd: { required: true, equalTo: "#newLoginPwd" },
+            },
+            messages: {
+                OrldLoginPwd: { required: "*原密码非空", maxlength: "账号输入内容不能超过30字" },
+                newLoginPwd: { required: "*密码必填"},
+                LoginPwd: { required: "*确认密码必填", equalTo: "前后两次密码不一致" },
+            }
+        })
+    </script>
 

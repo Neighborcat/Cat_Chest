@@ -1,0 +1,84 @@
+﻿@model Models.UserInfo
+
+@{
+    ViewBag.Title = "UserDetails";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+}
+
+<h2>用户信息</h2>
+<hr />
+<form method="get" action="/Mannage/UserDetails">
+    <input type="hidden" id="UserID" name="UserID" value="@Model.UserID" />
+    <div class="form-group">
+        头像：
+        <div class="col-md-10">
+            <input type="hidden" id="UserPicture" name="UserPicture" value="@Model.UserPicture" />
+            <img src="/Content/icon/@Model.UserPicture" style="width:125px;height:125px;border:1px solid #d1cece" />
+        </div>
+    </div>
+    <div class="form-group">
+        注册时间：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.RegistrationTime" id="RegistrationTime" name="RegistrationTime" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        登录名：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.LoginName" id="LoginName" name="LoginName" readonly="readonly" />
+        </div>
+    </div>
+    <input type="hidden" id="LoginPwd" name="LoginPwd" value="@Model.LoginPwd" />
+    <div class="form-group">
+        E_mail：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.E_mail" id="E_mail" name="E_mail" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        用户名：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.UserName" id="UserName" name="UserName" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        性别：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.UserSex" id="UserSex" name="UserSex" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        用户描述：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.Userdescribe" id="Userdescribe" name="Userdescribe" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        用户积分：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.integral" id="integral" name="integral" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        用户状态：
+        <div class="col-md-10">
+            <select class="form-control" id="UserState" name="UserState">
+                @if (Model.UserState == 0)
+                {
+                    <option value="0" selected="selected">可用</option>
+                    <option value="1">封禁</option>
+                }
+                else
+                {
+                    <option value="0">可用</option>
+                    <option value="1" selected="selected">封禁</option>
+                }
+            </select>
+        </div>
+    </div>
+    <p>
+        <a href="Users" class="btn btn-outline-success">返回上级列表</a>
+        <input type="submit" value="确认核实" class="btn btn-info" />
+    </p>
+</form>
+

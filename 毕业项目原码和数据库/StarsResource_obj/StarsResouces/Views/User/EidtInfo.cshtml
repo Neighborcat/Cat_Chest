@@ -8,10 +8,12 @@
         <div>
             <div class="form-group">
                 <label>头像：</label>
-                <img src="~/Content/icon/@Model.UserPicture" style="width:80px;height:80px" class="img-thumbnail"/>
+                <img src="~/Content/icon/@Model.UserPicture" style="width:80px;height:80px" class="img-thumbnail" />
                 <input type="file" class="form-control-fil" id="UserPicture" name="UserPicture">
-                <input type="hidden" name="UserPicture" value="@Model.UserPicture"/>
+                <input type="hidden" name="UserPicture" value="@Model.UserPicture" />
                 <input type="hidden" name="UserID" value="@Model.UserID" />
+                <input type="hidden" name="RegistrationTime" value="@Model.RegistrationTime" />
+                <input type="hidden" name="integral" value="@Model.integral" />
             </div>
             <div class="form-group">
                 <label class="">用户名：</label>

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "ComDetails";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+}
+@using Models;
+@model List<Comment>
+    @{ 
+        int rid = Convert.ToInt32(Session["rid"]);
+    }
+@foreach (var item in Model)
+{
+    <div style="width:100%;height:100px;background-color:antiquewhite;border-radius:5px;margin-top:5px">
+        <div style="padding-left:10px;padding-top:10px"><lable style="font-size:18px">评论内容：</lable>@item.Content</div>
+        <div class="row" style="padding-left:10px;padding-top:10px">
+            <div class="col-4">
+                <lable style="font-size:16px">资源名称：</lable>
+                <a href="#" target="_blank">@item.Resouces.Rname</a>
+            </div>
+            <div class="col-4">
+                <lable style="font-size:16px">发布者ID：</lable>
+                <a href="#" target="_blank">@item.UserID</a>
+            </div>
+            <div class="col-4">
+                <lable style="font-size:16px">发布者名称：</lable>
+                <a href="#" target="_blank">@item.UserInfo.UserName</a>
+            </div>
+        </div>
+        <a href="/Mannage/RemoveCom?id=@item.ComID" class="btn btn-danger" style="position:relative;left:88%;top:-40px" onclick="return confirm('确定删除？')">删除</a>
+    </div>
+}
+@*分页*@
+<div class="row">
+    <div class="col-lg-8 form-inline">
+        <label>总共 @ViewBag.tatalCount 行</label>
+        <lable>选择显示的行数：</lable>
+        <select name="pageCount" id="pageCount" onchange="window.location = this.value;">
+            @{
+                int[] count = new[] { 5, 10, 20, 30, 40, 50 };
+            }
+            @foreach (var item in count)
+            {
+                if (item.Equals(ViewBag.pageCount))
+                {
+                    <option selected value="~/Mannage/ComDetails?id=@rid&pageIndex=1&pageCount=@item">@item</option>
+                }
+                else
+                {
+                    <option value="~/Mannage/ComDetails?id=@rid&pageIndex=1&pageCount=@item">@item</option>
+                }
+
+            }
+
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="~/Mannage/ComDetails?id=@rid&pageIndex=1&pageCount=@ViewBag.pageCount">首页</a></li>
+                @if (ViewBag.pageIndex > 1)
+                {
+                    <li class="page-item"><a class="page-link" href="~/Mannage/ComDetails?id=@rid&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a></li>
+
+                }
+                else
+                {
+                    <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+                }
+                <li class="page-item">
+                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                </li>
+                @if (ViewBag.pageIndex < ViewBag.tatalPage)
+                {
+                    <li class="page-item"><a class="page-link" href="~/Mannage/ComDetails?id=@rid&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a></li>
+
+                }
+                else
+                {
+                    <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
+                }
+
+                <li class="page-item"><a class="page-link" href="~/Mannage/ComDetails?id=@rid&pageIndex=@ViewBag.tatalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

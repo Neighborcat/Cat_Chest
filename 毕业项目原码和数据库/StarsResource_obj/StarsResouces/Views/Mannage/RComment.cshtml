@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Models.Resouces>
+
+@{
+    ViewBag.Title = "RComment";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+}
+@using Models;
+<table class="table table-active table-bordered table-hover table-striped">
+    <tr style="background-color:black;color:white">
+        <th>
+            资源名称
+        </th>
+        <th>
+            阅览量
+        </th>
+        <th>
+            类别
+        </th>
+        <th>
+            标签
+        </th>
+        <th>
+            发布者
+        </th>
+        <th>
+            评论数量
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reading)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lable.LableName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserInfo.LoginName)
+            </td>
+            <td>
+                <label>@item.Comment.Count()</label>
+            </td>
+            <td>
+                <a href="/Mannage/ComDetails?id=@item.ResoucesID" class="btn btn-primary">查看评论</a>
+            </td>
+        </tr>
+    }
+</table>
+@*分页*@
+<div class="row">
+    <div class="col-lg-8 form-inline">
+        <label>总共 @ViewBag.tatalCount 行</label>
+        <lable>选择显示的行数：</lable>
+        <select name="pageCount" id="pageCount" onchange="window.location = this.value;">
+            @{
+                int[] count = new[] { 5, 10, 20, 30, 40, 50 };
+            }
+            @foreach (var item in count)
+            {
+                if (item.Equals(ViewBag.pageCount))
+                {
+                    <option selected value="~/Mannage/RComment?pageIndex=1&pageCount=@item">@item</option>
+                }
+                else
+                {
+                    <option value="~/Mannage/RComment?pageIndex=1&pageCount=@item">@item</option>
+                }
+
+            }
+
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="~/Mannage/RComment?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a></li>
+                @if (ViewBag.pageIndex > 1)
+                {
+                    <li class="page-item"><a class="page-link" href="~/Mannage/RComment?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a></li>
+
+                }
+                else
+                {
+                    <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+                }
+                <li class="page-item">
+                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                </li>
+                @if (ViewBag.pageIndex < ViewBag.tatalPage)
+                {
+                    <li class="page-item"><a class="page-link" href="~/Mannage/RComment?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a></li>
+
+                }
+                else
+                {
+                    <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
+                }
+
+                <li class="page-item"><a class="page-link" href="~/Mannage/RComment?pageIndex=@ViewBag.tatalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

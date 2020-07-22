@@ -5,7 +5,18 @@
 @using Models
 @using PagedList.Mvc
 @model PagedList.PagedList<Resouces>
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+@{
+    List<News> nlist = ViewBag.nlist;
+    List<Advertisement> alist = Session["a"] as List<Advertisement>;
+    List<HotLable> hlist = Session["hlist"] as List<HotLable>;
+    if (TempData["fall"] != null)
+    {
+        <script type="text/javascript">
+            alert("@TempData["fall"]");
+        </script>
+    }
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -50,7 +61,6 @@
 </div>
 <br />
 <div id="demo" class="carousel slide" data-ride="carousel">
-
     <!-- 指示符 -->
     <ul class="carousel-indicators">
         <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -59,19 +69,26 @@
         <li data-target="#demo" data-slide-to="3"></li>
     </ul>
     <!-- 轮播图片 -->
-    <div class="carousel-inner" style="border-radius: 5px;">
-        <div class="carousel-item active">
-            <a href="#"><img src="~/Content/LB/images/QQ图片20200528143941.jpg" /></a>
-        </div>
-        <div class="carousel-item">
-            <a href="#"><img src="~/Content/LB/images/ACG.GY_03.jpg" /></a>
-        </div>
-        <div class="carousel-item">
-            <a href="#"><img src="~/Content/LB/images/ACG.GY_19.jpg" /></a>
-        </div>
-        <div class="carousel-item">
-            <a href="#"><img src="~/Content/LB/images/QQ图片20200528144122.jpg" /></a>
-        </div>
+    <div class="carousel-inner" style="border-radius: 5px;max-height:300px">
+        @for (int i = 0; i < nlist.Count(); i++)
+        {
+            if (i == 0)
+            {
+                <div class="carousel-item active">
+                    <label style="font-weight:bold;color:white;font-size:24px;font-family:STXingkai;position:absolute;top:45px;right:50px">推荐主题 @nlist[i].Resouces.Lable.LableName</label>
+                    <a href="/Home/Details?id=@nlist[i].ResoucesID"><img src="~/Content/Resouces/Images/@nlist[i].Resouces.Picture.Picture_a" alt="@nlist[i].Resouces.Rname" /></a>
+                    <a href="/Home/Details?id=@nlist[i].ResoucesID" style="background: linear-gradient(to right,blue, red, mediumvioletred);-webkit-background-clip: text;color: transparent; font-family:STZhongsong; font-size: 24px; text-decoration: none; position: relative; top: -125px; left: 30px ">@nlist[i].Resouces.Rname</a>
+                </div>
+            }
+            else
+            {
+                <div class="carousel-item">
+                    <label style="font-weight:bold;color:white;font-size:24px;font-family:STXingkai;position:absolute;top:45px;right:50px">推荐主题 @nlist[i].Resouces.Lable.LableName</label>
+                    <a href="/Home/Details?id=@nlist[i].ResoucesID"><img src="~/Content/Resouces/Images/@nlist[i].Resouces.Picture.Picture_a" /></a>
+                    <a href="/Home/Details?id=@nlist[i].ResoucesID" style="background: linear-gradient(to right,blue, red, mediumvioletred);-webkit-background-clip: text;color: transparent; font-family: STZhongsong; font-size: 24px; text-decoration: none; position: relative; top: -125px; left: 30px ">@nlist[i].Resouces.Rname</a>
+                </div>
+            }
+        }
     </div>
     <!-- 左右切换按钮 -->
     <a class="carousel-control-prev" href="#demo" data-slide="prev">
@@ -182,44 +199,43 @@
         </div>
     </div>
     @*右边部分*@
-<div class="col-md-4">
-    <div style="height:200px;margin-top:20px">
-        <a href="#">
-            <img src="~/Content/GuangGao/ds1.gif" style="width:100%;height:100%" />
-        </a>
-    </div>
-    <div class="calendar">
-        <div class="header">
-            <a data-action="prev-month" href="javascript:void(0)" title="Previous Month"><i></i></a>
-            <div class="text" data-render="month-year"></div>
-            <a data-action="next-month" href="javascript:void(0)" title="Next Month"><i></i></a>
+    <div class="col-md-4">
+        <div style="height:200px;margin-top:20px" id="a_1">
+            <a href="/Home/Loading?id=4" target="_blank">
+                <img src="~/Content/GuangGao/@alist[0].Illustration" style="width:100%;height:100%" />
+            </a>
         </div>
-        <div class="months" data-flow="left">
-            <div class="month month-a">
-                <div class="render render-a"></div>
+        <div class="calendar">
+            <div class="header">
+                <a data-action="prev-month" href="javascript:void(0)" title="Previous Month"><i></i></a>
+                <div class="text" data-render="month-year"></div>
+                <a data-action="next-month" href="javascript:void(0)" title="Next Month"><i></i></a>
             </div>
-            <div class="month month-b">
-                <div class="render render-b"></div>
+            <div class="months" data-flow="left">
+                <div class="month month-a">
+                    <div class="render render-a"></div>
+                </div>
+                <div class="month month-b">
+                    <div class="render render-b"></div>
+                </div>
             </div>
         </div>
+        <div style="background-color:lightgray;margin-top:25px;margin-left:25px;background-color:whitesmoke;height:300px;width:300px">
+            <h5 style="padding-left:15px;padding-top:5px">热门标签</h5>
+            <ul style="list-style:none;padding-top:15px;padding-left:70px">
+                @for (int i = 0; i < hlist.Count(); i++)
+                {
+                    <li style="margin-top:12px">
+                        <svg t="1592031854927" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6162" width="16" height="16"><path d="M960.616994 0.010005H519.790222c-9.825277 0-20.481001 4.642494-27.854961 12.016455L10.676772 494.095383l-1.090586 0.550296c-15.018066 15.018066-15.018066 39.331125 0 54.079046l439.736187 439.736187 0.550295 0.82044c14.747921 15.018066 39.331125 15.018066 54.349192 0l482.609214-482.619219c7.654111-7.644106 12.016454-17.209243 12.016454-27.854961V38.52069c0-21.311447-16.929093-38.510684-38.230534-38.510685z m-38.78083 462.948654L477.177334 907.61749l-386.207436-385.65714L536.179024 76.761229h385.65714v386.19743zM756.867558 357.532034c63.093888 0 114.981758-51.897875 114.981758-115.261908 0-63.364033-51.897875-115.261908-114.981758-115.261909-63.364033 0-115.271914 51.347579-115.271913 115.261909 0 63.374039 51.90788 115.261908 115.271913 115.261908z m0-184.088876a68.716908 68.716908 0 0 1 68.826968 68.826968c0 37.960389-31.136724 69.377263-68.826968 69.377263-38.240539 0-69.377263-31.416874-69.377263-69.377263 0-38.230534 31.136724-68.826968 69.377263-68.826968z" p-id="6163"></path></svg>
+                        <a href="#" style="color:black;font-size:22px;font-family:STXinwei;letter-spacing:10px">@hlist[i].Lable.LableName</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div style="margin-top:5px;background-color:#b6ff00;height:150px" id="a_2">
+            <a href="/Home/Loading?id=5" target="_blank">
+                <img src="~/Content/GuangGao/@alist[1].Illustration" style="width:100%;height:100%" />
+            </a>
+        </div>
     </div>
-    <div style="background-color:lightgray;margin-top:25px;margin-left:25px;background-color:whitesmoke;height:300px;width:300px">
-        <h5 style="padding-left:15px;padding-top:5px">热门标签</h5>
-        <ul style="list-style:none;padding-top:15px">
-            @for (int i = 0; i < 7; i++)
-            {
-
-                <li style="margin-top:12px">
-                    <svg t="1592031854927" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6162" width="16" height="16"><path d="M960.616994 0.010005H519.790222c-9.825277 0-20.481001 4.642494-27.854961 12.016455L10.676772 494.095383l-1.090586 0.550296c-15.018066 15.018066-15.018066 39.331125 0 54.079046l439.736187 439.736187 0.550295 0.82044c14.747921 15.018066 39.331125 15.018066 54.349192 0l482.609214-482.619219c7.654111-7.644106 12.016454-17.209243 12.016454-27.854961V38.52069c0-21.311447-16.929093-38.510684-38.230534-38.510685z m-38.78083 462.948654L477.177334 907.61749l-386.207436-385.65714L536.179024 76.761229h385.65714v386.19743zM756.867558 357.532034c63.093888 0 114.981758-51.897875 114.981758-115.261908 0-63.364033-51.897875-115.261908-114.981758-115.261909-63.364033 0-115.271914 51.347579-115.271913 115.261909 0 63.374039 51.90788 115.261908 115.271913 115.261908z m0-184.088876a68.716908 68.716908 0 0 1 68.826968 68.826968c0 37.960389-31.136724 69.377263-68.826968 69.377263-38.240539 0-69.377263-31.416874-69.377263-69.377263 0-38.230534 31.136724-68.826968 69.377263-68.826968z" p-id="6163"></path></svg>
-                    <a href="#" style="color:black;font-size:20px">热门标签，有资讯</a>
-                </li>
-            }
-        </ul>
-    </div>
-    <div style="margin-top:5px;background-color:#b6ff00;height:120px">
-        <a href="#">
-            <img src="~/Content/GuangGao/liuliang.jpg" style="width:100%;height:100%" />
-        </a>
-    </div>
-</div>
 </div>

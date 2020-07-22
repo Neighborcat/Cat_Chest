@@ -53,6 +53,12 @@
     <Compile Include="Administrators.cs">
       <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="AdverPosition.cs">
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Advertisement.cs">
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
@@ -77,16 +83,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>db_StarsResourcesEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="HotLable.cs">
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Lable.cs">
       <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Link.cs">
       <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="News.cs">
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Picture.cs">
       <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recommend.cs">
+      <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Resouces.cs">
       <DependentUpon>db_StarsResourcesEntities.tt</DependentUpon>
     </Compile>

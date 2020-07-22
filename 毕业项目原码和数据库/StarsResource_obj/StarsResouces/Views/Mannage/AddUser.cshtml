@@ -4,61 +4,86 @@
     ViewBag.Title = "AddUser";
     Layout = "~/Views/Shared/_MLayout.cshtml";
 }
-    <form method="post" action="/Mannage/AddUser">
-        <div class="form-horizontal">
-            <h4></h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.LoginName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.LoginName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LoginName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.LoginPwd, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.LoginPwd, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LoginPwd, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.E_mail, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.E_mail, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.E_mail, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserSex, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="radio" id="UserSex" name="UserSex" value="1" checked />男
-                    <input type="radio" id="UserSex" name="UserSex" value="2" />女
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserState, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <select class="form-control" id="UserState" name="UserState">
-                        <option>请选择状态</option>
-                        <option value="0">通过</option>
-                        <option value="1">封禁</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="保存" class="btn btn-success" style="min-width:150px"/>
-                </div>
+<style>
+    .error {
+    color:red;
+    }
+</style>
+<form method="post" action="/Mannage/AddUser" id="form">
+    <div class="form-horizontal">
+        <h4></h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoginName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LoginName, new { htmlAttributes = new { @class = "form-control", @id = "LoginName" } })
+                @Html.ValidationMessageFor(model => model.LoginName, "", new { @class = "text-danger" })
             </div>
         </div>
-    </form>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoginPwd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LoginPwd, new { htmlAttributes = new { @class = "form-control", @id = "LoginPwd" } })
+                @Html.ValidationMessageFor(model => model.LoginPwd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.E_mail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.E_mail, new { htmlAttributes = new { @class = "form-control", @id = "E_mail" } })
+                @Html.ValidationMessageFor(model => model.E_mail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @id = "UserName" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserSex, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="radio" id="UserSex" name="UserSex" value="1" checked />男
+                <input type="radio" id="UserSex" name="UserSex" value="2" />女
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserState, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="UserState" name="UserState">
+                    <option value="0">通过</option>
+                    <option value="1">封禁</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="保存" class="btn btn-success" style="min-width:150px" />
+            </div>
+        </div>
+    </div>
+</form>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript">
+    $("#form").validate({
+        rules: {
+            LoginName: { required: true, maxlength: 30 },
+            LoginPwd: { required: true },
+            UserName: { required: true },
+            UserState: { required: true },
+            E_mail: { required: true, email: true }
+        },
+        messages: {
+            LoginName: { required: "*账号必填", maxlength: "账号输入内容不能超过30字" },
+            LoginPwd: { required: "*内容非空" },
+            UserName: { required: "*内容非空" },
+            UserState: { required: "*内容非空" },
+            E_mail: { required: "邮箱必填", email: "请输入有效的邮箱格式" }
+
+        }
+    })
+</script>

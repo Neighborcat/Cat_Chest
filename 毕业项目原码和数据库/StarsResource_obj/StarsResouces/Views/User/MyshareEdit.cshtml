@@ -1,0 +1,133 @@
+﻿@model Models.Resouces
+@{
+    ViewBag.Title = "MyshareEdit";
+    Layout = "~/Views/Shared/_LayoutUserMain.cshtml";
+}
+
+<h2>资源详情</h2>
+<hr />
+<form method="get" action="/User/MyshareEdit" id="form">
+    <input type="hidden" id="ResoucesID" name="ResoucesID" value="@Model.ResoucesID" />
+    <div class="form-group">
+        发布时间：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.Releasetime" id="Releasetime" name="Releasetime" readonly="readonly"/>
+        </div>
+    </div>
+    <div class="form-group">
+        资源名称：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.Rname" id="Rname" name="Rname" />
+        </div>
+    </div>
+    <div class="form-group">
+        资源描述：
+        <div class="col-md-10">
+            <textarea class="form-control" id="Rdescribe" name="Rdescribe">@Model.Rdescribe</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        需求积分：
+        <div class="col-md-10">
+            <select multiple class="form-control" id="Rdemand" name="Rdemand">
+                <option value="0" selected="@(Model.Rdemand==0)">0</option>
+                <option value="1" selected="@(Model.Rdemand==1)">1</option>
+                <option value="2" selected="@(Model.Rdemand==2)">2</option>
+                <option value="3" selected="@(Model.Rdemand==3)">3</option>
+                <option value="4" selected="@(Model.Rdemand==4)">4</option>
+                <option value="5" selected="@(Model.Rdemand==5)">5</option>
+            </select>
+        </div>
+    </div>
+    <input type="hidden" id="Reading" name="Reading" value="@Model.Reading" />
+    <div class="form-group">
+        所属类别：
+        <div class="col-md-10">
+            <input type="hidden" id="CategoryID" name="CategoryID" value="@Model.CategoryID" />
+            <input class="form-control" type="text" value="@Model.Category.CategoryName" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        所属标签：
+        <div class="col-md-10">
+            <input type="hidden" id="LableID" name="LableID" value="@Model.LableID" />
+            <input class="form-control" type="text" value="@Model.Lable.LableName" readonly="readonly" />
+        </div>
+    </div>
+    <div class="form-group">
+        链接描述：
+        <div class="col-md-10">
+            <input type="hidden" id="LinkID" name="LinkID" value="@Model.LinkID" />
+            <input class="form-control" type="text" value="@Model.Link.Ldescribe" readonly="readonly"/>
+        </div>
+    </div>
+    <div class="form-group">
+        链接声明：
+        <div class="col-md-10">
+            <input class="form-control" type="text" value="@Model.Link.Lremarks" readonly="readonly"/>
+        </div>
+    </div>
+    <div class="form-group">
+        拥有图片：
+        <div class="col-md-10">
+            <input type="hidden" id="PictureID" name="PictureID" value="@Model.PictureID" />
+            @if (Model.Picture.Picture_a != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+            }
+            else if (Model.Picture.Picture_b != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_b" style="width:100px;height:100px" />
+            }
+            else if (Model.Picture.Picture_c != null && Model.Picture.Picture_b != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_b" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_c" style="width:100px;height:100px" />
+            }
+            else if (Model.Picture.Picture_d != null && Model.Picture.Picture_c != null && Model.Picture.Picture_b != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_b" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_c" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_d" style="width:100px;height:100px" />
+            }
+            else if (Model.Picture.Picture_e != null && Model.Picture.Picture_d != null && Model.Picture.Picture_c != null && Model.Picture.Picture_b != null)
+            {
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_a" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_b" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_c" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_d" style="width:100px;height:100px" />
+                <img src="~/Content/Resouces/Images/@Model.Picture.Picture_e" style="width:100px;height:100px" />
+            }
+            else
+            {
+                @:没有图片
+            }
+        </div>
+    </div>
+    <input type="hidden" id="UserID" name="UserID" value="@Model.UserID" />
+    <input type="hidden" id="Rstate" name="Rstate" value="@Model.Rstate" />
+    <p>
+        <a href="Myshare" class="btn btn-outline-success">返回上级列表</a>
+        <input type="submit" value="确认修改" class="btn btn-info" />
+    </p>
+</form>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript">
+    $("#form").validate({
+        rules: {
+            Rname: { required: true, maxlength: 30 },
+            Rdescribe: { required: true, maxlength: 500 },
+            Rdemand: { required: true },
+        },
+        messages: {
+            Rname: { required: "*内容非空", maxlength: "账号输入内容不能超过30字" },
+            Rdescribe: { required: "*内容非空", maxlength: "账号输入内容不能超过500字" },
+            Rdemand: { required: "*内容非空" },
+        }
+    })
+</script>
+

@@ -11,8 +11,7 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Resouces
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,30 +19,21 @@ namespace Models
         {
             this.Collection = new HashSet<Collection>();
             this.Comment = new HashSet<Comment>();
+            this.News = new HashSet<News>();
+            this.Recommend = new HashSet<Recommend>();
         }
-        [Display(Name = "编号")]
+    
         public int ResoucesID { get; set; }
-        [Display(Name = "发布者ID")]
         public Nullable<int> UserID { get; set; }
-        [Display(Name = "链接ID")]
         public Nullable<int> LinkID { get; set; }
-        [Display(Name = "图片ID")]
         public Nullable<int> PictureID { get; set; }
-        [Display(Name = "类别ID")]
         public Nullable<int> CategoryID { get; set; }
-        [Display(Name = "标签ID")]
         public Nullable<int> LableID { get; set; }
-        [Display(Name = "发布时间")]
         public System.DateTime Releasetime { get; set; }
-        [Display(Name = "资源名称")]
         public string Rname { get; set; }
-        [Display(Name = "资源描述")]
         public string Rdescribe { get; set; }
-        [Display(Name = "获取需求")]
         public Nullable<int> Rdemand { get; set; }
-        [Display(Name = "资源状态")]
         public Nullable<int> Rstate { get; set; }
-        [Display(Name = "已有阅览量")]
         public int Reading { get; set; }
     
         public virtual Category Category { get; set; }
@@ -55,5 +45,9 @@ namespace Models
         public virtual Link Link { get; set; }
         public virtual Picture Picture { get; set; }
         public virtual UserInfo UserInfo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<News> News { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Recommend> Recommend { get; set; }
     }
 }
